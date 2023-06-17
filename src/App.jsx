@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
+import NewPost from "./components/NewPost";
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
 
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+
+        <Route path='/posts'>
+          <Route path='new' element={<NewPost />} />
+        </Route>
 
         <Route path='*' element={<NotFound />} />
       </Route>
