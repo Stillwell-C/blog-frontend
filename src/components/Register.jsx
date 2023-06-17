@@ -93,159 +93,157 @@ const Register = () => {
   };
 
   const successPage = (
-    <section className='auth-page-container'>
-      <div className='auth-page-content-wrapper'>
-        <img className='img-color-fix' src={spoonbill} alt='' />
-        <div className='auth-form-container success'>
-          <h2>Success</h2>
-          <p className='auth-success-link'>
-            Please <Link to='/login'>log in</Link>
-          </p>
-        </div>
+    <>
+      <img className='img-color-fix' src={spoonbill} alt='' />
+      <div className='auth-form-container success'>
+        <h2>Success</h2>
+        <p className='auth-success-link'>
+          Please <Link to='/login'>log in</Link>
+        </p>
       </div>
-    </section>
+    </>
   );
 
   const registrationPage = (
-    <section className='auth-page-container'>
+    <>
+      <img className='img-color-fix' src={spoonbill} alt='' />
+      <div className='auth-form-container'>
+        <h2>Sign up</h2>
+        <form onSubmit={handleSubmit}>
+          <div
+            ref={errRef}
+            className={errorMsg ? "form-error-div" : "error-offscreen"}
+            aria-live='assertive'
+          >
+            {errorMsg}
+          </div>
+          <div
+            className={`form-line ${username && !validUsername ? "error" : ""}`}
+          >
+            <label htmlFor='username' className='form-label'>
+              username:
+            </label>
+            <input
+              type='text'
+              id='username'
+              className='form-input'
+              placeholder='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete='off'
+              spellCheck='false'
+              ref={usernameRef}
+              required
+              aria-invalid={validUsername ? "false" : "true"}
+              aria-describedby='usernameNote'
+              onFocus={() => setUserFocus(true)}
+              onBlur={() => setUserFocus(false)}
+            />
+            <p
+              id='usernameNote'
+              className={
+                userFocus && username && !validUsername
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              4 to 24 characters. <br />
+              Must begin with a letter. <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+          </div>
+          <div
+            className={`form-line ${password && !validPassword ? "error" : ""}`}
+          >
+            <label htmlFor='password' className='form-label'>
+              password:
+            </label>
+            <input
+              type='password'
+              id='password'
+              className='form-input'
+              placeholder='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              aria-invalid={validPassword ? "false" : "true"}
+              aria-describedby='passwordNote'
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
+            />
+            <p
+              id='passwordNote'
+              className={
+                passwordFocus && !validPassword
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              8 to 24 characters. <br />
+              Must include at least one letter and one number.
+            </p>
+          </div>
+          <div
+            className={`form-line ${
+              confirmPassword && !confirmPasswordMatch ? "error" : ""
+            }`}
+          >
+            <label htmlFor='confirmPassword' className='form-label'>
+              confirm password:
+            </label>
+            <input
+              type='password'
+              id='confirmPassword'
+              className='form-input'
+              placeholder='password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              aria-invalid={confirmPasswordMatch ? "false" : "true"}
+              aria-describedby='confirmNote'
+              onFocus={() => setConfirmFocus(true)}
+              onBlur={() => setConfirmFocus(false)}
+            />
+            <p
+              id='confirmNote'
+              className={
+                confirmFocus && !confirmPasswordMatch
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              Passwords must match.
+            </p>
+          </div>
+          <div className='button-div'>
+            <button
+              disabled={
+                !validUsername || !validPassword || !confirmPasswordMatch
+                  ? true
+                  : false
+              }
+              className='basic-button'
+              type='submit'
+            >
+              Sign up
+            </button>
+          </div>
+          <div className='auth-form-link-div'>
+            <p>Have an account?</p>
+            <Link to='/login'>Log in</Link>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+
+  const content = (
+    <section className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
-        <img className='img-color-fix' src={spoonbill} alt='' />
-        <div className='auth-form-container'>
-          <h2>Sign up</h2>
-          <form onSubmit={handleSubmit}>
-            <div
-              ref={errRef}
-              className={errorMsg ? "form-error-div" : "error-offscreen"}
-              aria-live='assertive'
-            >
-              {errorMsg}
-            </div>
-            <div
-              className={`form-line ${
-                username && !validUsername ? "error" : ""
-              }`}
-            >
-              <label htmlFor='username' className='form-label'>
-                username:
-              </label>
-              <input
-                type='text'
-                id='username'
-                className='form-input'
-                placeholder='username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete='off'
-                spellCheck='false'
-                ref={usernameRef}
-                required
-                aria-invalid={validUsername ? "false" : "true"}
-                aria-describedby='usernameNote'
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
-              />
-              <p
-                id='usernameNote'
-                className={
-                  userFocus && username && !validUsername
-                    ? "form-description form-fade-in"
-                    : "offscreen"
-                }
-              >
-                4 to 24 characters. <br />
-                Must begin with a letter. <br />
-                Letters, numbers, underscores, hyphens allowed.
-              </p>
-            </div>
-            <div
-              className={`form-line ${
-                password && !validPassword ? "error" : ""
-              }`}
-            >
-              <label htmlFor='password' className='form-label'>
-                password:
-              </label>
-              <input
-                type='password'
-                id='password'
-                className='form-input'
-                placeholder='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                aria-invalid={validPassword ? "false" : "true"}
-                aria-describedby='passwordNote'
-                onFocus={() => setPasswordFocus(true)}
-                onBlur={() => setPasswordFocus(false)}
-              />
-              <p
-                id='passwordNote'
-                className={
-                  passwordFocus && !validPassword
-                    ? "form-description form-fade-in"
-                    : "offscreen"
-                }
-              >
-                8 to 24 characters. <br />
-                Must include at least one letter and one number.
-              </p>
-            </div>
-            <div
-              className={`form-line ${
-                confirmPassword && !confirmPasswordMatch ? "error" : ""
-              }`}
-            >
-              <label htmlFor='confirmPassword' className='form-label'>
-                confirm password:
-              </label>
-              <input
-                type='password'
-                id='confirmPassword'
-                className='form-input'
-                placeholder='password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                aria-invalid={confirmPasswordMatch ? "false" : "true"}
-                aria-describedby='confirmNote'
-                onFocus={() => setConfirmFocus(true)}
-                onBlur={() => setConfirmFocus(false)}
-              />
-              <p
-                id='confirmNote'
-                className={
-                  confirmFocus && !confirmPasswordMatch
-                    ? "form-description form-fade-in"
-                    : "offscreen"
-                }
-              >
-                Passwords must match.
-              </p>
-            </div>
-            <div className='button-div'>
-              <button
-                disabled={
-                  !validUsername || !validPassword || !confirmPasswordMatch
-                    ? true
-                    : false
-                }
-                className='basic-button'
-                type='submit'
-              >
-                Sign up
-              </button>
-            </div>
-            <div className='auth-form-link-div'>
-              <p>Have an account?</p>
-              <Link to='/login'>Log in</Link>
-            </div>
-          </form>
-        </div>
+        {success ? successPage : registrationPage}
       </div>
     </section>
   );
-
-  const content = success ? successPage : registrationPage;
 
   return content;
 };

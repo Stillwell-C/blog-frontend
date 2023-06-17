@@ -16,7 +16,7 @@ const Login = () => {
   }, []);
 
   return (
-    <section className='auth-page-container'>
+    <section className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
         <div className='auth-form-container'>
           <h2>Log In</h2>

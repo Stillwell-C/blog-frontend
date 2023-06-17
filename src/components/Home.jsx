@@ -3,7 +3,7 @@ import birdFlight from "../assets/Flock-Of-Flying-Geese-Silhouette.svg";
 
 const Home = () => {
   return (
-    <section className='home-container'>
+    <section className='home-container fill-screen'>
       <div className='home-top-container'>
         <div className='home-top-center'>
           <div className='home-top-center-content'>
