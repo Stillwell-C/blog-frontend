@@ -1,10 +1,10 @@
 import PostDisplaySmall from "./PostDisplaySmall";
-import PostDisplaySmallLoading from "./PostDisplaySmallLoading";
+import PostDisplaySmallSkeleton from "./PostDisplaySmallSkeleton";
 
 const HomeRecentPosts = ({ posts, isLoading }) => {
   let loadingContent = [];
   for (let i = 0; i < 12; i++) {
-    loadingContent.push(<PostDisplaySmallLoading key={i} />);
+    loadingContent.push(<PostDisplaySmallSkeleton key={i} />);
   }
 
   const postsRender = posts?.map((post) => (

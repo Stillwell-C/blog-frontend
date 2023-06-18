@@ -1,12 +1,12 @@
 import PostDisplaySmall from "./PostDisplaySmall";
-import PostDisplaySmallLoading from "./PostDisplaySmallLoading";
+import PostDisplaySmallSkeleton from "./PostDisplaySmallSkeleton";
 
 const HomeTopPosts = ({ topPosts, isLoading }) => {
   const loadingContent = (
     <>
-      <PostDisplaySmallLoading />
-      <PostDisplaySmallLoading />
-      <PostDisplaySmallLoading />
+      <PostDisplaySmallSkeleton />
+      <PostDisplaySmallSkeleton />
+      <PostDisplaySmallSkeleton />
     </>
   );
 
