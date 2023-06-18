@@ -217,13 +217,13 @@ button {
   gap: 10px
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 950px){
   .top-posts-list {
     flex-direction: row;
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1020px) {
   .home-top-container {
     flex-direction: row;
   }
