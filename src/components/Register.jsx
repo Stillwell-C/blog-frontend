@@ -106,7 +106,7 @@ const Register = () => {
 
   const registrationPage = (
     <>
-      <img className='img-color-fix' src={spoonbill} alt='' />
+      <img className='img-color-fix fade-in' src={spoonbill} alt='' />
       <div className='auth-form-container'>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>

@@ -9,7 +9,7 @@ const Home = () => {
           <div className='home-top-center-content'>
             <h2>Waterfowl of Korea</h2>
             <p>Exploring the Avian Splendor of Korea&#39;s Wetlands</p>
-            <img src={gooseImg} />
+            <img className='fade-in' src={gooseImg} />
           </div>
         </div>
         <div className='home-top-posts'>
@@ -41,7 +41,7 @@ const Home = () => {
       </div>
       <div className='home-middle-container'>
         <div className='home-middle-wrapper'>
-          <img src={birdFlight} />
+          <img className='fade-in' src={birdFlight} />
         </div>
       </div>
       <div className='home-bottom-container'>

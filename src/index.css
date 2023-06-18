@@ -71,6 +71,15 @@ button {
   filter: invert(0%) sepia(0%) saturate(3616%) hue-rotate(164deg) brightness(95%) contrast(60%);
 }
 
+.fade-in {
+  animation: fade-in 5s;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 /* Page headers and footers */
 .page-header {
   padding: 1rem;
@@ -398,6 +407,8 @@ button {
   color: var(--text-color);
 }
 
+/* POSTS */
+
 /* New Post */
 
 .new-post-container {
@@ -436,6 +447,40 @@ button {
     height: 450px;
   }
 }
+
+/* Single Post */
+
+.single-post-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.single-post-content {
+  max-width: 600px;
+  white-space: pre-wrap;
+}
+
+.single-post-author {
+  margin-top: 1rem;
+}
+
+.single-post-epigraph-content {
+  margin-top: 2rem;
+}
+
+.epigraph-text {
+  font-style: italic;
+}
+
+.epigraph-author {
+  margin-top: 1rem;
+}
+
+.single-post-text {
+  margin-top: 3rem;
+}
+
 
 /* Not found page */
 

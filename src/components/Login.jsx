@@ -73,7 +73,7 @@ const Login = () => {
             </div>
           </form>
         </div>
-        <img src={birdImg} alt='' />
+        <img className='fade-in' src={birdImg} alt='' />
       </div>
     </section>
   );
