@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "../api/axios";
+import { useNavigate } from "react-router-dom";
+
+const ADD_POST_URL = "/posts";
 
 const NewPost = () => {
+  const navigate = useNavigate();
+
   const titleRef = useRef();
   const errRef = useRef();
 
@@ -8,6 +14,8 @@ const NewPost = () => {
   const [titleErr, setTitleErr] = useState(false);
   const [epigraph, setEpigraph] = useState("");
   const [epigraphErr, setEpigraphErr] = useState(false);
+  const [epigraphAuthor, setEpigraphAuthor] = useState("");
+  const [epigraphAuthorErr, setEpigraphAuthorErr] = useState(false);
   const [text, setText] = useState("");
   const [textErr, setTextErr] = useState(false);
   //Later use auth and get this with useEffect
@@ -24,13 +32,16 @@ const NewPost = () => {
     setTitleErr(false);
     setEpigraphErr(false);
     setTextErr(false);
+    setEpigraphAuthorErr(false);
   }, [title, epigraph, text]);
 
   const wordCheck = (strInput) => {
     return strInput.trim().split(" ").length;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
     if (!title.length) {
       setTitleErr(true);
       setErrorMsg("Must include title");
@@ -49,12 +60,52 @@ const NewPost = () => {
       errRef.current.focus();
       return;
     }
+    if (epigraphAuthor.length > 70) {
+      setEpigraphAuthorErr(true);
+      setErrorMsg("Epigraph author must not exceeed 70 characters");
+      errRef.current.focus();
+      return;
+    }
     const textLength = wordCheck(text);
     if (textLength > 4000) {
       setTextErr(true);
       setErrorMsg("Post text should not exceeed 4,000 words");
       errRef.current.focus();
       return;
+    }
+    const trimmedTitle = title.trim();
+    const trimmedEpigraph = epigraph.trim();
+    const trimmedText = text.trim();
+    try {
+      const response = await axios.post(
+        ADD_POST_URL,
+        JSON.stringify({
+          title: trimmedTitle,
+          epigraph: trimmedEpigraph,
+          text: trimmedText,
+          author,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      //Potentially remove once author is automatically input
+      if (!response.data.isError) {
+        navigate("/");
+      } else {
+        setErrorMsg(response.data.message);
+      }
+    } catch (err) {
+      console.log(err.response.status);
+      if (!err.response) {
+        setErrorMsg("No server reponse");
+      } else if (err.response.status === 400) {
+        setErrorMsg(err.response.message);
+      } else {
+        setErrorMsg("Add post failed");
+      }
+      errRef.current.focus();
     }
   };
 
@@ -100,9 +151,24 @@ const NewPost = () => {
               onChange={(e) => setEpigraph(e.target.value)}
               autoComplete='off'
               spellCheck='true'
-              required
               maxLength='850'
             ></textarea>
+          </div>
+          <div className={`form-line ${epigraphAuthorErr ? "error" : ""}`}>
+            <label htmlFor='epigraphAuthor' className='form-label'>
+              epigraph author:
+            </label>
+            <input
+              type='text'
+              id='epigraphAuthor'
+              className='form-input post-input'
+              placeholder='epigraph author'
+              value={epigraphAuthor}
+              onChange={(e) => setEpigraphAuthor(e.target.value)}
+              autoComplete='off'
+              spellCheck='true'
+              maxLength='70'
+            />
           </div>
           <div className='form-line'>
             <label htmlFor='author' className='form-label'>
@@ -141,7 +207,7 @@ const NewPost = () => {
               className='basic-button'
               type='submit'
             >
-              Sign up
+              Submit
             </button>
           </div>
         </form>
