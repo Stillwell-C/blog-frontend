@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
+import PostSkeleton from "./PostSkeleton";
 
 const POST_URL = "/posts";
 
@@ -35,7 +36,7 @@ const Post = () => {
     axiosGet();
   }, []);
 
-  const LoadingPage = <p>Loading...</p>;
+  //   const LoadingPage = <p>Loading...</p>;
 
   const LoadedPage = (
     <article className='single-post-content'>
@@ -56,7 +57,7 @@ const Post = () => {
     </article>
   );
 
-  const content = isLoading ? LoadingPage : LoadedPage;
+  const content = isLoading ? <PostSkeleton /> : LoadedPage;
 
   return (
     <section className='fill-screen single-post-container'>{content}</section>
