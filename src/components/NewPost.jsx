@@ -33,7 +33,7 @@ const NewPost = () => {
     setEpigraphErr(false);
     setTextErr(false);
     setEpigraphAuthorErr(false);
-  }, [title, epigraph, text]);
+  }, [title, epigraph, text, epigraphAuthor]);
 
   const wordCheck = (strInput) => {
     return strInput.trim().split(" ").length;
@@ -75,6 +75,7 @@ const NewPost = () => {
     }
     const trimmedTitle = title.trim();
     const trimmedEpigraph = epigraph.trim();
+    const trimmedEpigraphAuthor = epigraphAuthor.trim();
     const trimmedText = text.trim();
     try {
       const response = await axios.post(
@@ -82,6 +83,7 @@ const NewPost = () => {
         JSON.stringify({
           title: trimmedTitle,
           epigraph: trimmedEpigraph,
+          epigraphAuthor: trimmedEpigraphAuthor,
           text: trimmedText,
           author,
         }),
