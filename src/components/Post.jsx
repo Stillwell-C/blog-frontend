@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 import PostSkeleton from "./PostSkeleton";
+import dateOptions from "../utils/DateOptions";
 
 const POST_URL = "/posts";
 
@@ -14,9 +15,16 @@ const Post = () => {
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
-      setParsedDate(new Date(createdDate).toUTCString());
+      setParsedDate(
+        new Date(createdDate).toLocaleDateString("en-us", dateOptions)
+      );
     } else {
-      setParsedDate(`Last Updated: ${new Date(createdDate).toUTCString()}`);
+      setParsedDate(
+        `Last Updated: ${new Date(createdDate).toLocaleDateString(
+          "en-us",
+          dateOptions
+        )}`
+      );
     }
   };
 
@@ -24,7 +32,7 @@ const Post = () => {
     const axiosGet = async () => {
       try {
         const response = await axios.get(`${POST_URL}/${postID}`);
-        parseDate(response?.data?.createdAt, response?.data?.updatedDate);
+        parseDate(response?.data?.createdAt, response?.data?.updatedAt);
         setPostContent(response?.data);
         console.log(response.data);
         setIsLoading(false);

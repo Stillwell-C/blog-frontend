@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import dateOptions from "../utils/DateOptions";
 
 const PostDisplaySmall = ({ post }) => {
   const [date, setDate] = useState("");
@@ -9,9 +10,14 @@ const PostDisplaySmall = ({ post }) => {
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
-      setDate(new Date(createdDate).toUTCString());
+      setDate(new Date(createdDate).toLocaleDateString("en-us", dateOptions));
     } else {
-      setDate(`Last Updated: ${new Date(createdDate).toUTCString()}`);
+      setDate(
+        `Updated: ${new Date(updatedDate).toLocaleDateString(
+          "en-us",
+          dateOptions
+        )}`
+      );
     }
   };
 
@@ -20,7 +26,7 @@ const PostDisplaySmall = ({ post }) => {
   }, []);
 
   return (
-    <article className='post-display-small-wrapper post-wrapper'>
+    <article className='post-display-small-wrapper post-display-wrapper '>
       <div>
         <Link to={`/posts/${post._id}`}>
           <h4>{post.title}</h4>
