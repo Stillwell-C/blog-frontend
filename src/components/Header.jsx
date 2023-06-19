@@ -23,9 +23,10 @@ const Header = () => {
 
   return (
     <header className='page-header'>
-      <Link to='/'>
-        <h1 className='header-title'>Wild Goose Chase</h1>
-      </Link>
+      <h1 className='header-title'>
+        <Link to='/'>Wild Goose Chase </Link>
+      </h1>
+
       <nav className='header-buttons-container'>{headerButtons}</nav>
     </header>
   );
