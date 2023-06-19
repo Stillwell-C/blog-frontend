@@ -4,10 +4,13 @@ import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import HomeTopPosts from "./HomeTopPosts";
 import HomeRecentPosts from "./HomeRecentPosts";
+import { useNavigate } from "react-router-dom";
 
 const POST_URL = "/posts?top=true&limit=12";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
   const [topPosts, setTopPosts] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -166,7 +169,11 @@ const Home = () => {
             </p>
           </article> */}
         </div>
-        <button className='basic-button' title='More posts'>
+        <button
+          className='basic-button'
+          title='More posts'
+          onClick={() => navigate("/posts")}
+        >
           More
         </button>
       </div>
