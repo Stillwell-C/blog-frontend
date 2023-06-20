@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
+import axios from "../app/api/axios";
 import PostDisplayLarge from "./PostDisplayLarge";
 import PostDisplayLargeSkeleton from "./PostDisplayLargeSkeleton";
 import AllPostsPageBtns from "./AllPostsPageBtns";

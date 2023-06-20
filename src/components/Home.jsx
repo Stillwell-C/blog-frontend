@@ -1,6 +1,6 @@
 import gooseImg from "../assets/Goose.svg";
 import birdFlight from "../assets/Flock-Of-Flying-Geese-Silhouette.svg";
-import axios from "../api/axios";
+import axios from "../app/api/axios";
 import { useEffect, useState } from "react";
 import HomeTopPosts from "./HomeTopPosts";
 import HomeRecentPosts from "./HomeRecentPosts";

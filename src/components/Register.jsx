@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import spoonbill from "../assets/spoonbill.svg";
 import { Link } from "react-router-dom";
-import axios from "../api/axios";
+import axios from "../app/api/axios";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;

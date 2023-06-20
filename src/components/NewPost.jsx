@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "../api/axios";
+import axios from "../app/api/axios";
 import { useNavigate } from "react-router-dom";
 
 const ADD_POST_URL = "/posts";
