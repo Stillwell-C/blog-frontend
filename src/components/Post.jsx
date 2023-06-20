@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../api/axios";
+import axios from "../app/api/axios";
 import PostSkeleton from "./PostSkeleton";
 import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
