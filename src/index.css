@@ -39,6 +39,7 @@ button {
   font-size: 1rem;
   padding: 7px 10px;
   border-radius: .25rem;
+  
 }
 
 .basic-button:hover {
@@ -261,7 +262,7 @@ button {
   width: 300px;
 }
 
-/* Post component */
+/* Post Preview component */
 .post-display-wrapper {
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -632,10 +633,37 @@ button {
   margin-top: 3rem;
 }
 
+.post-like-btn-div {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-like-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+}
+
+.post-like-btn > img {
+  width: 20px
+}
+
+.post-page-break {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.single-post-content > h3 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .single-post-content-skeleton {
   display: flex;
   flex-direction: column;
-  gap: 5px
+  gap: 5px;
 }
 
 /* Not found page */
