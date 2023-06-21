@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../app/api/axios";
 import PostSkeleton from "./PostSkeleton";
 import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
 import filledHeart from "../assets/heart-filled.svg";
-
-const POST_URL = "/posts";
+import { useGetPostQuery } from "../features/posts/postsApiSlice";
 
 const Post = () => {
   const { postID } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
+
+  const { data: postData, isLoading } = useGetPostQuery(postID);
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
@@ -31,20 +31,9 @@ const Post = () => {
   };
 
   useEffect(() => {
-    const axiosGet = async () => {
-      try {
-        const response = await axios.get(`${POST_URL}/${postID}`);
-        parseDate(response?.data?.createdAt, response?.data?.updatedAt);
-        setPostContent(response?.data);
-        console.log(response.data);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-        //maybe navigate to 404
-      }
-    };
-    axiosGet();
-  }, []);
+    parseDate(postData?.createdAt, postData?.updatedAt);
+    setPostContent(postData);
+  }, [isLoading]);
 
   const LoadedPage = (
     <>
