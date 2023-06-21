@@ -3,6 +3,7 @@ import PostDisplayLarge from "./PostDisplayLarge";
 import PostDisplayLargeSkeleton from "./PostDisplayLargeSkeleton";
 import AllPostsPageBtns from "./AllPostsPageBtns";
 import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
+import Error from "./Error";
 
 const AllPosts = () => {
   // const [isLoading, setIsLoading] = useState(true);
@@ -10,7 +11,11 @@ const AllPosts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
 
-  const { data: postData, isFetching } = useGetMultiplePostsQuery({
+  const {
+    data: postData,
+    isFetching,
+    isError,
+  } = useGetMultiplePostsQuery({
     page: currentPage,
     limit: 10,
     top: false,
@@ -45,6 +50,7 @@ const AllPosts = () => {
           setCurrentPage={setCurrentPage}
         />
       )}
+      {isError && <Error />}
     </section>
   );
 };
