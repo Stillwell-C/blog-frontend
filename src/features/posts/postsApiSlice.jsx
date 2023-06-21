@@ -55,10 +55,44 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         } else [{ type: "Post", id: "LIST" }];
       },
     }),
+    addNewPost: builder.mutation({
+      query: (postData) => ({
+        url: "/posts",
+        method: "POST",
+        body: {
+          ...postData,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
+    }),
+    updatePost: builder.mutation({
+      query: (postData) => ({
+        url: "/posts",
+        method: "PATCH",
+        body: {
+          ...postData,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
+    }),
+    deletePost: builder.mutation({
+      query: ({ id }) => ({
+        url: "/posts",
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
+    }),
   }),
 });
 
-export const { useGetPostQuery, useGetMultiplePostsQuery } = postsApiSlice;
+export const {
+  useGetPostQuery,
+  useGetMultiplePostsQuery,
+  useAddNewPostMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
+} = postsApiSlice;
 
 //The below is probably unneccessary for a single user.
 
