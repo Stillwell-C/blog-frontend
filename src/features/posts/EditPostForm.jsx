@@ -8,29 +8,21 @@ const EditPostForm = ({ post }) => {
   const titleRef = useRef();
   const errRef = useRef();
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(post?.title);
   const [titleErr, setTitleErr] = useState(false);
-  const [epigraph, setEpigraph] = useState("");
+  const [epigraph, setEpigraph] = useState(post?.epigraph);
   const [epigraphErr, setEpigraphErr] = useState(false);
-  const [epigraphAuthor, setEpigraphAuthor] = useState("");
+  const [epigraphAuthor, setEpigraphAuthor] = useState(post?.epigraphAuthor);
   const [epigraphAuthorErr, setEpigraphAuthorErr] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(post?.text);
   const [textErr, setTextErr] = useState(false);
   //Later use auth and get this with useEffect
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState(post?.author?._id);
 
   const [errorMsg, setErrorMsg] = useState("");
 
   const [updatePost, { isLoading, isSuccess, isError, error }] =
     useUpdatePostMutation();
-
-  useEffect(() => {
-    setTitle(post?.title);
-    setEpigraph(post?.epigraph);
-    setEpigraphAuthor(post?.epigraphAuthor);
-    setAuthor(post?.author?._id);
-    setText(post?.text);
-  }, []);
 
   useEffect(() => {
     setErrorMsg("");
