@@ -5,6 +5,7 @@ import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
 import filledHeart from "../assets/heart-filled.svg";
 import { useGetPostQuery } from "../features/posts/postsApiSlice";
+import Error from "./Error";
 
 const Post = () => {
   const { postID } = useParams();
@@ -13,7 +14,7 @@ const Post = () => {
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
 
-  const { data: postData, isLoading } = useGetPostQuery(postID);
+  const { data: postData, isLoading, isError } = useGetPostQuery(postID);
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
@@ -70,7 +71,13 @@ const Post = () => {
     </>
   );
 
-  const content = isLoading ? <PostSkeleton /> : LoadedPage;
+  const content = isError ? (
+    <Error />
+  ) : isLoading ? (
+    <PostSkeleton />
+  ) : (
+    LoadedPage
+  );
 
   return (
     <section className='fill-screen single-post-container'>{content}</section>
