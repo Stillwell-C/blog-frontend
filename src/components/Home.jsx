@@ -5,11 +5,16 @@ import HomeTopPosts from "./HomeTopPosts";
 import HomeRecentPosts from "./HomeRecentPosts";
 import { useNavigate } from "react-router-dom";
 import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
+import Error from "./Error";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const { data: postData, isLoading } = useGetMultiplePostsQuery({
+  const {
+    data: postData,
+    isLoading,
+    isError,
+  } = useGetMultiplePostsQuery({
     page: 1,
     limit: 12,
     top: true,
@@ -24,7 +29,7 @@ const Home = () => {
     setPosts(postData?.posts);
   }, [isLoading]);
 
-  return (
+  const content = (
     <section className='home-container fill-screen'>
       <div className='home-top-container'>
         <div className='home-top-center'>
@@ -59,6 +64,8 @@ const Home = () => {
       </div>
     </section>
   );
+
+  return isError ? <Error /> : content;
 };
 
 export default Home;
