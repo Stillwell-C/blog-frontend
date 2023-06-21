@@ -1,18 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import spoonbill from "../assets/spoonbill.svg";
 import { Link } from "react-router-dom";
-import axios from "../app/api/axios";
+import { useAddNewUserMutation } from "../features/users/usersApiSlice";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 //Min 8 char long. Must contain at least one letter & one number
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/;
 
-const REGISTER_URL = "/users";
-
 const Register = () => {
   const usernameRef = useRef();
   const errRef = useRef();
+
+  const [addNewUser, { isLoading, isSuccess, isError, error }] =
+    useAddNewUserMutation();
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
@@ -27,11 +28,10 @@ const Register = () => {
   const [confirmFocus, setConfirmFocus] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    if (success) return;
-    usernameRef.current.focus();
+    if (isSuccess) return;
+    usernameRef?.current.focus();
   }, []);
 
   useEffect(() => {
@@ -64,33 +64,43 @@ const Register = () => {
       errRef.current.focus();
       return;
     }
+    await addNewUser({ username, password });
 
-    try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ username, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(response.data);
-      setSuccess(true);
+    // try {
+    //   const response = await axios.post(
+    //     REGISTER_URL,
+    //     JSON.stringify({ username, password }),
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   console.log(response.data);
+    // } catch (err) {
+    //   console.log(err.response.status);
+    //   if (!err.response) {
+    //     setErrorMsg("No server reponse");
+    //   } else if (err.response.status === 409) {
+    //     setErrorMsg("Username taken");
+    //   } else {
+    //     setErrorMsg("Registration failed");
+    //   }
+    //   errRef.current.focus();
+    // }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
       setUsername("");
       setPassword("");
       setConfirmPassword("");
-    } catch (err) {
-      console.log(err.response.status);
-      if (!err.response) {
-        setErrorMsg("No server reponse");
-      } else if (err.response.status === 409) {
-        setErrorMsg("Username taken");
-      } else {
-        setErrorMsg("Registration failed");
-      }
-      errRef.current.focus();
     }
-  };
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!errorMsg.length) return;
+    if (isError) errRef.current.focus();
+  }, [isError, errorMsg]);
 
   const successPage = (
     <>
@@ -112,10 +122,14 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <div
             ref={errRef}
-            className={errorMsg ? "form-error-div" : "error-offscreen"}
+            className={
+              isError || errorMsg ? "form-error-div" : "error-offscreen"
+            }
             aria-live='assertive'
           >
+            {/* See if this is sufficient for message */}
             {errorMsg}
+            {error?.data?.message}
           </div>
           <div
             className={`form-line ${username && !validUsername ? "error" : ""}`}
@@ -240,7 +254,7 @@ const Register = () => {
   const content = (
     <section className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
-        {success ? successPage : registrationPage}
+        {isSuccess ? successPage : registrationPage}
       </div>
     </section>
   );
