@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "../app/api/axios";
 import { useNavigate } from "react-router-dom";
+import { useAddNewPostMutation } from "../features/posts/postsApiSlice";
 
 const ADD_POST_URL = "/posts";
 
@@ -22,6 +23,9 @@ const NewPost = () => {
   const [author, setAuthor] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
+
+  const [addNewPost, { isLoading, isSuccess, isError, error }] =
+    useAddNewPostMutation();
 
   useEffect(() => {
     titleRef.current.focus();
@@ -77,39 +81,56 @@ const NewPost = () => {
     const trimmedEpigraph = epigraph.trim();
     const trimmedEpigraphAuthor = epigraphAuthor.trim();
     const trimmedText = text.trim();
-    try {
-      const response = await axios.post(
-        ADD_POST_URL,
-        JSON.stringify({
-          title: trimmedTitle,
-          epigraph: trimmedEpigraph,
-          epigraphAuthor: trimmedEpigraphAuthor,
-          text: trimmedText,
-          author,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      //Potentially remove once author is automatically input
-      if (!response.data.isError) {
-        navigate("/");
-      } else {
-        setErrorMsg(response.data.message);
-      }
-    } catch (err) {
-      console.log(err.response.status);
-      if (!err.response) {
-        setErrorMsg("No server reponse");
-      } else if (err.response.status === 400) {
-        setErrorMsg(err.response.message);
-      } else {
-        setErrorMsg("Add post failed");
-      }
-      errRef.current.focus();
-    }
+    addNewPost({
+      title: trimmedTitle,
+      epigraph: trimmedEpigraph,
+      epigraphAuthor: trimmedEpigraphAuthor,
+      text: trimmedText,
+      author,
+    });
+
+    // try {
+    //   const response = await axios.post(
+    //     ADD_POST_URL,
+    //     JSON.stringify({
+    //       title: trimmedTitle,
+    //       epigraph: trimmedEpigraph,
+    //       epigraphAuthor: trimmedEpigraphAuthor,
+    //       text: trimmedText,
+    //       author,
+    //     }),
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   //Potentially remove once author is automatically input
+    //   if (!response.data.isError) {
+    //     navigate("/");
+    //   } else {
+    //     setErrorMsg(response.data.message);
+    //   }
+    // } catch (err) {
+    //   console.log(err.response.status);
+    //   if (!err.response) {
+    //     setErrorMsg("No server reponse");
+    //   } else if (err.response.status === 400) {
+    //     setErrorMsg(err.response.message);
+    //   } else {
+    //     setErrorMsg("Add post failed");
+    //   }
+    //   errRef.current.focus();
+    // }
   };
+
+  useEffect(() => {
+    if (isSuccess) navigate("/");
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!errorMsg.length) return;
+    if (isError) errRef.current.focus();
+  }, [isError, errorMsg]);
 
   return (
     <section className='fill-screen new-post-container flex-align-center'>
@@ -117,10 +138,13 @@ const NewPost = () => {
         <h2>New Post</h2>
         <form onSubmit={handleSubmit}>
           <div
-            className={errorMsg ? "form-error-div" : "error-offscreen"}
+            className={
+              errorMsg || isError ? "form-error-div" : "error-offscreen"
+            }
             ref={errRef}
           >
             {errorMsg}
+            {error?.data?.message}
           </div>
           <div className={`form-line ${titleErr ? "error" : ""}`}>
             <label htmlFor='title' className='form-label'>
