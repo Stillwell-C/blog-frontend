@@ -666,9 +666,9 @@ button {
   gap: 5px;
 }
 
-/* Not found page */
+/* Not found page & Error Page */
 
-.not-found-page {
+.error-page {
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -677,20 +677,20 @@ button {
   gap: 5px
 }
 
-.not-found-page img {
+.error-page img {
   max-width: 400px;
   width: auto;
   margin-bottom: 4rem;
 }
 
-.not-found-page h2 {
+.error-page h2 {
   font-size: 2rem;
 }
 
-.not-found-page p {
+.error-page p {
   font-size: 1.1rem;
 }
 
-.not-found-page a {
+.error-page a {
   color: var(--text-color);
 }

@@ -3,7 +3,7 @@ import birdImg from "../assets/frog-in-mouth.svg";
 
 const NotFound = () => {
   return (
-    <section className='not-found-page fill-screen'>
+    <section className='error-page fill-screen'>
       <img src={birdImg} alt='' />
       <h2>404 Not Found</h2>
       <p>seems you&apos;re on your own wild goose chase</p>
