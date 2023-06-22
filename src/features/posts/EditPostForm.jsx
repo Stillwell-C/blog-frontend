@@ -110,7 +110,7 @@ const EditPostForm = ({ post }) => {
   return (
     <section className='fill-screen new-post-container flex-align-center edit-post-container'>
       <div className='new-post-wrapper'>
-        <h2>New Post</h2>
+        <h2>Edit Post</h2>
         <form onSubmit={handleSubmit}>
           <div
             className={
