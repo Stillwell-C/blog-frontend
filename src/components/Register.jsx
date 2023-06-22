@@ -99,7 +99,7 @@ const Register = () => {
 
   useEffect(() => {
     if (!errorMsg.length) return;
-    if (isError) errRef.current.focus();
+    if (isError || errorMsg.length) errRef.current.focus();
   }, [isError, errorMsg]);
 
   const successPage = (
