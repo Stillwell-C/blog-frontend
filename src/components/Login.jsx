@@ -1,31 +1,82 @@
 import { useState, useEffect, useRef } from "react";
 import birdImg from "../assets/stork.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../features/auth/authSlice";
+import { useLoginMutation } from "../features/auth/authApiSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const usernameRef = useRef();
   const errRef = useRef();
+
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
 
+  const [login, { isLoading, error, isSuccess, isError }] = useLoginMutation();
+
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    setErrorMsg("");
+  }, [username, password]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // try {
+    //   const { accessToken } = await login({ username, password }).unwrap;
+    //   dispatch(setCredentials({ accessToken }));
+    //   setUsername("");
+    //   setPassword("");
+    //   navigate("/");
+    // } catch (err) {
+    //   if (!err.status) {
+    //     setErrorMsg("No Server Response");
+    //   } else {
+    //     setErrorMsg(err?.data?.message);
+    //   }
+    // }
+    const response = await login({ username, password });
+    dispatch(setCredentials({ accessToken: response.data.accessToken }));
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUsername("");
+      setPassword("");
+      navigate("/");
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!errorMsg.length) return;
+    if (isError || errorMsg.length) errRef.current.focus();
+  }, [isError, errorMsg]);
 
   return (
     <section className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
         <div className='auth-form-container'>
           <h2>Log In</h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <div
-              className={errorMsg ? "form-error-div" : "error-offscreen"}
+              className={
+                isError || errorMsg.length
+                  ? "form-error-div"
+                  : "error-offscreen"
+              }
               ref={errRef}
+              aria-live='assertive'
             >
               {errorMsg}
+              {error?.data?.message}
             </div>
             <div className='form-line'>
               <label htmlFor='username' className='form-label'>
