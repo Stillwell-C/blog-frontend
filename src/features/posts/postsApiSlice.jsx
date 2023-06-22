@@ -13,7 +13,11 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
-      providesTags: ["Post"],
+      providesTags: (result, error, arg) => {
+        //Not sure if this is preferable to just returning "Post"
+        if (result) return [{ type: "Post", id: result._id }];
+        else return ["Post"];
+      },
     }),
     getMultiplePosts: builder.query({
       query: ({ page, limit, top = false }) =>
