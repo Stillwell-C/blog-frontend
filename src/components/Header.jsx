@@ -1,7 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import { useSendLogoutMutation } from "../features/auth/authApiSlice";
+import { useEffect } from "react";
+
 const Header = () => {
   const navigate = useNavigate();
+
+  const [sendLogout, { isLoading, isSuccess, isError, error }] =
+    useSendLogoutMutation();
+
+  useEffect(() => {
+    if (isSuccess) navigate("/");
+  }, [isSuccess]);
 
   let loginButton = (
     <button className='basic-button' onClick={() => navigate("/login")}>
@@ -13,11 +23,23 @@ const Header = () => {
       Sign up
     </button>
   );
+  let logoutButton = (
+    <button className='basic-button' onClick={sendLogout}>
+      {isLoading ? "Logging Out" : "Log Out"}
+    </button>
+  );
+  // let mypageButton
+  let newPostButton = (
+    <button className='basic-button' onClick={() => navigate("/posts/new")}>
+      New Post
+    </button>
+  );
 
   const headerButtons = (
     <>
       {loginButton}
       {newUserButton}
+      {logoutButton}
     </>
   );
 
