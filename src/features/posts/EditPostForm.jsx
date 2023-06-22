@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUpdatePostMutation } from "./postsApiSlice";
+import { useDeletePostMutation, useUpdatePostMutation } from "./postsApiSlice";
 
 const EditPostForm = ({ post }) => {
   const navigate = useNavigate();
@@ -23,6 +23,16 @@ const EditPostForm = ({ post }) => {
 
   const [updatePost, { isLoading, isSuccess, isError, error }] =
     useUpdatePostMutation();
+
+  const [
+    deletePost,
+    {
+      isLoading: deleteIsLoading,
+      isSuccess: deleteIsSuccess,
+      isError: deleteIsError,
+      error: deleteError,
+    },
+  ] = useDeletePostMutation();
 
   useEffect(() => {
     setErrorMsg("");
@@ -74,7 +84,7 @@ const EditPostForm = ({ post }) => {
     const trimmedEpigraph = epigraph.trim();
     const trimmedEpigraphAuthor = epigraphAuthor.trim();
     const trimmedText = text.trim();
-    updatePost({
+    await updatePost({
       title: trimmedTitle,
       epigraph: trimmedEpigraph,
       epigraphAuthor: trimmedEpigraphAuthor,
@@ -82,52 +92,23 @@ const EditPostForm = ({ post }) => {
       author,
       id: post._id,
     });
+  };
 
-    // try {
-    //   const response = await axios.post(
-    //     ADD_POST_URL,
-    //     JSON.stringify({
-    //       title: trimmedTitle,
-    //       epigraph: trimmedEpigraph,
-    //       epigraphAuthor: trimmedEpigraphAuthor,
-    //       text: trimmedText,
-    //       author,
-    //     }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   //Potentially remove once author is automatically input
-    //   if (!response.data.isError) {
-    //     navigate("/");
-    //   } else {
-    //     setErrorMsg(response.data.message);
-    //   }
-    // } catch (err) {
-    //   console.log(err.response.status);
-    //   if (!err.response) {
-    //     setErrorMsg("No server reponse");
-    //   } else if (err.response.status === 400) {
-    //     setErrorMsg(err.response.message);
-    //   } else {
-    //     setErrorMsg("Add post failed");
-    //   }
-    //   errRef.current.focus();
-    // }
+  const handleDelete = async () => {
+    await deletePost({ id: post._id });
   };
 
   useEffect(() => {
-    if (isSuccess) navigate("/");
-  }, [isSuccess]);
+    if ((isSuccess, deleteIsSuccess)) navigate("/");
+  }, [isSuccess, deleteIsSuccess]);
 
   useEffect(() => {
     if (!errorMsg.length) return;
-    if (isError) errRef.current.focus();
-  }, [isError, errorMsg]);
+    if (isError || deleteIsError || errorMsg.length) errRef.current.focus();
+  }, [isError, deleteIsError, errorMsg]);
 
   return (
-    <section className='fill-screen new-post-container flex-align-center'>
+    <section className='fill-screen new-post-container flex-align-center edit-post-container'>
       <div className='new-post-wrapper'>
         <h2>New Post</h2>
         <form onSubmit={handleSubmit}>
@@ -221,13 +202,20 @@ const EditPostForm = ({ post }) => {
               required
             ></textarea>
           </div>
-          <div className='button-div'>
+          <div className='post-form-button-div'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button'
               type='submit'
             >
               Submit
+            </button>
+            <button
+              className='basic-button delete-button'
+              type='button'
+              onClick={handleDelete}
+            >
+              Delete
             </button>
           </div>
         </form>
