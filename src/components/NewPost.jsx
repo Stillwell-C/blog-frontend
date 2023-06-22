@@ -227,7 +227,7 @@ const NewPost = () => {
               required
             ></textarea>
           </div>
-          <div className='button-div'>
+          <div className='post-form-button-div'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button'

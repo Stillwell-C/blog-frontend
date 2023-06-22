@@ -39,7 +39,11 @@ button {
   font-size: 1rem;
   padding: 7px 10px;
   border-radius: .25rem;
-  
+}
+
+.delete-button {
+  color: var(--error);
+  border: 1px solid var(--error);
 }
 
 .basic-button:hover {
@@ -598,6 +602,11 @@ button {
   .post-input.form-textarea.textarea-long {
     height: 450px;
   }
+}
+
+.post-form-button-div {
+  display: flex;
+  gap: 10px
 }
 
 /* Single Post */
