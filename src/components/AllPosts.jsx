@@ -3,7 +3,7 @@ import PostDisplayLarge from "./PostDisplayLarge";
 import PostDisplayLargeSkeleton from "./PostDisplayLargeSkeleton";
 import AllPostsPageBtns from "./AllPostsPageBtns";
 import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
 
 const AllPosts = () => {
   // const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +50,7 @@ const AllPosts = () => {
           setCurrentPage={setCurrentPage}
         />
       )}
-      {isError && <Error />}
+      {isError && <ErrorPage />}
     </section>
   );
 };

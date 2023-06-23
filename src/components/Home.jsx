@@ -5,7 +5,7 @@ import HomeTopPosts from "./HomeTopPosts";
 import HomeRecentPosts from "./HomeRecentPosts";
 import { useNavigate } from "react-router-dom";
 import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const Home = () => {
     </section>
   );
 
-  return isError ? <Error /> : content;
+  return isError ? <ErrorPage /> : content;
 };
 
 export default Home;

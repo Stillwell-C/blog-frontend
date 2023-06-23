@@ -5,7 +5,7 @@ import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
 import filledHeart from "../assets/heart-filled.svg";
 import { useGetPostQuery } from "../features/posts/postsApiSlice";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
 
 const Post = () => {
   const { postID } = useParams();
@@ -72,7 +72,7 @@ const Post = () => {
   );
 
   const content = isError ? (
-    <Error />
+    <ErrorPage />
   ) : isLoading ? (
     <PostSkeleton />
   ) : (
