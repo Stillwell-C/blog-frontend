@@ -8,26 +8,29 @@ import NewPost from "./components/NewPost";
 import Post from "./components/Post";
 import AllPosts from "./components/AllPosts";
 import EditPost from "./features/posts/EditPost";
+import PersistentLogin from "./features/auth/PersistentLogin";
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
-        <Route index element={<Home />} />
+        <Route element={<PersistentLogin />}>
+          <Route index element={<Home />} />
 
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
 
-        <Route path='/posts'>
-          <Route index element={<AllPosts />} />
-          <Route path='new' element={<NewPost />} />
-          <Route path=':postID' element={<Post />} />
-          <Route path=':postID/edit' element={<EditPost />} />
+          <Route path='/posts'>
+            <Route index element={<AllPosts />} />
+            <Route path='new' element={<NewPost />} />
+            <Route path=':postID' element={<Post />} />
+            <Route path=':postID/edit' element={<EditPost />} />
+          </Route>
+
+          <Route path='/users'></Route>
+
+          <Route path='*' element={<NotFound />} />
         </Route>
-
-        <Route path='/users'></Route>
-
-        <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
   );
