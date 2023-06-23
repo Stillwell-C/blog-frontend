@@ -1,10 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { checkCredentialsLoading } from "../features/auth/authSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  // const [authLoading, setAuthLoading] = useState(true);
+  const { loggedIn } = useAuth();
+
+  const authLoading = useSelector(checkCredentialsLoading);
+
+  console.log("auth loading: ", authLoading, "||  logged in: ", loggedIn);
+
+  // useEffect(() => {
+  //   setAuthLoading(false);
+  // }, [loggedIn]);
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
@@ -34,15 +48,32 @@ const Header = () => {
       New Post
     </button>
   );
+  let buttonLoadingSkeleton = (
+    <div className='header-button-skeleton'>
+      <div className='skeleton skeleton-title-sm skeleton-width-80'></div>
+    </div>
+  );
 
-  const headerButtons = (
+  const skeletonButtons = (
+    <>
+      {buttonLoadingSkeleton}
+      {buttonLoadingSkeleton}
+    </>
+  );
+
+  const headerButtons = !loggedIn ? (
     <>
       {loginButton}
       {newUserButton}
+    </>
+  ) : (
+    <>
       {logoutButton}
       {newPostButton}
     </>
   );
+
+  const displayButtons = authLoading ? skeletonButtons : headerButtons;
 
   return (
     <header className='page-header'>
@@ -50,7 +81,7 @@ const Header = () => {
         <Link to='/'>Wild Goose Chase </Link>
       </h1>
 
-      <nav className='header-buttons-container'>{headerButtons}</nav>
+      <nav className='header-buttons-container'>{displayButtons}</nav>
     </header>
   );
 };
