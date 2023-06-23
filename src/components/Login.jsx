@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useLoginMutation } from "../features/auth/authApiSlice";
+import usePersistLogin from "../hooks/usePersistLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,8 +16,8 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [errorMsg, setErrorMsg] = useState("");
+  const [persistLogin, setPersistLogin] = usePersistLogin();
 
   const [login, { isLoading, error, isSuccess, isError }] = useLoginMutation();
 
@@ -30,6 +31,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setPersistLogin(true);
     // try {
     //   const { accessToken } = await login({ username, password }).unwrap;
     //   dispatch(setCredentials({ accessToken }));
@@ -109,6 +111,21 @@ const Login = () => {
                 required
               />
             </div>
+            {/* <div className='form-line'>
+              <label
+                htmlFor='persistLogin'
+                className='form-label checkbox-label'
+              >
+                <input
+                  type='checkbox'
+                  className='form-checkbox'
+                  id='persistLogin'
+                  onChange={() => setPersistLogin((prev) => !prev)}
+                  checked={persistLogin}
+                />
+                keep me logged in
+              </label>
+            </div> */}
             <div className='button-div'>
               <button
                 disabled={!username || !password}
