@@ -40,6 +40,7 @@ const Header = () => {
       {loginButton}
       {newUserButton}
       {logoutButton}
+      {newPostButton}
     </>
   );
 
