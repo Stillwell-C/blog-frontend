@@ -429,6 +429,18 @@ button {
   resize: vertical;
 }
 
+.form-checkbox {
+  padding: 0;
+  accent-color: var(--background-grey);
+  margin-right: 5px;
+}
+
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
 .form-line.error > .form-input {
   border-color:  var(--error);
   
