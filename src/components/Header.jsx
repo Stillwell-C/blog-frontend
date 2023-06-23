@@ -4,7 +4,7 @@ import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
-import { checkCredentialsLoading } from "../features/auth/authSlice";
+import { selectCredentialsLoading } from "../features/auth/authSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Header = () => {
   // const [authLoading, setAuthLoading] = useState(true);
   const { loggedIn } = useAuth();
 
-  const authLoading = useSelector(checkCredentialsLoading);
+  const authLoading = useSelector(selectCredentialsLoading);
 
   console.log("auth loading: ", authLoading, "||  logged in: ", loggedIn);
 
