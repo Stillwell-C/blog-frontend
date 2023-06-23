@@ -1,14 +1,20 @@
 import errorRobot from "../assets/BrokenRobot.svg";
 
-const Error = () => {
+const ErrorPage = ({ message }) => {
+  let content;
+  if (message) {
+    content = message;
+  } else {
+    content = "Please try again";
+  }
   return (
     <section className='fill-screen error-page'>
       <img src={errorRobot} alt='' />
       <h2>Error</h2>
       <p>Something went wrong</p>
-      <p>Please try again</p>
+      <p>{content}</p>
     </section>
   );
 };
 
-export default Error;
+export default ErrorPage;
