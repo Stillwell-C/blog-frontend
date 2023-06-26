@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import PostSkeleton from "./PostSkeleton";
 import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
 import filledHeart from "../assets/heart-filled.svg";
 import { useGetPostQuery } from "../features/posts/postsApiSlice";
 import ErrorPage from "./ErrorPage";
+import useAuth from "../hooks/useAuth";
 
 const Post = () => {
   const { postID } = useParams();
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   // const [isLoading, setIsLoading] = useState(true);
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
 
   const { data: postData, isLoading, isError } = useGetPostQuery(postID);
+
+  const { id, isAdmin } = useAuth();
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
@@ -36,6 +42,19 @@ const Post = () => {
     setPostContent(postData);
   }, [isLoading]);
 
+  let editButtons = null;
+  if (id === postContent?.author?._id || isAdmin) {
+    editButtons = (
+      <button
+        className='basic-button'
+        type='button'
+        onClick={() => navigate(`${pathname}/edit`)}
+      >
+        Edit Post
+      </button>
+    );
+  }
+
   const LoadedPage = (
     <>
       <div className='single-post-content'>
@@ -54,6 +73,7 @@ const Post = () => {
           <div className='single-post-text'>
             <p>{postContent?.text}</p>
           </div>
+          <div className='edit-post-btn-div margin-top-2'>{editButtons}</div>
         </article>
         <div className='post-like-btn-div'>
           <button
