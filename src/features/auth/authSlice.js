@@ -13,7 +13,7 @@ const authSlice = createSlice({
       return { ...state, credentialsLoading };
     },
     logOut: (state, action) => {
-      state.token = null;
+      return { ...state, token: null };
     },
   },
 });
