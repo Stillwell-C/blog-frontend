@@ -23,9 +23,9 @@ const Header = () => {
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
 
-  useEffect(() => {
-    if (isSuccess) navigate("/");
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) navigate("/");
+  // }, [isSuccess]);
 
   let loginButton = (
     <button className='basic-button' onClick={() => navigate("/login")}>
