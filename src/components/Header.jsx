@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   // const [authLoading, setAuthLoading] = useState(true);
-  const { loggedIn } = useAuth();
+  const { loggedIn, isAdmin, isContributor } = useAuth();
 
   const authLoading = useSelector(selectCredentialsLoading);
 
@@ -42,12 +42,17 @@ const Header = () => {
       {isLoading ? "Logging Out" : "Log Out"}
     </button>
   );
-  // let mypageButton
   let newPostButton = (
     <button className='basic-button' onClick={() => navigate("/posts/new")}>
       New Post
     </button>
   );
+  let myPageButton = (
+    <button className='basic-button' onClick={() => navigate("/mypage")}>
+      My Page
+    </button>
+  );
+
   let buttonLoadingSkeleton = (
     <div className='header-button-skeleton'>
       <div className='skeleton skeleton-title-sm skeleton-width-80'></div>
@@ -68,8 +73,9 @@ const Header = () => {
     </>
   ) : (
     <>
+      {myPageButton}
+      {isContributor && newPostButton}
       {logoutButton}
-      {newPostButton}
     </>
   );
 
