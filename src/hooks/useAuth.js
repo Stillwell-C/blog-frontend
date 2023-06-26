@@ -11,8 +11,8 @@ const useAuth = () => {
     const decodedToken = jwtDecode(token);
     const { username, roles } = decodedToken.UserInfo;
 
-    isContributor = roles.includes("Contributor");
-    isAdmin = roles.includes("Admin");
+    isContributor = roles.some((role) => role.match(/contributor/i));
+    isAdmin = roles.some((role) => role.match(/admin/i));
 
     return { username, roles, isAdmin, isContributor, loggedIn: true };
   } else {
