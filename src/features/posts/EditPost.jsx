@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import EditPostForm from "./EditPostForm";
 import { useGetPostQuery } from "./postsApiSlice";
 import { Navigate, useParams } from "react-router-dom";
+import LoadingPage from "../../components/LoadingPage";
 
 const EditPost = () => {
   const { postID } = useParams();
@@ -20,7 +21,7 @@ const EditPost = () => {
   }, [isLoading]);
 
   const content = isLoading ? (
-    <p>Loading...</p>
+    <LoadingPage />
   ) : (
     <EditPostForm post={postData} />
   );
