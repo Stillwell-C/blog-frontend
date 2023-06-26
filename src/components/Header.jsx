@@ -15,8 +15,6 @@ const Header = () => {
 
   const authLoading = useSelector(selectCredentialsLoading);
 
-  console.log("auth loading: ", authLoading, "||  logged in: ", loggedIn);
-
   // useEffect(() => {
   //   setAuthLoading(false);
   // }, [loggedIn]);
@@ -61,7 +59,7 @@ const Header = () => {
   }
 
   let adminDashButton = null;
-  if (isContributor) {
+  if (isAdmin) {
     adminDashButton = (
       <button className='basic-button' onClick={() => navigate("/admindash")}>
         Admin Dash
@@ -70,7 +68,6 @@ const Header = () => {
   }
 
   let myPageButton = null;
-  console.log("path", pathname);
   if (!pathname.match(/\/mypage/i)) {
     myPageButton = (
       <button className='basic-button' onClick={() => navigate("/mypage")}>
