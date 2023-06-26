@@ -66,12 +66,28 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg._id }],
     }),
+    getUserPosts: builder.query({
+      query: ({ userId, page, limit }) =>
+        `/users/${userId}/posts/?page=${page}&limit=${limit}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      providesTags: (result, error, arg) => {
+        if (result) {
+          return [
+            { type: "Post", id: "LIST" },
+            ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
+          ];
+        } else [{ type: "Post", id: "LIST" }];
+      },
+    }),
   }),
 });
 
 export const {
   useGetUserQuery,
   useGetAllUsersQuery,
+  useGetUserPostsQuery,
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
