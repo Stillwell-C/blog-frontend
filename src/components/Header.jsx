@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { selectCredentialsLoading } from "../features/auth/authSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   // const [authLoading, setAuthLoading] = useState(true);
   const { loggedIn, isAdmin, isContributor } = useAuth();
@@ -23,35 +24,60 @@ const Header = () => {
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
 
-  // useEffect(() => {
-  //   if (isSuccess) navigate("/");
-  // }, [isSuccess]);
+  useEffect(() => {
+    //Not sure if this will help or hurt
+    if (isSuccess) window.location.reload();
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) console.log("logout error: ", error?.data?.message);
+  }, [isError]);
 
   let loginButton = (
     <button className='basic-button' onClick={() => navigate("/login")}>
       Log in
     </button>
   );
+
   let newUserButton = (
     <button className='basic-button' onClick={() => navigate("/register")}>
       Sign up
     </button>
   );
+
   let logoutButton = (
     <button className='basic-button' onClick={sendLogout}>
       {isLoading ? "Logging Out" : "Log Out"}
     </button>
   );
-  let newPostButton = (
-    <button className='basic-button' onClick={() => navigate("/posts/new")}>
-      New Post
-    </button>
-  );
-  let myPageButton = (
-    <button className='basic-button' onClick={() => navigate("/mypage")}>
-      My Page
-    </button>
-  );
+
+  let newPostButton = null;
+  if (isContributor) {
+    newPostButton = (
+      <button className='basic-button' onClick={() => navigate("/posts/new")}>
+        New Post
+      </button>
+    );
+  }
+
+  let adminDashButton = null;
+  if (isContributor) {
+    adminDashButton = (
+      <button className='basic-button' onClick={() => navigate("/admindash")}>
+        Admin Dash
+      </button>
+    );
+  }
+
+  let myPageButton = null;
+  console.log("path", pathname);
+  if (!pathname.match(/\/mypage/i)) {
+    myPageButton = (
+      <button className='basic-button' onClick={() => navigate("/mypage")}>
+        My Page
+      </button>
+    );
+  }
 
   let buttonLoadingSkeleton = (
     <div className='header-button-skeleton'>
@@ -74,7 +100,8 @@ const Header = () => {
   ) : (
     <>
       {myPageButton}
-      {isContributor && newPostButton}
+      {adminDashButton}
+      {newPostButton}
       {logoutButton}
     </>
   );
