@@ -9,6 +9,15 @@ import Post from "./components/Post";
 import AllPosts from "./components/AllPosts";
 import EditPost from "./features/posts/EditPost";
 import PersistentLogin from "./features/auth/PersistentLogin";
+import UserDashboard from "./components/UserDashboard";
+import RequireLogin from "./features/auth/RequireLogin";
+import RequireRole from "./features/auth/RequireRole";
+
+const roles = {
+  User: "User",
+  Contributor: "Contributor",
+  Admin: "Admin",
+};
 
 function App() {
   return (
@@ -24,10 +33,20 @@ function App() {
             <Route index element={<AllPosts />} />
             <Route path='new' element={<NewPost />} />
             <Route path=':postID' element={<Post />} />
-            <Route path=':postID/edit' element={<EditPost />} />
+            <Route
+              element={
+                <RequireRole requiredRoles={[roles.Contributor, roles.Admin]} />
+              }
+            >
+              <Route path=':postID/edit' element={<EditPost />} />
+            </Route>
           </Route>
 
           <Route path='/users'></Route>
+
+          <Route element={<RequireLogin />}>
+            <Route path='/mypage' element={<UserDashboard />} />
+          </Route>
 
           <Route path='*' element={<NotFound />} />
         </Route>
