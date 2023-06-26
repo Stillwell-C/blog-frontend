@@ -1,11 +1,23 @@
+import { useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 import EditPostForm from "./EditPostForm";
 import { useGetPostQuery } from "./postsApiSlice";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const EditPost = () => {
   const { postID } = useParams();
 
   const { data: postData, isLoading, isError } = useGetPostQuery(postID);
+
+  const { id, isAdmin } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!isAdmin || postData?.author._id !== id) {
+        <Navigate to='/' state={{ from: location }} replace />;
+      }
+    }
+  }, [isLoading]);
 
   const content = isLoading ? (
     <p>Loading...</p>
