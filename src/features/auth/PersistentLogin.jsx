@@ -5,7 +5,6 @@ import usePersistLogin from "../../hooks/usePersistLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentToken, setCredentialsLoading } from "./authSlice";
 import ErrorPage from "../../components/ErrorPage";
-import PersistLoginLoading from "../../components/PersistLoginLoading";
 
 const PersistentLogin = () => {
   const [persist, setPersist] = usePersistLogin();
