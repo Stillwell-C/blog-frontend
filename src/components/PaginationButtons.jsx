@@ -1,11 +1,11 @@
-import AllPostsPageBtn from "./AllPostsPageBtn";
+import PaginationButton from "./PaginationButton";
 
-const AllPostsPageBtns = ({ totalPages, currentPage, setCurrentPage }) => {
+const PaginationButtons = ({ totalPages, currentPage, setCurrentPage }) => {
   let content = [];
   if (totalPages <= 5 || currentPage <= 3) {
     for (let i = 1; i <= 5; i++) {
       content.push(
-        <AllPostsPageBtn
+        <PaginationButton
           key={i}
           pageNum={i}
           currentPage={currentPage}
@@ -16,7 +16,7 @@ const AllPostsPageBtns = ({ totalPages, currentPage, setCurrentPage }) => {
   } else if (totalPages - currentPage === 1) {
     for (let i = currentPage - 3; i <= totalPages; i++) {
       content.push(
-        <AllPostsPageBtn
+        <PaginationButton
           key={i}
           pageNum={i}
           currentPage={currentPage}
@@ -27,7 +27,7 @@ const AllPostsPageBtns = ({ totalPages, currentPage, setCurrentPage }) => {
   } else if (totalPages === currentPage) {
     for (let i = currentPage - 4; i <= totalPages; i++) {
       content.push(
-        <AllPostsPageBtn
+        <PaginationButton
           key={i}
           pageNum={i}
           currentPage={currentPage}
@@ -38,7 +38,7 @@ const AllPostsPageBtns = ({ totalPages, currentPage, setCurrentPage }) => {
   } else {
     for (let i = currentPage - 2; i <= currentPage + 2; i++) {
       content.push(
-        <AllPostsPageBtn
+        <PaginationButton
           key={i}
           pageNum={i}
           currentPage={currentPage}
@@ -102,4 +102,4 @@ const AllPostsPageBtns = ({ totalPages, currentPage, setCurrentPage }) => {
   );
 };
 
-export default AllPostsPageBtns;
+export default PaginationButtons;
