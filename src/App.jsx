@@ -13,8 +13,8 @@ import PersistentLogin from "./features/auth/PersistentLogin";
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route element={<PersistentLogin />}>
+      <Route element={<PersistentLogin />}>
+        <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
 
           <Route path='/register' element={<Register />} />
