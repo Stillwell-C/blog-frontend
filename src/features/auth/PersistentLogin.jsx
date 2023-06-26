@@ -48,13 +48,20 @@ const PersistentLogin = () => {
   //If error -> set this to false ?
 
   let content;
-  if (!persist || (isSuccess && loginSuccess) || (token && isUninitialized)) {
+  if (
+    !persist ||
+    (isSuccess && loginSuccess) ||
+    (token && isUninitialized) ||
+    isLoading
+  ) {
     content = <Outlet />;
-  } else if (isLoading) {
-    //persist: yes, token: no
-    console.log("loading");
-    content = <PersistLoginLoading />;
-  } else if (isError) {
+  }
+  // else if (isLoading) {
+  //   //persist: yes, token: no
+  //   console.log("loading");
+  //   content = <Outlet />;
+  // }
+  else if (isError) {
     //persist: yes, token: no
     setPersist(false);
     content = (
