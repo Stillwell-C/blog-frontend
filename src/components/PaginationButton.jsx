@@ -1,4 +1,4 @@
-const AllPostsPageBtn = ({ pageNum, currentPage, setCurrentPage }) => {
+const PaginationButton = ({ pageNum, currentPage, setCurrentPage }) => {
   return (
     <button
       type='button'
@@ -19,4 +19,4 @@ const AllPostsPageBtn = ({ pageNum, currentPage, setCurrentPage }) => {
   );
 };
 
-export default AllPostsPageBtn;
+export default PaginationButton;
