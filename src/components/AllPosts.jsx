@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PostDisplayLarge from "./PostDisplayLarge";
 import PostDisplayLargeSkeleton from "./PostDisplayLargeSkeleton";
-import AllPostsPageBtns from "./AllPostsPageBtns";
+import PaginationButtons from "./PaginationButtons";
 import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
 import ErrorPage from "./ErrorPage";
 
@@ -22,6 +22,10 @@ const AllPosts = () => {
   });
 
   useEffect(() => {
+    console.log("Page: ", currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
@@ -29,7 +33,7 @@ const AllPosts = () => {
     // setTotalPosts(postData?.totalPosts);
     setTotalPages(Math.ceil(postData?.totalPosts / 10) || 1);
     setPosts(postData?.posts);
-  }, [isFetching]);
+  }, [postData]);
 
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
@@ -44,7 +48,7 @@ const AllPosts = () => {
         posts &&
         posts.map((post) => <PostDisplayLarge post={post} key={post._id} />)}
       {!isFetching && posts && (
-        <AllPostsPageBtns
+        <PaginationButtons
           totalPages={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
