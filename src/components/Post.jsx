@@ -7,6 +7,7 @@ import filledHeart from "../assets/heart-filled.svg";
 import { useGetPostQuery } from "../features/posts/postsApiSlice";
 import ErrorPage from "./ErrorPage";
 import useAuth from "../hooks/useAuth";
+import AddComment from "../features/comments/AddComment";
 
 const Post = () => {
   const { postID } = useParams();
@@ -86,7 +87,8 @@ const Post = () => {
         </div>
         <div className='post-page-break'></div>
         <h3>Comments</h3>
-        <div className='post-user-comments'></div>
+        <AddComment />
+        <div className='post-user-comments margin-top-2'></div>
       </div>
     </>
   );
