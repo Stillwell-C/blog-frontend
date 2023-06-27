@@ -73,7 +73,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         return response.status === 200 && !result.isError;
       },
       providesTags: (result, error, arg) => {
-        if (result) {
+        if (result?.posts?.length) {
           return [
             { type: "Post", id: "LIST" },
             ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
