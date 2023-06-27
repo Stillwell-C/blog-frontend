@@ -727,6 +727,65 @@ button {
   gap: 5px;
 }
 
+.add-user-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-user-comment > form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.add-user-comment textarea {
+  resize: vertical;
+  /* background-color: var(--background-grey); */
+  border: 1.5px solid var(--border-color);
+  border-radius: .25rem;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.add-user-comment button {
+  align-self: flex-end;
+  margin-top: 10px;
+  width: 80px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-user-comment-msg {
+  text-align: center;
+}
+
+/* User Dashboard */
+.user-dashboard-content {
+  width: clamp(300px, 80vw, 800px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-dashboard-display-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  width: 80%;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.user-dashboard-display-buttons > button {
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  border: none;
+}
+
 /* Not found page & Error Page */
 
 .error-page {
