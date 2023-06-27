@@ -5,11 +5,9 @@ import PostDisplayLargeAbbr from "../../components/PostDisplayLargeAbbr";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 import PaginationButtons from "../../components/PaginationButtons";
 import ErrorPage from "../../components/ErrorPage";
-import { useSearchParams } from "react-router-dom";
 
 const UserPosts = () => {
   const { id: userId } = useAuth();
-  const [searchParams, setSearchParams] = useSearchParams(1);
 
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
