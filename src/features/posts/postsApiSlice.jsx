@@ -59,6 +59,21 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         } else [{ type: "Post", id: "LIST" }];
       },
     }),
+    getPostComments: builder.query({
+      query: ({ postId, page, limit }) =>
+        `/posts/${postId}/comments/?page=${page}&limit=${limit}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      providesTags: (result, error, arg) => {
+        if (result?.comments?.length) {
+          return [
+            { type: "Comment", id: "LIST" },
+            ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
+          ];
+        } else [{ type: "Comment", id: "LIST" }];
+      },
+    }),
     addNewPost: builder.mutation({
       query: (postData) => ({
         url: "/posts",
