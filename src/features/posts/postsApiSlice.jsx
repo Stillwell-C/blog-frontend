@@ -62,9 +62,6 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     getPostComments: builder.query({
       query: ({ postId, page, limit }) =>
         `/posts/${postId}/comments/?page=${page}&limit=${limit}`,
-      validateStatus: (response, result) => {
-        return response.status === 200 && !result.isError;
-      },
       providesTags: (result, error, arg) => {
         if (result?.comments?.length) {
           return [
@@ -108,6 +105,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetPostQuery,
   useGetMultiplePostsQuery,
+  useGetPostCommentsQuery,
   useAddNewPostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
