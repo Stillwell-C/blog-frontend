@@ -81,6 +81,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         } else [{ type: "Post", id: "LIST" }];
       },
     }),
+    getUserComments: builder.query({
+      query: ({ userId, page, limit }) =>
+        `/users/${userId}/comments/?page=${page}&limit=${limit}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      providesTags: (result, error, arg) => {
+        if (result?.comments?.length) {
+          return [
+            { type: "Comment", id: "LIST" },
+            ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
+          ];
+        } else [{ type: "Comment", id: "LIST" }];
+      },
+    }),
   }),
 });
 
