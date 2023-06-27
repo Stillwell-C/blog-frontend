@@ -25,6 +25,10 @@ const UserPosts = () => {
     setPosts(postData?.posts);
   }, [postData]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
     skeletonPosts.push(<PostDisplayLargeAbbrSkeleton key={i} />);
@@ -33,7 +37,7 @@ const UserPosts = () => {
   useEffect(() => console.log(postData), [postData]);
 
   return (
-    <div>
+    <div className='flex-container flex-column flex-align-center'>
       {isFetching && skeletonPosts}
       {!isFetching &&
         posts &&
