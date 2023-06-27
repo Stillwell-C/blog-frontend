@@ -12,6 +12,7 @@ import PersistentLogin from "./features/auth/PersistentLogin";
 import UserDashboard from "./components/UserDashboard";
 import RequireLogin from "./features/auth/RequireLogin";
 import RequireRole from "./features/auth/RequireRole";
+import UserPosts from "./features/posts/UserPosts";
 
 const roles = {
   User: "User",
@@ -45,7 +46,10 @@ function App() {
           <Route path='/users'></Route>
 
           <Route element={<RequireLogin />}>
-            <Route path='/mypage' element={<UserDashboard />} />
+            <Route path='/mypage'>
+              <Route index element={<UserDashboard />} />
+              <Route path='posts' element={<UserPosts />} />
+            </Route>
           </Route>
 
           <Route path='*' element={<NotFound />} />
