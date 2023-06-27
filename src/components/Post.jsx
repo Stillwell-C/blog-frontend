@@ -8,6 +8,7 @@ import { useGetPostQuery } from "../features/posts/postsApiSlice";
 import ErrorPage from "./ErrorPage";
 import useAuth from "../hooks/useAuth";
 import AddComment from "../features/comments/AddComment";
+import PostComments from "../features/comments/PostComments";
 
 const Post = () => {
   const { postID } = useParams();
@@ -88,6 +89,7 @@ const Post = () => {
         <div className='post-page-break'></div>
         <h3>Comments</h3>
         <AddComment />
+        <PostComments />
         <div className='post-user-comments margin-top-2'></div>
       </div>
     </>
