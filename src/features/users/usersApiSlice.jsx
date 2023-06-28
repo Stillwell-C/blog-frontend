@@ -109,6 +109,7 @@ export const {
   useGetUserQuery,
   useGetAllUsersQuery,
   useGetUserPostsQuery,
+  useGetUserCommentsQuery,
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
