@@ -3,7 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import { useGetUserCommentsQuery } from "../users/usersApiSlice";
 import CommentDisplayAbbr from "../../components/CommentDisplayAbbr";
 import PaginationButtons from "../../components/PaginationButtons";
-import ErrorPage from "../../components/ErrorPage";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 
 const UserComments = () => {
