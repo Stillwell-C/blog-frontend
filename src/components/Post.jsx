@@ -90,7 +90,6 @@ const Post = () => {
         <h3>Comments</h3>
         <AddComment />
         <PostComments />
-        <div className='post-user-comments margin-top-2'></div>
       </div>
     </>
   );
