@@ -35,24 +35,41 @@ const UserPosts = () => {
     skeletonPosts.push(<PostDisplayLargeAbbrSkeleton key={i} />);
   }
 
-  useEffect(() => console.log(postData), [postData]);
+  let postContent;
+  if (!isFetching && posts?.length) {
+    postContent = posts.map((post) => (
+      <PostDisplayLargeAbbr post={post} key={post._id} />
+    ));
+  } else if (!isFetching && !posts?.length) {
+    postContent = <p className='margin-top-1'>No comments found</p>;
+  }
+
+  let buttonContent;
+  if (!isLoading && posts?.length) {
+    buttonContent = (
+      <PaginationButtons
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    );
+  }
+
+  let errorContent;
+  if (isError) {
+    errorContent = (
+      <p className='margin-top-1'>
+        An error occurred. Please refresh the page.
+      </p>
+    );
+  }
 
   return (
     <div className='flex-container flex-column flex-align-center'>
       {isFetching && skeletonPosts}
-      {!isFetching &&
-        posts &&
-        posts.map((post) => (
-          <PostDisplayLargeAbbr post={post} key={post._id} />
-        ))}
-      {!isLoading && posts && (
-        <PaginationButtons
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-      {isError && <ErrorPage />}
+      {postContent}
+      {buttonContent}
+      {errorContent}
     </div>
   );
 };
