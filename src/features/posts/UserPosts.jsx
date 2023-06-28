@@ -17,6 +17,7 @@ const UserPosts = () => {
     data: postData,
     isFetching,
     isError,
+    isLoading,
   } = useGetUserPostsQuery({ userId, page: currentPage, limit: 10 });
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const UserPosts = () => {
         posts.map((post) => (
           <PostDisplayLargeAbbr post={post} key={post._id} />
         ))}
-      {!isFetching && posts && (
+      {!isLoading && posts && (
         <PaginationButtons
           totalPages={totalPages}
           currentPage={currentPage}
