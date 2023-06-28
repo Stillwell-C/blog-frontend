@@ -36,22 +36,39 @@ const UserComments = () => {
     skeletonPosts.push(<PostDisplayLargeAbbrSkeleton key={i} />);
   }
 
+  let commentContent;
+  if (!isFetching && comments?.length) {
+    commentContent = comments.map((comment) => (
+      <CommentDisplayAbbr comment={comment} key={comment._id} />
+    ));
+  } else if (!isFetching && !comments?.length) {
+    commentContent = <p className='margin-top-1'>No comments found</p>;
+  }
+
+  let buttonContent;
+  if (!isLoading && comments) {
+    <PaginationButtons
+      totalPages={totalPages}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    />;
+  }
+
+  let errorContent;
+  if (isError) {
+    errorContent = (
+      <p className='margin-top-1'>
+        An error occurred. Please refresh the page.
+      </p>
+    );
+  }
+
   return (
     <div className='flex-container flex-column flex-align-center'>
       {isFetching && skeletonPosts}
-      {!isFetching &&
-        comments &&
-        comments.map((comment) => (
-          <CommentDisplayAbbr comment={comment} key={comment._id} />
-        ))}
-      {!isLoading && comments && (
-        <PaginationButtons
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-      {isError && <ErrorPage />}
+      {commentContent}
+      {buttonContent}
+      {errorContent}
     </div>
   );
 };
