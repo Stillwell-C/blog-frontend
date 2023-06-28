@@ -10,9 +10,9 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     getPost: builder.query({
       query: (postId) => `/posts/${postId}`,
       //May be unnecessary. Backend should send a non-200 status, but will also send isError
-      validateStatus: (response, result) => {
-        return response.status === 200 && !result.isError;
-      },
+      // validateStatus: (response, result) => {
+      //   return response.status === 200 && !result.isError;
+      // },
       providesTags: (result, error, arg) => {
         //Not sure if this is preferable to just returning "Post"
         if (result) return [{ type: "Post", id: result._id }];
@@ -22,9 +22,9 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     getMultiplePosts: builder.query({
       query: ({ page, limit, top = false }) =>
         `/posts?top=${top}&page=${page}&limit=${limit}`,
-      validateStatus: (response, result) => {
-        return response.status === 200 && !result.isError;
-      },
+      // validateStatus: (response, result) => {
+      //   return response.status === 200 && !result.isError;
+      // },
       //Map over data and provide the id property that createEntity adapter will look for
       //This works, but not sure of its true utility.
       //Will require use of filter or similar and make page more complex
