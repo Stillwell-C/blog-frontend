@@ -762,6 +762,28 @@ button {
   text-align: center;
 }
 
+.post-comments-container {
+  padding: 2rem 1rem;
+  gap: 1rem
+}
+
+.post-comments-container > p {
+  text-align: center;
+}
+
+.post-comments-container > button {
+  align-self: center;
+}
+
+.post-comment > h4 {
+  font-size: 1.1rem;
+  margin-bottom: 7px;
+}
+
+.post-comment > p:first-of-type {
+  margin-bottom: 3px;
+}
+
 /* User Dashboard */
 .user-dashboard-content {
   width: clamp(300px, 80vw, 800px);
