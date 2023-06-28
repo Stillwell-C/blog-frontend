@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import { useGetPostCommentsQuery } from "../posts/postsApiSlice";
 import { useEffect, useRef, useState } from "react";
 import PostComment from "../../components/PostComment";
-import BeatLoader from "react-spinners/BeatLoader";
-import { ScaleLoader } from "react-spinners";
+import { ScaleLoader, BeatLoader } from "react-spinners";
 
 const PostComments = () => {
   const { postID } = useParams();
