@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewPostMutation } from "../features/posts/postsApiSlice";
 import useAuth from "../hooks/useAuth";
+import { BeatLoader } from "react-spinners";
 
 const NewPost = () => {
   const { id } = useAuth();
@@ -130,6 +131,12 @@ const NewPost = () => {
     if (isError) errRef.current.focus();
   }, [isError, errorMsg]);
 
+  const buttonContent = !isLoading ? (
+    "Submit"
+  ) : (
+    <BeatLoader color='#333' size={8} />
+  );
+
   return (
     <section className='fill-screen new-post-container flex-align-center'>
       <div className='new-post-wrapper'>
@@ -212,10 +219,11 @@ const NewPost = () => {
           <div className='post-form-button-div'>
             <button
               disabled={!title || !text ? true : false}
-              className='basic-button'
+              className='basic-button flex-container flex-align-center flex-justify-center'
+              style={{ minWidth: "75px" }}
               type='submit'
             >
-              Submit
+              {buttonContent}
             </button>
           </div>
         </form>
