@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import UserPosts from "../features/posts/UserPosts";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import UserComments from "../features/comments/UserComments";
 
 const UserDashboard = () => {
   const { username, roles } = useAuth();
@@ -10,6 +11,8 @@ const UserDashboard = () => {
   let content;
   if (displayContent === "posts") {
     content = <UserPosts />;
+  } else if (displayContent === "comments") {
+    content = <UserComments />;
   }
 
   return (
