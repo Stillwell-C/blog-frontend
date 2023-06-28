@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDeletePostMutation, useUpdatePostMutation } from "./postsApiSlice";
+import { BeatLoader } from "react-spinners";
 
 const EditPostForm = ({ post }) => {
   const navigate = useNavigate();
@@ -16,8 +17,6 @@ const EditPostForm = ({ post }) => {
   const [epigraphAuthorErr, setEpigraphAuthorErr] = useState(false);
   const [text, setText] = useState(post?.text);
   const [textErr, setTextErr] = useState(false);
-  //Later use auth and get this with useEffect
-  const [author, setAuthor] = useState(post?.author?._id);
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -89,7 +88,6 @@ const EditPostForm = ({ post }) => {
       epigraph: trimmedEpigraph,
       epigraphAuthor: trimmedEpigraphAuthor,
       text: trimmedText,
-      author,
       id: post._id,
     });
   };
@@ -99,13 +97,25 @@ const EditPostForm = ({ post }) => {
   };
 
   useEffect(() => {
-    if ((isSuccess, deleteIsSuccess)) navigate("/");
+    if (isSuccess || deleteIsSuccess) navigate("/");
   }, [isSuccess, deleteIsSuccess]);
 
   useEffect(() => {
     if (!errorMsg.length) return;
     if (isError || deleteIsError || errorMsg.length) errRef.current.focus();
   }, [isError, deleteIsError, errorMsg]);
+
+  const submitButtonContent = !isLoading ? (
+    "Submit"
+  ) : (
+    <BeatLoader color='#333' size={8} />
+  );
+
+  const deleteButtonContent = !deleteIsLoading ? (
+    "Delete"
+  ) : (
+    <BeatLoader color='#cc0000' size={8} />
+  );
 
   return (
     <section className='fill-screen new-post-container flex-align-center edit-post-container'>
@@ -120,6 +130,7 @@ const EditPostForm = ({ post }) => {
           >
             {errorMsg}
             {error?.data?.message}
+            {deleteError?.data?.message}
           </div>
           <div className={`form-line ${titleErr ? "error" : ""}`}>
             <label htmlFor='title' className='form-label'>
@@ -171,22 +182,6 @@ const EditPostForm = ({ post }) => {
               maxLength='70'
             />
           </div>
-          <div className='form-line'>
-            <label htmlFor='author' className='form-label'>
-              author:
-            </label>
-            <input
-              type='text'
-              id='author'
-              className='form-input post-input'
-              placeholder='author'
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              autoComplete='off'
-              spellCheck='true'
-              required
-            />
-          </div>
           <div className={`form-line ${textErr ? "error" : ""}`}>
             <label htmlFor='text' className='form-label'>
               text:
@@ -205,17 +200,19 @@ const EditPostForm = ({ post }) => {
           <div className='post-form-button-div'>
             <button
               disabled={!title || !text ? true : false}
-              className='basic-button'
+              className='basic-button flex-container flex-align-center flex-justify-center'
               type='submit'
+              style={{ minWidth: "72px" }}
             >
-              Submit
+              {submitButtonContent}
             </button>
             <button
-              className='basic-button delete-button'
+              className='basic-button delete-button flex-container flex-align-center flex-justify-center'
               type='button'
               onClick={handleDelete}
+              style={{ minWidth: "72px" }}
             >
-              Delete
+              {deleteButtonContent}
             </button>
           </div>
         </form>
