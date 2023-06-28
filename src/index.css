@@ -350,6 +350,33 @@ button {
   text-align: center;
 }
 
+/* Comment Display */
+.comment-display {
+  padding: 1rem;
+  width: 500px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.comment-display > p {
+  margin-bottom: 5px;
+}
+
+.comment-display > p:last-of-type {
+  margin-bottom: 15px;
+  text-align: end;
+}
+
+.comment-button-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.comment-button-div > button {
+  font-size: .8rem;
+  width: 85px;
+}
+
+
 /* Skeleton classes */
 
 .skeleton {
@@ -769,6 +796,10 @@ button {
 
 .post-comments-container > p {
   text-align: center;
+}
+
+.post-comments-loader {
+  align-self: center;
 }
 
 .post-comments-container > button {
