@@ -45,12 +45,14 @@ const UserComments = () => {
   }
 
   let buttonContent;
-  if (!isLoading && comments) {
-    <PaginationButtons
-      totalPages={totalPages}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-    />;
+  if (!isLoading && comments?.length) {
+    buttonContent = (
+      <PaginationButtons
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    );
   }
 
   let errorContent;
