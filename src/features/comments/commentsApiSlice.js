@@ -23,7 +23,9 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
             { type: "Comment", id: "LIST" },
             ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
           ];
-        } else [{ type: "Comment", id: "LIST" }];
+        } else {
+          return [{ type: "Comment", id: "LIST" }];
+        }
       },
     }),
     addNewComment: builder.mutation({
