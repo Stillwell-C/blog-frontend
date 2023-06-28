@@ -35,7 +35,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             { type: "User", id: "LIST" },
             ...result.ids.map((id) => ({ type: "User", id })),
           ];
-        } else return [{ type: "User", id: "LIST" }];
+        } else {
+          return [{ type: "User", id: "LIST" }];
+        }
       },
     }),
     addNewUser: builder.mutation({
@@ -78,7 +80,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             { type: "Post", id: "LIST" },
             ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
           ];
-        } else [{ type: "Post", id: "LIST" }];
+        } else {
+          return [{ type: "Post", id: "LIST" }];
+        }
       },
     }),
     getUserComments: builder.query({
@@ -93,7 +97,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             { type: "Comment", id: "LIST" },
             ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
           ];
-        } else [{ type: "Comment", id: "LIST" }];
+        } else {
+          return [{ type: "Comment", id: "LIST" }];
+        }
       },
     }),
   }),
