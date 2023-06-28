@@ -24,8 +24,6 @@ const UserComments = () => {
     setComments(commentData?.comments);
   }, [commentData]);
 
-  useEffect(() => console.log("total pages: ", totalPages), [totalPages]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
