@@ -73,7 +73,9 @@ const PostComments = () => {
   } else if (!commentData?.length && isSuccess) {
     content = <p>No comments yet. Be the first to comment.</p>;
   } else if (!commentData?.length && isFetching) {
-    content = <ScaleLoader color='#333' height={45} />;
+    content = (
+      <ScaleLoader className='post-comments-loader' color='#333' height={45} />
+    );
   } else if (isError) {
     console.log(error);
     content = <p>An error has occurred. Refresh page to see comments.</p>;
