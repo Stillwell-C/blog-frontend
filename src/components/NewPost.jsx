@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "../app/api/axios";
 import { useNavigate } from "react-router-dom";
 import { useAddNewPostMutation } from "../features/posts/postsApiSlice";
-
-const ADD_POST_URL = "/posts";
+import useAuth from "../hooks/useAuth";
 
 const NewPost = () => {
+  const { id } = useAuth();
+
   const navigate = useNavigate();
 
   const titleRef = useRef();
@@ -19,8 +19,6 @@ const NewPost = () => {
   const [epigraphAuthorErr, setEpigraphAuthorErr] = useState(false);
   const [text, setText] = useState("");
   const [textErr, setTextErr] = useState(false);
-  //Later use auth and get this with useEffect
-  const [author, setAuthor] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -86,7 +84,7 @@ const NewPost = () => {
       epigraph: trimmedEpigraph,
       epigraphAuthor: trimmedEpigraphAuthor,
       text: trimmedText,
-      author,
+      author: id,
     });
 
     // try {
@@ -194,22 +192,6 @@ const NewPost = () => {
               autoComplete='off'
               spellCheck='true'
               maxLength='70'
-            />
-          </div>
-          <div className='form-line'>
-            <label htmlFor='author' className='form-label'>
-              author:
-            </label>
-            <input
-              type='text'
-              id='author'
-              className='form-input post-input'
-              placeholder='author'
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              autoComplete='off'
-              spellCheck='true'
-              required
             />
           </div>
           <div className={`form-line ${textErr ? "error" : ""}`}>
