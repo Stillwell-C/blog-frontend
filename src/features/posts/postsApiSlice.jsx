@@ -56,7 +56,9 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             { type: "Post", id: "LIST" },
             ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
           ];
-        } else [{ type: "Post", id: "LIST" }];
+        } else {
+          return [{ type: "Post", id: "LIST" }];
+        }
       },
     }),
     getPostComments: builder.query({
@@ -64,11 +66,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         `/posts/${postId}/comments/?page=${page}&limit=${limit}`,
       providesTags: (result, error, arg) => {
         if (result?.comments?.length) {
+          console.log(result.comments);
           return [
             { type: "Comment", id: "LIST" },
             ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
           ];
-        } else [{ type: "Comment", id: "LIST" }];
+        } else {
+          return [{ type: "Comment", id: "LIST" }];
+        }
       },
     }),
     addNewPost: builder.mutation({
