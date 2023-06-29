@@ -127,6 +127,7 @@ export const {
   useGetPostCommentsQuery,
   useAddNewPostMutation,
   useUpdatePostMutation,
+  useUpdatePostLikeMutation,
   useDeletePostMutation,
 } = postsApiSlice;
 
