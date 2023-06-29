@@ -4,7 +4,10 @@ import PostSkeleton from "./PostSkeleton";
 import dateOptions from "../utils/DateOptions";
 import outlinedHeart from "../assets/heart-outline.svg";
 import filledHeart from "../assets/heart-filled.svg";
-import { useGetPostQuery } from "../features/posts/postsApiSlice";
+import {
+  useGetPostQuery,
+  useUpdatePostLikeMutation,
+} from "../features/posts/postsApiSlice";
 import ErrorPage from "./ErrorPage";
 import useAuth from "../hooks/useAuth";
 import AddComment from "../features/comments/AddComment";
@@ -19,8 +22,10 @@ const Post = () => {
   // const [isLoading, setIsLoading] = useState(true);
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
+  const [likeCount, setLikeCount] = useState(0);
+  const [userLike, setUserLike] = useState(false);
 
-  const { id, isAdmin } = useAuth();
+  const { id, isAdmin, loggedIn } = useAuth();
 
   const {
     data: postData,
@@ -28,6 +33,11 @@ const Post = () => {
     isError,
     error,
   } = useGetPostQuery({ postID, userID: id });
+
+  const [
+    updatePostLike,
+    { isLoading: likeIsLoading, isError: likeIsError, error: likeError },
+  ] = useUpdatePostLikeMutation();
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
@@ -47,6 +57,8 @@ const Post = () => {
   useEffect(() => {
     parseDate(postData?.createdAt, postData?.updatedAt);
     setPostContent(postData);
+    setLikeCount(postData?.likes);
+    setUserLike(postData?.userLikesPost);
   }, [isLoading]);
 
   let editButtons = null;
@@ -61,6 +73,32 @@ const Post = () => {
       </button>
     );
   }
+
+  let buttonHeart = userLike ? filledHeart : outlinedHeart;
+
+  const handleLike = async () => {
+    if (!loggedIn) {
+      navigate("/login");
+      return;
+    }
+    if (!userLike) {
+      try {
+        await updatePostLike({ postID, userID: id, increment: 1 });
+        setUserLike(true);
+        setLikeCount((prev) => prev + 1);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await updatePostLike({ postID, userID: id, increment: -1 });
+        setUserLike(false);
+        setLikeCount((prev) => prev - 1);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   const LoadedPage = (
     <>
@@ -86,9 +124,10 @@ const Post = () => {
           <button
             type='button'
             className='post-like-btn basic-button'
-            aria-label={`Like this post. Current likes: ${postContent?.likes}`}
+            aria-label={`Like this post. Current number of likes: ${likeCount}`}
+            onClick={handleLike}
           >
-            <img src={outlinedHeart} alt='' /> {postContent?.likes}
+            <img src={buttonHeart} alt='' /> {likeCount}
           </button>
         </div>
         <div className='post-page-break'></div>
