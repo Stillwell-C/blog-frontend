@@ -20,9 +20,14 @@ const Post = () => {
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
 
-  const { data: postData, isLoading, isError } = useGetPostQuery(postID);
-
   const { id, isAdmin } = useAuth();
+
+  const {
+    data: postData,
+    isLoading,
+    isError,
+    error,
+  } = useGetPostQuery({ postID, userID: id });
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
