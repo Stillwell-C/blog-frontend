@@ -100,9 +100,16 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
-    // updatePostLike: builder.mutation({
-
-    // })
+    updatePostLike: builder.mutation({
+      query: ({ postID, userID, increment }) => ({
+        url: `/posts/${postID}/like`,
+        method: "PATCH",
+        body: {
+          userID,
+          increment,
+        },
+      }),
+    }),
     deletePost: builder.mutation({
       query: ({ id }) => ({
         url: "/posts",
