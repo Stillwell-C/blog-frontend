@@ -8,7 +8,11 @@ const initialState = postsAdapter.getInitialState();
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPost: builder.query({
-      query: (postId) => `/posts/${postId}`,
+      query: ({ postID, userID }) => {
+        return {
+          url: `/posts/${postID}?userId=${userID}`,
+        };
+      },
       //May be unnecessary. Backend should send a non-200 status, but will also send isError
       // validateStatus: (response, result) => {
       //   return response.status === 200 && !result.isError;
@@ -96,6 +100,9 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
+    // updatePostLike: builder.mutation({
+
+    // })
     deletePost: builder.mutation({
       query: ({ id }) => ({
         url: "/posts",
