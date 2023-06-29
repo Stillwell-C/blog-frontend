@@ -726,6 +726,9 @@ button {
   margin: 2rem 0;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .post-like-btn {

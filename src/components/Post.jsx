@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import PostSkeleton from "./PostSkeleton";
 import dateOptions from "../utils/DateOptions";
@@ -15,6 +15,8 @@ import PostComments from "../features/comments/PostComments";
 
 const Post = () => {
   const { postID } = useParams();
+
+  const errRef = useRef();
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -76,6 +78,7 @@ const Post = () => {
 
   let buttonHeart = userLike ? filledHeart : outlinedHeart;
 
+  //Maybe move to own component
   const handleLike = async () => {
     if (!loggedIn) {
       navigate("/login");
@@ -99,6 +102,12 @@ const Post = () => {
       }
     }
   };
+
+  let likeErrorMsg = likeIsError ? "Error. Please refresh page." : "";
+
+  useEffect(() => {
+    if (likeIsError) errRef.current.focus();
+  }, [likeIsError]);
 
   const LoadedPage = (
     <>
@@ -129,6 +138,13 @@ const Post = () => {
           >
             <img src={buttonHeart} alt='' /> {likeCount}
           </button>
+          <div
+            className={likeIsError ? "form-error-div" : "error-offscreen"}
+            ref={errRef}
+            aria-live='assertive'
+          >
+            {likeErrorMsg}
+          </div>
         </div>
         <div className='post-page-break'></div>
         <h3>Comments</h3>
