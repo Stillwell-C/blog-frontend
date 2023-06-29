@@ -70,7 +70,6 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         `/posts/${postId}/comments/?page=${page}&limit=${limit}`,
       providesTags: (result, error, arg) => {
         if (result?.comments?.length) {
-          console.log(result.comments);
           return [
             { type: "Comment", id: "LIST" },
             ...result.comments.map(({ _id }) => ({ type: "Comment", id: _id })),
@@ -109,6 +108,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
           increment,
         },
       }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
     deletePost: builder.mutation({
       query: ({ id }) => ({
