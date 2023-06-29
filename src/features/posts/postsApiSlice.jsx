@@ -1,9 +1,9 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
 
-const postsAdapter = createEntityAdapter({});
+// const postsAdapter = createEntityAdapter({});
 
-const initialState = postsAdapter.getInitialState();
+// const initialState = postsAdapter.getInitialState();
 
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,6 +11,9 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: ({ postID, userID }) => {
         return {
           url: `/posts/${postID}?userId=${userID}`,
+          validateStatus: (response, result) => {
+            return response.status === 200 && !result.isError;
+          },
         };
       },
       //May be unnecessary. Backend should send a non-200 status, but will also send isError
@@ -134,20 +137,20 @@ export const {
 //The below is probably unneccessary for a single user.
 
 //Will return single user query results
-export const selectMultiplePostsResult =
-  postsApiSlice.endpoints.getMultiplePosts.select();
+// export const selectMultiplePostsResult =
+//   postsApiSlice.endpoints.getMultiplePosts.select();
 
-//Creates a memoized selector for all users
-const selectMultiplePostData = createSelector(
-  selectMultiplePostsResult,
-  (userResult) => userResult.data
-);
+// //Creates a memoized selector for all users
+// const selectMultiplePostData = createSelector(
+//   selectMultiplePostsResult,
+//   (userResult) => userResult.data
+// );
 
-//Allow to get specific data from the memoized selector
-export const {
-  selectAll: selectMultiplePosts,
-  selectById: selectPostById,
-  selectIds: selectPostIds,
-} = postsAdapter.getSelectors(
-  (state) => selectMultiplePostData(state) ?? initialState
-);
+// //Allow to get specific data from the memoized selector
+// export const {
+//   selectAll: selectMultiplePosts,
+//   selectById: selectPostById,
+//   selectIds: selectPostIds,
+// } = postsAdapter.getSelectors(
+//   (state) => selectMultiplePostData(state) ?? initialState
+// );
