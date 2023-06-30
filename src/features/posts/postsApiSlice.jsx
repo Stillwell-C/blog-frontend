@@ -32,9 +32,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       // validateStatus: (response, result) => {
       //   return response.status === 200 && !result.isError;
       // },
-      //Map over data and provide the id property that createEntity adapter will look for
-      //This works, but not sure of its true utility.
-      //Will require use of filter or similar and make page more complex
+      //This will need to take in account total pages
       // transformResponse: (responseData) => {
       //   let posts = responseData.posts.map((post) => {
       //     post.id = post._id;
