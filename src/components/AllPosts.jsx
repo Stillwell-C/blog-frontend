@@ -37,6 +37,13 @@ const AllPosts = () => {
     console.log("page: ", currentPage, "data: ", postData);
   }, [postData]);
 
+  // useEffect(() => {
+  //   // setTotalPosts(postData?.totalPosts);
+  //   setTotalPages(Math.ceil(postData?.totalPosts / 10) || 1);
+  //   setPosts(postData?.ids.map((id) => postData.entities[id]));
+  //   console.log("page: ", currentPage, "data: ", postData);
+  // }, [postData]);
+
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
     skeletonPosts.push(<PostDisplayLargeSkeleton key={i} />);
