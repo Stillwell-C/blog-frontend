@@ -27,6 +27,7 @@ const Home = () => {
   useEffect(() => {
     setTopPosts(postData?.top);
     setPosts(postData?.posts);
+    console.log("post data: ", postData);
   }, [isLoading]);
 
   const content = (
