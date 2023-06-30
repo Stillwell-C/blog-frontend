@@ -13,6 +13,7 @@ import UserDashboard from "./components/UserDashboard";
 import RequireLogin from "./features/auth/RequireLogin";
 import RequireRole from "./features/auth/RequireRole";
 import UserPosts from "./features/posts/UserPosts";
+import AdminDashboard from "./components/AdminDashboard";
 
 const roles = {
   User: "User",
@@ -50,6 +51,10 @@ function App() {
               <Route index element={<UserDashboard />} />
               <Route path='posts' element={<UserPosts />} />
             </Route>
+          </Route>
+
+          <Route element={<RequireRole requiredRoles={[roles.Admin]} />}>
+            <Route path='/admindash' element={<AdminDashboard />} />
           </Route>
 
           <Route path='*' element={<NotFound />} />
