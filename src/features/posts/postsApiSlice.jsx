@@ -1,9 +1,9 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
 
-// const postsAdapter = createEntityAdapter({});
+const postsAdapter = createEntityAdapter({});
 
-// const initialState = postsAdapter.getInitialState();
+const initialState = postsAdapter.getInitialState();
 
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -35,21 +35,21 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       //Map over data and provide the id property that createEntity adapter will look for
       //This works, but not sure of its true utility.
       //Will require use of filter or similar and make page more complex
-      //   transformResponse: (responseData) => {
-      //     let posts = responseData.posts.map((post) => {
+      // transformResponse: (responseData) => {
+      //   let posts = responseData.posts.map((post) => {
+      //     post.id = post._id;
+      //     return post;
+      //   });
+      //   if (responseData?.top) {
+      //     const topPosts = responseData.top.map((post) => {
       //       post.id = post._id;
+      //       post.top = true;
       //       return post;
       //     });
-      //     if (responseData?.top) {
-      //       const topPosts = responseData.top.map((post) => {
-      //         post.id = post._id;
-      //         post.top = true;
-      //         return post;
-      //       });
-      //       posts = posts.concat(topPosts);
-      //     }
-      //     return postsAdapter.setAll(initialState, posts);
-      //   },
+      //     posts = posts.concat(topPosts);
+      //   }
+      //   return postsAdapter.setAll(initialState, posts);
+      // },
       //Provide tag for each post return as well as entire list
       providesTags: (result, error, arg) => {
         if (result?.top) {
