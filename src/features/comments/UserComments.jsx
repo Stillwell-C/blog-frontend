@@ -38,7 +38,7 @@ const UserComments = () => {
     commentContent = comments.map((comment) => (
       <CommentDisplayAbbr comment={comment} key={comment._id} />
     ));
-  } else if (!isFetching && !comments?.length) {
+  } else if (!isFetching && !comments?.length && !isError) {
     commentContent = <p className='margin-top-1'>No comments found</p>;
   }
 
