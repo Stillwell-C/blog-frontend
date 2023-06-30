@@ -15,6 +15,7 @@ import RequireRole from "./features/auth/RequireRole";
 import UserPosts from "./features/posts/UserPosts";
 import AdminDashboard from "./components/AdminDashboard";
 import EditUserInfo from "./features/users/EditUserInfo";
+import AdminSingleUser from "./features/users/AdminSingleUser";
 
 const roles = {
   User: "User",
@@ -55,7 +56,10 @@ function App() {
           </Route>
 
           <Route element={<RequireRole requiredRoles={[roles.Admin]} />}>
-            <Route path='/admindash' element={<AdminDashboard />} />
+            <Route path='/admindash'>
+              <Route index element={<AdminDashboard />} />
+              <Route path=':userID' element={<AdminSingleUser />} />
+            </Route>
           </Route>
 
           <Route path='*' element={<NotFound />} />
