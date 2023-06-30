@@ -16,18 +16,20 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       providesTags: ["User"],
     }),
     getAllUsers: builder.query({
-      query: () => "/users",
-      validateStatus: (response, result) => {
-        return response.status === 200 && !result.isError;
-      },
+      query: ({ page, limit }) => ({
+        url: `/users?page=${page}&limit=${limit}`,
+        validateStatus: (response, result) => {
+          return response.status === 200 && !result.isError;
+        },
+      }),
       //Map over data and provide the id property that createEntity adapter will look for
-      transformResponse: (responseData) => {
-        const loadedUsers = responseData.map((user) => {
-          user.id = user._id;
-          return user;
-        });
-        return usersAdapter.setAll(initialState, loadedUsers);
-      },
+      // transformResponse: (responseData) => {
+      //   const loadedUsers = responseData.map((user) => {
+      //     user.id = user._id;
+      //     return user;
+      //   });
+      //   return usersAdapter.setAll(initialState, loadedUsers);
+      // },
       providesTags: (result, error, arg) => {
         //If no issues and get ids, make a tag for each user as well as the entire list
         if (result?.ids) {
