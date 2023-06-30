@@ -54,7 +54,7 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
           <button
             type='button'
             className='basic-button delete-button flex-container flex-justify-center flex-align-center'
-            onClick={() => handleDelete({ id: post._id })}
+            onClick={() => handleDelete()}
             disabled={isLoading ? true : false}
           >
             {buttonContent}
