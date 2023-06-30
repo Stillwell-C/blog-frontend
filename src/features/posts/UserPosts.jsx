@@ -40,7 +40,7 @@ const UserPosts = () => {
     postContent = posts.map((post) => (
       <PostDisplayLargeAbbr post={post} key={post._id} />
     ));
-  } else if (!isFetching && !posts?.length) {
+  } else if (!isFetching && !posts?.length && !isError) {
     postContent = <p className='margin-top-1'>No comments found</p>;
   }
 
