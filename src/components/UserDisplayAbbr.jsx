@@ -3,10 +3,13 @@ import { BeatLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
 import { useDeleteUserMutation } from "../features/users/usersApiSlice";
 import dateOptions from "../utils/DateOptions";
+import { useNavigate } from "react-router-dom";
 
 const UserDisplayAbbr = ({ user }) => {
   const errRef = useRef();
   const { isAdmin } = useAuth();
+
+  const navigate = useNavigate();
 
   const [deleteUser, { isLoading, isSuccess, isError, error }] =
     useDeleteUserMutation();
@@ -40,6 +43,13 @@ const UserDisplayAbbr = ({ user }) => {
         {new Date(user?.updatedAt).toLocaleDateString("en-us", dateOptions)}
       </p>
       <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
+        <button
+          type='button'
+          className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
+          onClick={() => navigate(`/admindash/${user._id}`)}
+        >
+          Edit User
+        </button>
         <button
           type='button'
           className='basic-button delete-button flex-container flex-justify-center flex-align-center'
