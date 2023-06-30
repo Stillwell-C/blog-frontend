@@ -16,7 +16,7 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getComments: builder.query({
-      query: "/comments",
+      query: ({ page, limit }) => `/comments?page=${page}&limit=${limit}`,
       providesTags: (result, error, arg) => {
         if (result?.comments?.length) {
           return [
