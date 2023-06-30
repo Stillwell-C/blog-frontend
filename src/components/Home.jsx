@@ -30,6 +30,20 @@ const Home = () => {
     console.log("post data: ", postData);
   }, [isLoading]);
 
+  // useEffect(() => {
+  //   setTopPosts(
+  //     postData?.ids
+  //       ?.filter((id) => postData.entities[id].top === true)
+  //       .map((id) => postData.entities[id])
+  //   );
+  //   setPosts(
+  //     postData?.ids
+  //       ?.filter((id) => postData.entities[id].top !== true)
+  //       .map((id) => postData.entities[id])
+  //   );
+  //   console.log("post data: ", postData);
+  // }, [isLoading]);
+
   const content = (
     <section className='home-container fill-screen'>
       <div className='home-top-container'>
