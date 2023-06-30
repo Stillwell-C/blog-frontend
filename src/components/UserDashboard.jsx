@@ -16,7 +16,7 @@ const UserDashboard = () => {
 
   return (
     <section className='fill-screen flex-container flex-justify-center'>
-      <div className='user-dashboard-content margin-top-2'>
+      <div className='dashboard-content margin-top-2'>
         <h2 className='margin-btm-1'>My Page</h2>
         <p>Username: {username}</p>
         <p>Account Status: {roles.join(", ")}</p>
