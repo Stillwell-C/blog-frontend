@@ -15,15 +15,16 @@ const AllPosts = () => {
     data: postData,
     isFetching,
     isError,
+    isLoading,
   } = useGetMultiplePostsQuery({
     page: currentPage,
     limit: 10,
     top: false,
   });
 
-  useEffect(() => {
-    console.log("Page: ", currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   console.log("Page: ", currentPage);
+  // }, [currentPage]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,6 +34,7 @@ const AllPosts = () => {
     // setTotalPosts(postData?.totalPosts);
     setTotalPages(Math.ceil(postData?.totalPosts / 10) || 1);
     setPosts(postData?.posts);
+    console.log("page: ", currentPage, "data: ", postData);
   }, [postData]);
 
   let skeletonPosts = [];
@@ -47,7 +49,7 @@ const AllPosts = () => {
       {!isFetching &&
         posts &&
         posts.map((post) => <PostDisplayLarge post={post} key={post._id} />)}
-      {!isFetching && posts && (
+      {!isLoading && posts && (
         <PaginationButtons
           totalPages={totalPages}
           currentPage={currentPage}
