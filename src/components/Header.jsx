@@ -32,19 +32,31 @@ const Header = () => {
   }, [isError]);
 
   let loginButton = (
-    <button className='basic-button' onClick={() => navigate("/login")}>
+    <button
+      className='basic-button'
+      style={{ minWidth: "95px" }}
+      onClick={() => navigate("/login")}
+    >
       Log in
     </button>
   );
 
   let newUserButton = (
-    <button className='basic-button' onClick={() => navigate("/register")}>
+    <button
+      className='basic-button'
+      style={{ minWidth: "95px" }}
+      onClick={() => navigate("/register")}
+    >
       Sign up
     </button>
   );
 
   let logoutButton = (
-    <button className='basic-button' onClick={sendLogout}>
+    <button
+      className='basic-button'
+      style={{ minWidth: "95px" }}
+      onClick={sendLogout}
+    >
       {isLoading ? "Logging Out" : "Log Out"}
     </button>
   );
@@ -52,16 +64,24 @@ const Header = () => {
   let newPostButton = null;
   if (isContributor) {
     newPostButton = (
-      <button className='basic-button' onClick={() => navigate("/posts/new")}>
+      <button
+        className='basic-button'
+        style={{ minWidth: "95px" }}
+        onClick={() => navigate("/posts/new")}
+      >
         New Post
       </button>
     );
   }
 
   let adminDashButton = null;
-  if (isAdmin) {
+  if (isAdmin && !pathname.match(/\/admindash/i)) {
     adminDashButton = (
-      <button className='basic-button' onClick={() => navigate("/admindash")}>
+      <button
+        className='basic-button'
+        style={{ minWidth: "95px" }}
+        onClick={() => navigate("/admindash")}
+      >
         Admin Dash
       </button>
     );
@@ -70,7 +90,11 @@ const Header = () => {
   let myPageButton = null;
   if (!pathname.match(/\/mypage/i)) {
     myPageButton = (
-      <button className='basic-button' onClick={() => navigate("/mypage")}>
+      <button
+        className='basic-button'
+        style={{ minWidth: "95px" }}
+        onClick={() => navigate("/mypage")}
+      >
         My Page
       </button>
     );
