@@ -14,6 +14,7 @@ import RequireLogin from "./features/auth/RequireLogin";
 import RequireRole from "./features/auth/RequireRole";
 import UserPosts from "./features/posts/UserPosts";
 import AdminDashboard from "./components/AdminDashboard";
+import EditUserInfo from "./features/users/EditUserInfo";
 
 const roles = {
   User: "User",
@@ -49,7 +50,7 @@ function App() {
           <Route element={<RequireLogin />}>
             <Route path='/mypage'>
               <Route index element={<UserDashboard />} />
-              <Route path='posts' element={<UserPosts />} />
+              <Route path='edit' element={<EditUserInfo />} />
             </Route>
           </Route>
 
