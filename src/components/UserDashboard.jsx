@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import UserPosts from "../features/posts/UserPosts";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
@@ -21,7 +20,7 @@ const UserDashboard = () => {
         <h2 className='margin-btm-1'>My Page</h2>
         <p>Username: {username}</p>
         <p>Account Status: {roles.join(", ")}</p>
-        <div className='user-dashboard-display-buttons margin-top-1'>
+        <div className='dashboard-display-buttons margin-top-1'>
           <button
             type='button'
             aria-label='Display your posts'
