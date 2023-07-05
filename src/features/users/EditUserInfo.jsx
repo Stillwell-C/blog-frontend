@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useUpdateUserMutation } from "./usersApiSlice";
+import { useDeleteUserMutation, useUpdateUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { useRefreshMutation } from "../auth/authApiSlice";
 import { setCredentials } from "../auth/authSlice";
 import { useDispatch } from "react-redux";
+import { useSendLogoutMutation } from "../auth/authApiSlice";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -24,15 +24,24 @@ const EditUserInfo = () => {
     useUpdateUserMutation();
 
   const [
-    refresh,
+    deleteUser,
     {
-      isUninitialized,
-      isLoading: refreshIsLoading,
-      isSuccess: refreshIsSuccess,
-      isError: refreshIsError,
-      error: refreshError,
+      isLoading: deleteIsLoading,
+      isSuccess: deleteIsSuccess,
+      isError: deleteIsError,
+      error: deleteError,
     },
-  ] = useRefreshMutation();
+  ] = useDeleteUserMutation();
+
+  const [
+    sendLogout,
+    {
+      isLoading: logoutIsLoading,
+      isSuccess: logoutIsSuccess,
+      isError: logoutIsError,
+      error: logoutError,
+    },
+  ] = useSendLogoutMutation();
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
@@ -66,15 +75,6 @@ const EditUserInfo = () => {
   useEffect(() => {
     setErrorMsg("");
   }, [username, password, confirmPassword]);
-
-  //   useEffect(() => {
-  //     if (isSuccess && refreshIsSuccess) {
-  //       setUsername("");
-  //       setPassword("");
-  //       setConfirmPassword("");
-  //       navigate("/mypage");
-  //     }
-  //   }, [refreshIsSuccess]);
 
   useEffect(() => {
     if (!errorMsg.length) return;
@@ -116,6 +116,16 @@ const EditUserInfo = () => {
     navigate("/mypage");
   };
 
+  const handleDelete = async () => {
+    await deleteUser({ id });
+  };
+
+  useEffect(() => {
+    if (deleteIsSuccess) {
+      sendLogout();
+    }
+  }, [deleteIsSuccess]);
+
   return (
     <section className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
       <h2>Edit user information</h2>
@@ -124,7 +134,7 @@ const EditUserInfo = () => {
         <div
           ref={errRef}
           className={
-            isError || errorMsg || refreshIsError
+            isError || errorMsg || deleteIsError || logoutIsError
               ? "form-error-div"
               : "error-offscreen"
           }
@@ -133,7 +143,8 @@ const EditUserInfo = () => {
           {/* See if this is sufficient for message */}
           {errorMsg}
           {error?.data?.message}
-          {refreshError?.data?.message}
+          {deleteError?.data?.message}
+          {logoutError?.data?.message}
         </div>
         <div
           className={`form-line ${username && !validUsername ? "error" : ""}`}
@@ -233,10 +244,17 @@ const EditUserInfo = () => {
         <div className='button-div'>
           <button
             disabled={originalUsername === username && !password.length}
-            className='basic-button'
+            className='basic-button margin-r-2'
             type='submit'
           >
             Edit Info
+          </button>
+          <button
+            className='basic-button delete-button'
+            type='button'
+            onClick={handleDelete}
+          >
+            Delete
           </button>
         </div>
       </form>
