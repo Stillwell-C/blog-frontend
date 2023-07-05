@@ -8,7 +8,7 @@ import LoadingPage from "../../components/LoadingPage";
 const EditPost = () => {
   const { postID } = useParams();
 
-  const { data: postData, isLoading, isError } = useGetPostQuery(postID);
+  const { data: postData, isLoading, isError } = useGetPostQuery({ postID });
 
   const { id, isAdmin } = useAuth();
 
