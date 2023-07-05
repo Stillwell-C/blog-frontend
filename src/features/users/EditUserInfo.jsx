@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { setCredentials } from "../auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useSendLogoutMutation } from "../auth/authApiSlice";
+import { BeatLoader } from "react-spinners";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -126,6 +127,18 @@ const EditUserInfo = () => {
     }
   }, [deleteIsSuccess]);
 
+  const editButtonContent = !isLoading ? (
+    "Edit"
+  ) : (
+    <BeatLoader color='#333' size={8} />
+  );
+
+  const deleteButtonContent = !deleteIsLoading ? (
+    "Delete Account"
+  ) : (
+    <BeatLoader color='#cc0000' size={8} />
+  );
+
   return (
     <section className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
       <h2>Edit user information</h2>
@@ -241,20 +254,22 @@ const EditUserInfo = () => {
             Passwords must match.
           </p>
         </div>
-        <div className='button-div'>
+        <div className='button-div flex-container'>
           <button
             disabled={originalUsername === username && !password.length}
-            className='basic-button margin-r-2'
+            className='basic-button margin-r-2 flex-container flex-align-center flex-justify-center'
             type='submit'
+            style={{ minWidth: "65px" }}
           >
-            Edit Info
+            {editButtonContent}
           </button>
           <button
-            className='basic-button delete-button'
+            className='basic-button delete-button flex-container flex-align-center flex-justify-center'
             type='button'
             onClick={handleDelete}
+            style={{ minWidth: "130px" }}
           >
-            Delete
+            {deleteButtonContent}
           </button>
         </div>
       </form>
