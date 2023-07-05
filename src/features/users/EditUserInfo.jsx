@@ -95,7 +95,7 @@ const EditUserInfo = () => {
       setErrorMsg("Invalid password");
       return;
     }
-    if (password.legnth && !confirmPassword.length) {
+    if (password.length && !confirmPassword.length) {
       setErrorMsg("Please confirm your new password");
       return;
     }
