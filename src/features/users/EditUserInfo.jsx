@@ -6,6 +6,7 @@ import { setCredentials } from "../auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useSendLogoutMutation } from "../auth/authApiSlice";
 import { BeatLoader } from "react-spinners";
+import ConfirmModal from "../../components/ConfirmModal";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -55,8 +56,12 @@ const EditUserInfo = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordMatch, setConfirmPasswordMatch] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
+
+  const modalText = "delete this account";
 
   useEffect(() => {
     if (isSuccess) return;
@@ -122,6 +127,13 @@ const EditUserInfo = () => {
   };
 
   useEffect(() => {
+    console.log(confirmDelete);
+    if (confirmDelete) {
+      handleDelete();
+    }
+  }, [confirmDelete]);
+
+  useEffect(() => {
     if (deleteIsSuccess) {
       sendLogout();
     }
@@ -140,140 +152,150 @@ const EditUserInfo = () => {
   );
 
   return (
-    <section className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
-      <h2>Edit user information</h2>
-      <p>Only edit the fields you wish to update.</p>
-      <form className='margin-top-1' onSubmit={handleSubmit}>
-        <div
-          ref={errRef}
-          className={
-            isError || errorMsg || deleteIsError || logoutIsError
-              ? "form-error-div"
-              : "error-offscreen"
-          }
-          aria-live='assertive'
-        >
-          {/* See if this is sufficient for message */}
-          {errorMsg}
-          {error?.data?.message}
-          {deleteError?.data?.message}
-          {logoutError?.data?.message}
-        </div>
-        <div
-          className={`form-line ${username && !validUsername ? "error" : ""}`}
-        >
-          <label htmlFor='username' className='form-label'>
-            username:
-          </label>
-          <input
-            type='text'
-            id='username'
-            className='form-input'
-            placeholder='username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete='off'
-            spellCheck='false'
-            ref={usernameRef}
-            aria-invalid={validUsername ? "false" : "true"}
-            aria-describedby='usernameNote'
-            onFocus={() => setUserFocus(true)}
-            onBlur={() => setUserFocus(false)}
-          />
-          <p
-            id='usernameNote'
+    <>
+      <section className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
+        <h2>Edit user information</h2>
+        <p>Only edit the fields you wish to update.</p>
+        <form className='margin-top-1' onSubmit={handleSubmit}>
+          <div
+            ref={errRef}
             className={
-              userFocus && username && !validUsername
-                ? "form-description form-fade-in"
-                : "offscreen"
+              isError || errorMsg || deleteIsError || logoutIsError
+                ? "form-error-div"
+                : "error-offscreen"
             }
+            aria-live='assertive'
           >
-            4 to 24 characters. <br />
-            Must begin with a letter. <br />
-            Letters, numbers, underscores, hyphens allowed.
-          </p>
-        </div>
-        <div
-          className={`form-line ${password && !validPassword ? "error" : ""}`}
-        >
-          <label htmlFor='password' className='form-label'>
-            password:
-          </label>
-          <input
-            type='password'
-            id='password'
-            className='form-input'
-            placeholder='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            aria-invalid={validPassword ? "false" : "true"}
-            aria-describedby='passwordNote'
-            onFocus={() => setPasswordFocus(true)}
-            onBlur={() => setPasswordFocus(false)}
-          />
-          <p
-            id='passwordNote'
-            className={
-              passwordFocus && !validPassword
-                ? "form-description form-fade-in"
-                : "offscreen"
-            }
+            {/* See if this is sufficient for message */}
+            {errorMsg}
+            {error?.data?.message}
+            {deleteError?.data?.message}
+            {logoutError?.data?.message}
+          </div>
+          <div
+            className={`form-line ${username && !validUsername ? "error" : ""}`}
           >
-            8 to 24 characters. <br />
-            Must include at least one letter and one number.
-          </p>
-        </div>
-        <div
-          className={`form-line ${
-            confirmPassword && !confirmPasswordMatch ? "error" : ""
-          }`}
-        >
-          <label htmlFor='confirmPassword' className='form-label'>
-            confirm password:
-          </label>
-          <input
-            type='password'
-            id='confirmPassword'
-            className='form-input'
-            placeholder='password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            aria-invalid={confirmPasswordMatch ? "false" : "true"}
-            aria-describedby='confirmNote'
-            onFocus={() => setConfirmFocus(true)}
-            onBlur={() => setConfirmFocus(false)}
-          />
-          <p
-            id='confirmNote'
-            className={
-              confirmFocus && !confirmPasswordMatch
-                ? "form-description form-fade-in"
-                : "offscreen"
-            }
+            <label htmlFor='username' className='form-label'>
+              username:
+            </label>
+            <input
+              type='text'
+              id='username'
+              className='form-input'
+              placeholder='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete='off'
+              spellCheck='false'
+              ref={usernameRef}
+              aria-invalid={validUsername ? "false" : "true"}
+              aria-describedby='usernameNote'
+              onFocus={() => setUserFocus(true)}
+              onBlur={() => setUserFocus(false)}
+            />
+            <p
+              id='usernameNote'
+              className={
+                userFocus && username && !validUsername
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              4 to 24 characters. <br />
+              Must begin with a letter. <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+          </div>
+          <div
+            className={`form-line ${password && !validPassword ? "error" : ""}`}
           >
-            Passwords must match.
-          </p>
-        </div>
-        <div className='button-div flex-container'>
-          <button
-            disabled={originalUsername === username && !password.length}
-            className='basic-button margin-r-2 flex-container flex-align-center flex-justify-center'
-            type='submit'
-            style={{ minWidth: "65px" }}
+            <label htmlFor='password' className='form-label'>
+              password:
+            </label>
+            <input
+              type='password'
+              id='password'
+              className='form-input'
+              placeholder='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              aria-invalid={validPassword ? "false" : "true"}
+              aria-describedby='passwordNote'
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
+            />
+            <p
+              id='passwordNote'
+              className={
+                passwordFocus && !validPassword
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              8 to 24 characters. <br />
+              Must include at least one letter and one number.
+            </p>
+          </div>
+          <div
+            className={`form-line ${
+              confirmPassword && !confirmPasswordMatch ? "error" : ""
+            }`}
           >
-            {editButtonContent}
-          </button>
-          <button
-            className='basic-button delete-button flex-container flex-align-center flex-justify-center'
-            type='button'
-            onClick={handleDelete}
-            style={{ minWidth: "130px" }}
-          >
-            {deleteButtonContent}
-          </button>
-        </div>
-      </form>
-    </section>
+            <label htmlFor='confirmPassword' className='form-label'>
+              confirm password:
+            </label>
+            <input
+              type='password'
+              id='confirmPassword'
+              className='form-input'
+              placeholder='password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              aria-invalid={confirmPasswordMatch ? "false" : "true"}
+              aria-describedby='confirmNote'
+              onFocus={() => setConfirmFocus(true)}
+              onBlur={() => setConfirmFocus(false)}
+            />
+            <p
+              id='confirmNote'
+              className={
+                confirmFocus && !confirmPasswordMatch
+                  ? "form-description form-fade-in"
+                  : "offscreen"
+              }
+            >
+              Passwords must match.
+            </p>
+          </div>
+          <div className='button-div flex-container'>
+            <button
+              disabled={originalUsername === username && !password.length}
+              className='basic-button margin-r-2 flex-container flex-align-center flex-justify-center'
+              type='submit'
+              style={{ minWidth: "65px" }}
+            >
+              {editButtonContent}
+            </button>
+            <button
+              className='basic-button delete-button flex-container flex-align-center flex-justify-center'
+              type='button'
+              onClick={() => setModalOpen(true)}
+              style={{ minWidth: "130px" }}
+            >
+              {deleteButtonContent}
+            </button>
+          </div>
+        </form>
+      </section>
+      {modalOpen && (
+        <ConfirmModal
+          text={modalText}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setConfirmTask={setConfirmDelete}
+        />
+      )}
+    </>
   );
 };
 
