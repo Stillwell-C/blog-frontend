@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
 import { useDeleteUserMutation } from "../features/users/usersApiSlice";
 import dateOptions from "../utils/DateOptions";
 import { useNavigate } from "react-router-dom";
+import ConfirmModal from "./ConfirmModal";
 
 const UserDisplayAbbr = ({ user }) => {
   const errRef = useRef();
@@ -13,6 +14,11 @@ const UserDisplayAbbr = ({ user }) => {
 
   const [deleteUser, { isLoading, isSuccess, isError, error }] =
     useDeleteUserMutation();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const modalText = "delete this account";
 
   const buttonContent = !isLoading ? (
     "Delete"
@@ -26,21 +32,30 @@ const UserDisplayAbbr = ({ user }) => {
   };
 
   useEffect(() => {
+    if (confirmDelete) {
+      handleDelete();
+    }
+  }, [confirmDelete]);
+
+  useEffect(() => {
     if (isError) errRef.current.focus();
   }, [isError]);
 
   return (
-    //Fix class
     <article className='post-display-wrapper post-display-abbr-wrapper'>
       <h3>Username: {user?.username}</h3>
       <p>Roles: {user?.roles?.join(", ")}</p>
       <p>
-        Created at:{" "}
-        {new Date(user?.createdAt).toLocaleDateString("en-us", dateOptions)}
+        {`Created at: ${new Date(user?.createdAt).toLocaleDateString(
+          "en-us",
+          dateOptions
+        )}`}
       </p>
       <p>
-        Updated at:{" "}
-        {new Date(user?.updatedAt).toLocaleDateString("en-us", dateOptions)}
+        {`Updated at: ${new Date(user?.updatedAt).toLocaleDateString(
+          "en-us",
+          dateOptions
+        )}`}
       </p>
       <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
         <button
@@ -53,7 +68,7 @@ const UserDisplayAbbr = ({ user }) => {
         <button
           type='button'
           className='basic-button delete-button flex-container flex-justify-center flex-align-center'
-          onClick={() => handleDelete()}
+          onClick={() => setModalOpen(true)}
           disabled={isLoading ? true : false}
         >
           {buttonContent}
@@ -66,6 +81,14 @@ const UserDisplayAbbr = ({ user }) => {
       >
         {error}
       </div>
+      {modalOpen && (
+        <ConfirmModal
+          text={modalText}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setConfirmTask={setConfirmDelete}
+        />
+      )}
     </article>
   );
 };
