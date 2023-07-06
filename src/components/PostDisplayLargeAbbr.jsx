@@ -4,10 +4,16 @@ import dateOptions from "../utils/DateOptions";
 import { BeatLoader } from "react-spinners";
 import { useDeletePostMutation } from "../features/posts/postsApiSlice";
 import useAuth from "../hooks/useAuth";
+import ConfirmModal from "./ConfirmModal";
 
 const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   const [date, setDate] = useState("");
   const errRef = useRef();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const modalText = "delete this post";
 
   const { isAdmin } = useAuth();
 
@@ -43,6 +49,12 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   };
 
   useEffect(() => {
+    if (confirmDelete) {
+      handleDelete();
+    }
+  }, [confirmDelete]);
+
+  useEffect(() => {
     if (isError && adminDisplay) errRef.current.focus();
   }, [isError]);
 
@@ -54,7 +66,7 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
           <button
             type='button'
             className='basic-button delete-button flex-container flex-justify-center flex-align-center'
-            onClick={() => handleDelete()}
+            onClick={() => setModalOpen(true)}
             disabled={isLoading ? true : false}
           >
             {buttonContent}
@@ -80,6 +92,14 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
       </div>
       <p className='pdl-date'>{date}</p>
       {adminButtons}
+      {modalOpen && (
+        <ConfirmModal
+          text={modalText}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setConfirmTask={setConfirmDelete}
+        />
+      )}
     </article>
   );
 };
