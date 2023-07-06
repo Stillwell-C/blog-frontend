@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useDeleteUserMutation,
   useGetUserQuery,
@@ -9,14 +9,20 @@ import ErrorPage from "../../components/ErrorPage";
 import dateOptions from "../../utils/DateOptions";
 import { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const AdminSingleUser = () => {
   const { userID } = useParams();
   const errRef = useRef();
+  const navigate = useNavigate();
 
   const [userCheckbox, setUserCheckbox] = useState(false);
   const [contributorCheckbox, setContributorCheckbox] = useState(false);
   const [adminCheckbox, setAdminCheckbox] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const modalText = "delete this account";
 
   const { data, isLoading, isSuccess, isError, error } =
     useGetUserQuery(userID);
@@ -63,7 +69,14 @@ const AdminSingleUser = () => {
 
   const handleDelete = async () => {
     await deleteUser({ id: data._id });
+    navigate("/admindash");
   };
+
+  useEffect(() => {
+    if (confirmDelete) {
+      handleDelete();
+    }
+  }, [confirmDelete]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -149,13 +162,21 @@ const AdminSingleUser = () => {
           <button
             type='button'
             className='basic-button delete-button flex-container flex-justify-center flex-align-center'
-            onClick={handleDelete}
+            onClick={() => setModalOpen(true)}
             disabled={deleteIsLoading || updateIsLoading ? true : false}
           >
             {deleteButtonContent}
           </button>
         </div>
       </form>
+      {modalOpen && (
+        <ConfirmModal
+          text={modalText}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setConfirmTask={setConfirmDelete}
+        />
+      )}
     </>
   );
 
