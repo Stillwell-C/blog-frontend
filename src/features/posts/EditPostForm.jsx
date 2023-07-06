@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDeletePostMutation, useUpdatePostMutation } from "./postsApiSlice";
 import { BeatLoader } from "react-spinners";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const EditPostForm = ({ post }) => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ const EditPostForm = ({ post }) => {
   const [epigraphAuthorErr, setEpigraphAuthorErr] = useState(false);
   const [text, setText] = useState(post?.text);
   const [textErr, setTextErr] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const modalText = "delete this post";
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -95,6 +100,12 @@ const EditPostForm = ({ post }) => {
   const handleDelete = async () => {
     await deletePost({ id: post._id });
   };
+
+  useEffect(() => {
+    if (confirmDelete) {
+      handleDelete();
+    }
+  }, [confirmDelete]);
 
   useEffect(() => {
     if (isSuccess || deleteIsSuccess) navigate("/");
@@ -209,7 +220,7 @@ const EditPostForm = ({ post }) => {
             <button
               className='basic-button delete-button flex-container flex-align-center flex-justify-center'
               type='button'
-              onClick={handleDelete}
+              onClick={() => setModalOpen(true)}
               style={{ minWidth: "72px" }}
             >
               {deleteButtonContent}
@@ -217,6 +228,14 @@ const EditPostForm = ({ post }) => {
           </div>
         </form>
       </div>
+      {modalOpen && (
+        <ConfirmModal
+          text={modalText}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setConfirmTask={setConfirmDelete}
+        />
+      )}
     </section>
   );
 };
