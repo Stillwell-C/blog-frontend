@@ -127,12 +127,16 @@ const AdminSingleUser = () => {
           </label>
         </div>
         <p>
-          Created at:
-          {new Date(data?.createdAt).toLocaleDateString("en-us", dateOptions)}
+          {`Created at: ${new Date(data?.createdAt).toLocaleDateString(
+            "en-us",
+            dateOptions
+          )}`}
         </p>
         <p>
-          Updated at:
-          {new Date(data?.updatedAt).toLocaleDateString("en-us", dateOptions)}
+          {`Updated at: ${new Date(data?.updatedAt).toLocaleDateString(
+            "en-us",
+            dateOptions
+          )}`}
         </p>
         <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
           <button
