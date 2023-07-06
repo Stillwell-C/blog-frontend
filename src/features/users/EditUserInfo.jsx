@@ -127,7 +127,6 @@ const EditUserInfo = () => {
   };
 
   useEffect(() => {
-    console.log(confirmDelete);
     if (confirmDelete) {
       handleDelete();
     }
