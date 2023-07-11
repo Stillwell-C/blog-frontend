@@ -112,7 +112,7 @@ const EditUserInfo = () => {
     const updatedUserData = {};
     if (username.length && originalUsername !== username)
       updatedUserData.username = username;
-    if (password.length) updatedUserData.password = username;
+    if (password.length) updatedUserData.password = password;
     const response = await updateUser({ ...updatedUserData, id });
     const { accessToken } = response.data;
     dispatch(setCredentials({ accessToken }));
