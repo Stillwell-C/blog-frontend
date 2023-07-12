@@ -26,45 +26,45 @@ const roles = {
 function App() {
   return (
     <Routes>
-      <Route element={<PersistentLogin />}>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
+      {/* <Route element={<PersistentLogin />}> */}
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
 
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
 
-          <Route path='/posts'>
-            <Route index element={<AllPosts />} />
-            <Route path='new' element={<NewPost />} />
-            <Route path=':postID' element={<Post />} />
-            <Route
-              element={
-                <RequireRole requiredRoles={[roles.Contributor, roles.Admin]} />
-              }
-            >
-              <Route path=':postID/edit' element={<EditPost />} />
-            </Route>
+        <Route path='/posts'>
+          <Route index element={<AllPosts />} />
+          <Route path='new' element={<NewPost />} />
+          <Route path=':postID' element={<Post />} />
+          <Route
+            element={
+              <RequireRole requiredRoles={[roles.Contributor, roles.Admin]} />
+            }
+          >
+            <Route path=':postID/edit' element={<EditPost />} />
           </Route>
-
-          <Route path='/users'></Route>
-
-          <Route element={<RequireLogin />}>
-            <Route path='/mypage'>
-              <Route index element={<UserDashboard />} />
-              <Route path='edit' element={<EditUserInfo />} />
-            </Route>
-          </Route>
-
-          <Route element={<RequireRole requiredRoles={[roles.Admin]} />}>
-            <Route path='/admindash'>
-              <Route index element={<AdminDashboard />} />
-              <Route path=':userID' element={<AdminSingleUser />} />
-            </Route>
-          </Route>
-
-          <Route path='*' element={<NotFound />} />
         </Route>
+
+        <Route path='/users'></Route>
+
+        <Route element={<RequireLogin />}>
+          <Route path='/mypage'>
+            <Route index element={<UserDashboard />} />
+            <Route path='edit' element={<EditUserInfo />} />
+          </Route>
+        </Route>
+
+        <Route element={<RequireRole requiredRoles={[roles.Admin]} />}>
+          <Route path='/admindash'>
+            <Route index element={<AdminDashboard />} />
+            <Route path=':userID' element={<AdminSingleUser />} />
+          </Route>
+        </Route>
+
+        <Route path='*' element={<NotFound />} />
       </Route>
+      {/* </Route> */}
     </Routes>
   );
 }

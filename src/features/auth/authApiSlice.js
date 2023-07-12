@@ -25,7 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           setTimeout(() => {
             dispatch(apiSlice.util.resetApiState());
           }, 1000);
-          localStorage.setItem("persistLogin", JSON.stringify(false));
+          // localStorage.setItem("persistLogin", JSON.stringify(false));
         } catch (err) {
           console.log(err);
         }

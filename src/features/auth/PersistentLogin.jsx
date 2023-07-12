@@ -7,7 +7,7 @@ import { selectCurrentToken, setCredentialsLoading } from "./authSlice";
 import ErrorPage from "../../components/ErrorPage";
 
 const PersistentLogin = () => {
-  const [persist, setPersist] = usePersistLogin();
+  // const [persist, setPersist] = usePersistLogin();
   const token = useSelector(selectCurrentToken);
   const runEffect = useRef(false);
 

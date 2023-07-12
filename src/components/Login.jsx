@@ -17,7 +17,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [persistLogin, setPersistLogin] = usePersistLogin();
+  // const [persistLogin, setPersistLogin] = usePersistLogin();
 
   const [login, { isLoading, error, isSuccess, isError }] = useLoginMutation();
 
@@ -31,7 +31,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setPersistLogin(true);
+    // setPersistLogin(true);
     // try {
     //   const { accessToken } = await login({ username, password }).unwrap;
     //   dispatch(setCredentials({ accessToken }));
