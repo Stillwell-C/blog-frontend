@@ -136,11 +136,20 @@ const Header = () => {
     sendLogout();
   };
 
-  let homeLink;
+  let homeLink = null;
   if (!pathname.match(/^\/$/i)) {
     homeLink = (
       <Link onClick={() => showDropdown(false)} to='/'>
         Home
+      </Link>
+    );
+  }
+
+  let allPostsLink = null;
+  if (!pathname.match(/^\/posts$/i)) {
+    allPostsLink = (
+      <Link onClick={() => showDropdown(false)} to='/posts'>
+        All Posts
       </Link>
     );
   }
@@ -185,12 +194,14 @@ const Header = () => {
   const dropDownLinks = !loggedIn ? (
     <>
       {homeLink}
+      {allPostsLink}
       {loginLink}
       {newUserLink}
     </>
   ) : (
     <>
       {homeLink}
+      {allPostsLink}
       {myPageLink}
       {adminDashLink}
       {newPostLink}
