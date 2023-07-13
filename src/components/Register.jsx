@@ -117,7 +117,7 @@ const Register = () => {
   const registrationPage = (
     <>
       <img className='img-color-fix fade-in' src={spoonbill} alt='' />
-      <div className='auth-form-container'>
+      <section className='auth-form-container'>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div
@@ -247,16 +247,16 @@ const Register = () => {
             <Link to='/login'>Log in</Link>
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 
   const content = (
-    <section className='auth-page-container fill-screen'>
+    <main className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
         {isSuccess ? successPage : registrationPage}
       </div>
-    </section>
+    </main>
   );
 
   return content;
