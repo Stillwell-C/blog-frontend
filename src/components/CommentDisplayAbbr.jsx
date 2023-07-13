@@ -60,7 +60,7 @@ const CommentDisplayAbbr = ({ comment }) => {
   }, [confirmDelete]);
 
   return (
-    <div className='comment-display' role='comment'>
+    <article className='comment-display' role='comment'>
       <p>{commentDisplay}</p>
       <p>{date}</p>
       <div className='comment-button-div'>
@@ -88,7 +88,7 @@ const CommentDisplayAbbr = ({ comment }) => {
           setConfirmTask={setConfirmDelete}
         />
       )}
-    </div>
+    </article>
   );
 };
 
