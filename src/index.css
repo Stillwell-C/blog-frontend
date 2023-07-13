@@ -1001,3 +1001,11 @@ button {
   opacity: 1;
   pointer-events: all;
 }
+
+.admin-confirm-container > input {
+  border: 1.5px solid var(--border-color);
+  border-radius: .25rem;
+  font-size: 1rem;
+  padding: 5px 10px;
+  width: clamp(200px, 70%, 300px);
+}
