@@ -60,12 +60,12 @@ const AdminComments = () => {
   }
 
   return (
-    <div className='flex-container flex-column flex-align-center'>
+    <section className='flex-container flex-column flex-align-center'>
       {isFetching && skeletonPosts}
       {commentContent}
       {buttonContent}
       {errorContent}
-    </div>
+    </section>
   );
 };
 
