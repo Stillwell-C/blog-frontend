@@ -89,8 +89,7 @@ button {
 }
 
 .main-img {
-  max-width: 400px;
-  width: auto;
+  width: clamp(300px, 80vw, 500px);
 }
 
 .fade-in {
@@ -283,8 +282,7 @@ button {
 
 .home-top-center-content > img {
   margin-top: 3rem;
-  max-width: 400px;
-  width: auto;
+  width: clamp(300px, 80vw, 500px);
 }
 
 .home-top-posts {
@@ -350,7 +348,7 @@ button {
 }
 
 .home-middle-container  img {
-  width: 300px;
+  width: clamp(250px, 80vw, 350px);
 }
 
 /* Post Preview component */
@@ -393,7 +391,7 @@ button {
 
 .post-display-large-wrapper {
   padding: 1rem;
-  width: 500px;
+  width: clamp(300px, 80vw, 500px);
   min-height: 250px;
 }
 
@@ -417,7 +415,7 @@ button {
 
 .post-display-abbr-wrapper {
   padding: 1rem;
-  width: 500px;
+  width: clamp(300px, 80vw, 500px);
   /* min-height: 100px; */
   border-top: none;
   border-bottom: none;
@@ -427,7 +425,7 @@ button {
 /* Comment Display */
 .comment-display {
   padding: 1rem;
-  width: 500px;
+  width: clamp(300px, 80vw, 500px);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -850,6 +848,8 @@ button {
   border-radius: .25rem;
   font-size: 1rem;
   padding: 5px 10px;
+  width: clamp(300px, 80vw, 500px);
+  min-height: 100px;
 }
 
 .add-user-comment button {
@@ -928,8 +928,7 @@ button {
 }
 
 .error-page img {
-  max-width: 400px;
-  width: auto;
+  width: clamp(300px, 80vw, 500px);
   margin-bottom: 4rem;
 }
 
