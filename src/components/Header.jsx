@@ -1,14 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 import { selectCredentialsLoading } from "../features/auth/authSlice";
+import menuImg from "../assets/menu-svgrepo-com.svg";
 
 const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   // const [authLoading, setAuthLoading] = useState(true);
   const { loggedIn, isAdmin, isContributor } = useAuth();
@@ -129,13 +131,96 @@ const Header = () => {
 
   const displayButtons = authLoading ? skeletonButtons : headerButtons;
 
+  const handleLogoutLink = () => {
+    setShowDropdown(false);
+    sendLogout();
+  };
+
+  let homeLink;
+  if (!pathname.match(/^\/$/i)) {
+    homeLink = (
+      <Link onClick={() => showDropdown(false)} to='/'>
+        Home
+      </Link>
+    );
+  }
+
+  const loginLink = (
+    <Link onClick={() => showDropdown(false)} to='/login'>
+      Log in
+    </Link>
+  );
+  const newUserLink = (
+    <Link onClick={() => showDropdown(false)} to='/register'>
+      Sign up
+    </Link>
+  );
+  const logoutLink = (
+    <Link onClick={handleLogoutLink} to='/'>
+      Log out
+    </Link>
+  );
+  const myPageLink = (
+    <Link onClick={() => showDropdown(false)} to='mypage'>
+      My page
+    </Link>
+  );
+  let adminDashLink = null;
+  if (isAdmin) {
+    adminDashLink = (
+      <Link onClick={() => showDropdown(false)} to='/admindash'>
+        Admin dashboard
+      </Link>
+    );
+  }
+  let newPostLink = null;
+  if (isContributor) {
+    newPostLink = (
+      <Link onClick={() => showDropdown(false)} to='posts/new'>
+        New post
+      </Link>
+    );
+  }
+
+  const dropDownLinks = !loggedIn ? (
+    <>
+      {homeLink}
+      {loginLink}
+      {newUserLink}
+    </>
+  ) : (
+    <>
+      {homeLink}
+      {myPageLink}
+      {adminDashLink}
+      {newPostLink}
+      {logoutLink}
+    </>
+  );
+
+  useEffect(() => {
+    console.log("show drop: ", showDropdown);
+  }, [showDropdown]);
+
   return (
     <header className='page-header'>
-      <h1 className='header-title'>
-        <Link to='/'>Wild Goose Chase </Link>
-      </h1>
+      <div className='header-top-content'>
+        <h1 className='header-title'>
+          <Link to='/'>Wild Goose Chase </Link>
+        </h1>
 
-      <nav className='header-buttons-container'>{displayButtons}</nav>
+        <nav className='header-buttons-container'>{displayButtons}</nav>
+        <button
+          className='header-dropdown-toggle-button'
+          aria-label={`${showDropdown ? "hide" : "display"} nagivation menu`}
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
+          <img src={menuImg} alt='' />
+        </button>
+      </div>
+      <nav className={`header-dropdown-menu ${showDropdown ? "active" : ""}`}>
+        {dropDownLinks}
+      </nav>
     </header>
   );
 };
