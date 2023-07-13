@@ -21,6 +21,9 @@ const AdminSingleUser = () => {
   const [adminCheckbox, setAdminCheckbox] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [adminConfirm, setAdminConfirm] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const modalText = "delete this account";
 
@@ -51,8 +54,10 @@ const AdminSingleUser = () => {
     if (data?.roles.some((role) => role.match(/user/i))) setUserCheckbox(true);
     if (data?.roles.some((role) => role.match(/contributor/i)))
       setContributorCheckbox(true);
-    if (data?.roles.some((role) => role.match(/admin/i)))
+    if (data?.roles.some((role) => role.match(/admin/i))) {
       setAdminCheckbox(true);
+      setAdminConfirm(true);
+    }
   }, [isSuccess]);
 
   const deleteButtonContent = !deleteIsLoading ? (
@@ -72,14 +77,27 @@ const AdminSingleUser = () => {
     navigate("/admindash");
   };
 
+  const handleDeleteAdmin = async () => {
+    await deleteUser({ id: data._id, adminPassword });
+    navigate("/admindash");
+  };
+
   useEffect(() => {
-    if (confirmDelete) {
+    if (confirmDelete && !adminConfirm) {
       handleDelete();
+    }
+    if (confirmDelete && adminConfirm) {
+      handleDeleteAdmin();
     }
   }, [confirmDelete]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    setErrMsg("");
+    if (adminConfirm) {
+      setErrMsg("Cannot edit an admin profile");
+      return;
+    }
     let roles = [];
     if (userCheckbox) roles.push("User");
     if (contributorCheckbox) roles.push("Contributor");
@@ -88,17 +106,23 @@ const AdminSingleUser = () => {
     await updateUser({ id: data._id, roles });
   };
 
+  useEffect(() => {
+    if (errMsg.length || isError || deleteIsError || updateIsError)
+      errRef?.current?.focus();
+  }, [errMsg, isError, deleteIsError, updateIsError]);
+
   let editPage = (
     <>
       <div
         ref={errRef}
         className={
-          isError || deleteIsError || updateIsError
-            ? "form-error-div"
+          errMsg.length || isError || deleteIsError || updateIsError
+            ? "form-error-div margin-top-2"
             : "error-offscreen"
         }
         aria-live='assertive'
       >
+        {errMsg}
         {error?.data?.message}
         {deleteError?.data?.message}
         {updateError?.data?.message}
@@ -176,6 +200,8 @@ const AdminSingleUser = () => {
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           setConfirmTask={setConfirmDelete}
+          adminConfirm={adminConfirm}
+          setAdminPassword={setAdminPassword}
         />
       )}
     </>
