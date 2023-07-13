@@ -17,6 +17,8 @@ const UserDisplayAbbr = ({ user }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [adminConfirm, setAdminConfirm] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
 
   const modalText = "delete this account";
 
@@ -31,11 +33,24 @@ const UserDisplayAbbr = ({ user }) => {
     await deleteUser({ id: user._id });
   };
 
+  const handleDeleteAdmin = async () => {
+    if (!isAdmin) return;
+    await deleteUser({ id: user._id, adminPassword });
+  };
+
   useEffect(() => {
-    if (confirmDelete) {
+    if (confirmDelete && !adminConfirm) {
       handleDelete();
     }
+    if (confirmDelete && adminConfirm) {
+      handleDeleteAdmin();
+    }
   }, [confirmDelete]);
+
+  useEffect(() => {
+    if (user?.roles?.some((role) => role.match(/admin/i)))
+      setAdminConfirm(true);
+  }, []);
 
   useEffect(() => {
     if (isError) errRef.current.focus();
@@ -88,6 +103,8 @@ const UserDisplayAbbr = ({ user }) => {
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           setConfirmTask={setConfirmDelete}
+          adminConfirm={adminConfirm}
+          setAdminPassword={setAdminPassword}
         />
       )}
     </article>
