@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <section className='fill-screen flex-container flex-justify-center'>
+    <main className='fill-screen flex-container flex-justify-center'>
       <div className='dashboard-content margin-top-2'>
         <h2>Admin Dashboard</h2>
         <div className='dashboard-display-buttons margin-top-1'>
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
           </button>
           <button
             type='button'
-            aria-label='Display user posts'
+            aria-label='Display posts'
             style={displayContent === "posts" ? { fontWeight: "bold" } : {}}
             onClick={() => setDisplayContent("posts")}
           >
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
           </button>
           <button
             type='button'
-            aria-label='Display user comments'
+            aria-label='Display comments'
             style={displayContent === "comments" ? { fontWeight: "bold" } : {}}
             onClick={() => setDisplayContent("comments")}
           >
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
         </div>
         {content}
       </div>
-    </section>
+    </main>
   );
 };
 
