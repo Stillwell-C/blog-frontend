@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import spoonbill from "../assets/spoonbill.svg";
 import { Link } from "react-router-dom";
 import { useAddNewUserMutation } from "../features/users/usersApiSlice";
+import { BeatLoader } from "react-spinners";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -101,6 +102,12 @@ const Register = () => {
     if (!errorMsg.length) return;
     if (isError || errorMsg.length) errRef.current.focus();
   }, [isError, errorMsg]);
+
+  const buttonContent = !isLoading ? (
+    "Sign up"
+  ) : (
+    <BeatLoader color='#333' size={8} />
+  );
 
   const successPage = (
     <>
@@ -238,8 +245,9 @@ const Register = () => {
               }
               className='basic-button'
               type='submit'
+              style={{ minWidth: "77px" }}
             >
-              Sign up
+              {buttonContent}
             </button>
           </div>
           <div className='auth-form-link-div'>
