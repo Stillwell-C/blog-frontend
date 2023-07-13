@@ -23,6 +23,7 @@ body {
 
 .layout {
   min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -64,6 +65,7 @@ button {
 
 .fill-screen {
   flex-grow: 1;
+  overflow-x: scroll;
 }
 
 .flex-container {
@@ -149,6 +151,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .header-top-content {
