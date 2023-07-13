@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useGetUserCommentsQuery } from "../users/usersApiSlice";
 import CommentDisplayAbbr from "../../components/CommentDisplayAbbr";
@@ -11,6 +11,8 @@ const UserComments = () => {
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+
+  const errRef = useRef();
 
   const {
     data: commentData,
@@ -27,6 +29,10 @@ const UserComments = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (isError) errRef?.current?.focus();
+  }, [isError]);
 
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
@@ -56,7 +62,7 @@ const UserComments = () => {
   let errorContent;
   if (isError) {
     errorContent = (
-      <p className='margin-top-1'>
+      <p className='margin-top-1 .err-text' ref={errRef}>
         An error occurred. Please refresh the page.
       </p>
     );
