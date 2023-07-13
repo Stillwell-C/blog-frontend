@@ -50,7 +50,7 @@ const AllPosts = () => {
   }
 
   return (
-    <section className='all-posts-container fill-screen'>
+    <main className='all-posts-container fill-screen'>
       <h2>All Posts</h2>
       {isFetching && skeletonPosts}
       {!isFetching &&
@@ -64,7 +64,7 @@ const AllPosts = () => {
         />
       )}
       {isError && <ErrorPage />}
-    </section>
+    </main>
   );
 };
 
