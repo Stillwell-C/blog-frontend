@@ -81,9 +81,6 @@ const AddComment = () => {
           <textarea
             name='userComment'
             id='userComment'
-            cols='50'
-            rows='5
-          '
             value={commentBody}
             onChange={(e) => setCommentBody(e.target.value)}
           ></textarea>
