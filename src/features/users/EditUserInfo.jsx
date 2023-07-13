@@ -152,7 +152,7 @@ const EditUserInfo = () => {
 
   return (
     <>
-      <section className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
+      <main className='fill-screen flex-container flex-column flex-align-center margin-top-2'>
         <h2>Edit user information</h2>
         <p>Only edit the fields you wish to update.</p>
         <form className='margin-top-1' onSubmit={handleSubmit}>
@@ -285,7 +285,7 @@ const EditUserInfo = () => {
             </button>
           </div>
         </form>
-      </section>
+      </main>
       {modalOpen && (
         <ConfirmModal
           text={modalText}
