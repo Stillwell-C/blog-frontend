@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommentDisplayAbbr from "../../components/CommentDisplayAbbr";
 import PaginationButtons from "../../components/PaginationButtons";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
@@ -8,6 +8,8 @@ const AdminComments = () => {
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+
+  const errRef = useRef();
 
   const {
     data: commentData,
@@ -24,6 +26,10 @@ const AdminComments = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (isError) errRef?.current?.focus();
+  }, [isError]);
 
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
@@ -53,7 +59,7 @@ const AdminComments = () => {
   let errorContent;
   if (isError) {
     errorContent = (
-      <p className='margin-top-1'>
+      <p className='margin-top-1 .err-text' ref={errRef}>
         An error occurred. Please refresh the page.
       </p>
     );
@@ -61,10 +67,10 @@ const AdminComments = () => {
 
   return (
     <section className='flex-container flex-column flex-align-center'>
+      {errorContent}
       {isFetching && skeletonPosts}
       {commentContent}
       {buttonContent}
-      {errorContent}
     </section>
   );
 };
