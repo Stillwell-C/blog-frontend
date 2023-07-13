@@ -70,6 +70,7 @@ const UserDisplayAbbr = ({ user }) => {
           className='basic-button delete-button flex-container flex-justify-center flex-align-center'
           onClick={() => setModalOpen(true)}
           disabled={isLoading ? true : false}
+          style={{ minWidth: "69px" }}
         >
           {buttonContent}
         </button>
