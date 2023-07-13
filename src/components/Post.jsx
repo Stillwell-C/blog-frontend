@@ -128,28 +128,34 @@ const Post = () => {
             <p>{postContent?.text}</p>
           </div>
           <div className='edit-post-btn-div margin-top-2'>{editButtons}</div>
-        </article>
-        <div className='post-like-btn-div'>
-          <button
-            type='button'
-            className='post-like-btn basic-button'
-            aria-label={`Like this post. Current number of likes: ${likeCount}`}
-            onClick={handleLike}
-          >
-            <img src={buttonHeart} alt='' /> {likeCount}
-          </button>
-          <div
-            className={likeIsError ? "form-error-div" : "error-offscreen"}
-            ref={errRef}
-            aria-live='assertive'
-          >
-            {likeErrorMsg}
+          <div className='post-like-btn-div'>
+            <button
+              type='button'
+              className='post-like-btn basic-button'
+              aria-label={
+                userLike
+                  ? `Unlike this post. Current number of likes: ${likeCount}`
+                  : `Like this post. Current number of likes: ${likeCount}`
+              }
+              onClick={handleLike}
+            >
+              <img src={buttonHeart} alt='' /> {likeCount}
+            </button>
+            <div
+              className={likeIsError ? "form-error-div" : "error-offscreen"}
+              ref={errRef}
+              aria-live='assertive'
+            >
+              {likeErrorMsg}
+            </div>
           </div>
-        </div>
+        </article>
         <div className='post-page-break'></div>
-        <h3>Comments</h3>
-        <AddComment />
-        <PostComments />
+        <section>
+          <h3>Comments</h3>
+          <AddComment />
+          <PostComments />
+        </section>
       </div>
     </>
   );
@@ -162,9 +168,7 @@ const Post = () => {
     LoadedPage
   );
 
-  return (
-    <section className='fill-screen single-post-container'>{content}</section>
-  );
+  return <main className='fill-screen single-post-container'>{content}</main>;
 };
 
 export default Post;
