@@ -11,11 +11,11 @@ const Layout = () => {
   }, [pathname]);
 
   return (
-    <main className='layout'>
+    <div className='layout'>
       <Header />
       <Outlet />
       <Footer />
-    </main>
+    </div>
   );
 };
 
