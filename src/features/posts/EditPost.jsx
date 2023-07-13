@@ -26,7 +26,7 @@ const EditPost = () => {
     <EditPostForm post={postData} />
   );
 
-  return <section className='fill-screen flex-container'>{content}</section>;
+  return <main className='fill-screen flex-container'>{content}</main>;
 };
 
 export default EditPost;
