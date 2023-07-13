@@ -138,7 +138,7 @@ const NewPost = () => {
   );
 
   return (
-    <section className='fill-screen new-post-container flex-align-center'>
+    <main className='fill-screen new-post-container flex-align-center'>
       <div className='new-post-wrapper'>
         <h2>New Post</h2>
         <form onSubmit={handleSubmit}>
@@ -228,7 +228,7 @@ const NewPost = () => {
           </div>
         </form>
       </div>
-    </section>
+    </main>
   );
 };
 
