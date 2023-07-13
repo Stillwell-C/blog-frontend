@@ -45,26 +45,30 @@ const Home = () => {
   // }, [isLoading]);
 
   const content = (
-    <section className='home-container fill-screen'>
-      <div className='home-top-container'>
+    <main className='home-container fill-screen'>
+      <section className='home-top-container'>
         <div className='home-top-center'>
           <div className='home-top-center-content'>
             <h2>Waterfowl of Korea</h2>
             <p>Exploring the Avian Splendor of Korea&#39;s Wetlands</p>
-            <img className='fade-in' src={gooseImg} />
+            <img className='fade-in' src={gooseImg} alt='grayscale goose' />
           </div>
         </div>
-        <div className='home-top-posts'>
+        <aside className='home-top-posts'>
           <h3>Top Posts</h3>
           {<HomeTopPosts topPosts={topPosts} isLoading={isLoading} />}
-        </div>
-      </div>
+        </aside>
+      </section>
       <div className='home-middle-container'>
         <div className='home-middle-wrapper'>
-          <img className='fade-in' src={birdFlight} />
+          <img
+            className='fade-in'
+            src={birdFlight}
+            alt='flock of birds flying'
+          />
         </div>
       </div>
-      <div className='home-bottom-container'>
+      <section className='home-bottom-container'>
         <h3>Recent Posts</h3>
         <div className='home-bottom-post-wrapper'>
           {<HomeRecentPosts posts={posts} isLoading={isLoading} />}
@@ -76,8 +80,8 @@ const Home = () => {
         >
           More
         </button>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 
   return isError ? <ErrorPage /> : content;
