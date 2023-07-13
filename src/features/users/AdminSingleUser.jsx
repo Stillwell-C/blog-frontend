@@ -192,9 +192,9 @@ const AdminSingleUser = () => {
   }
 
   return (
-    <section className='fill-screen flex-container flex-column flex-align-center'>
+    <main className='fill-screen flex-container flex-column flex-align-center'>
       {content}
-    </section>
+    </main>
   );
 };
 
