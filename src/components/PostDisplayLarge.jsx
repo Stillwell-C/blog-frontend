@@ -34,7 +34,7 @@ const PostDisplayLarge = ({ post }) => {
         <p className='pdl-author-display'>By: {post.author.username}</p>
         <p className='pdl-post-text'>{displayText}</p>
       </div>
-      <p className='pdl-date'>{date}</p>
+      <p className='pdl-date margin-top-1'>{date}</p>
     </article>
   );
 };
