@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useLoginMutation } from "../features/auth/authApiSlice";
 import usePersistLogin from "../hooks/usePersistLogin";
+import { BeatLoader } from "react-spinners";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -62,6 +63,12 @@ const Login = () => {
     if (isError || errorMsg.length) errRef.current.focus();
   }, [isError, errorMsg]);
 
+  const buttonContent = !isLoading ? (
+    "Log In"
+  ) : (
+    <BeatLoader color='#333' size={8} />
+  );
+
   return (
     <main className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
@@ -116,8 +123,9 @@ const Login = () => {
                 disabled={!username || !password}
                 className='basic-button'
                 type='submit'
+                style={{ minWidth: "66px" }}
               >
-                Log in
+                {buttonContent}
               </button>
             </div>
             <div className='auth-form-link-div'>
