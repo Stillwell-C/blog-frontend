@@ -63,12 +63,12 @@ const AdminPosts = () => {
     );
   }
   return (
-    <div className='flex-container flex-column flex-align-center'>
+    <section className='flex-container flex-column flex-align-center'>
       {isFetching && skeletonPosts}
       {postContent}
       {buttonContent}
       {errorContent}
-    </div>
+    </section>
   );
 };
 
