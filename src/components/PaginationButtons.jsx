@@ -3,7 +3,8 @@ import PaginationButton from "./PaginationButton";
 const PaginationButtons = ({ totalPages, currentPage, setCurrentPage }) => {
   let content = [];
   if (totalPages <= 5 || currentPage <= 3) {
-    for (let i = 1; i <= totalPages; i++) {
+    const displayCount = totalPages > 5 ? 5 : totalPages;
+    for (let i = 1; i <= displayCount; i++) {
       content.push(
         <PaginationButton
           key={i}
