@@ -19,7 +19,7 @@ const UserDashboard = () => {
   }
 
   return (
-    <section className='fill-screen flex-container flex-justify-center'>
+    <main className='fill-screen flex-container flex-justify-center'>
       <div className='dashboard-content margin-top-2'>
         <div className='flex-container flex-align-center margin-btm-1'>
           <h2 className='margin-r-2'>My Page</h2>
@@ -52,7 +52,7 @@ const UserDashboard = () => {
         </div>
         {content}
       </div>
-    </section>
+    </main>
   );
 };
 
