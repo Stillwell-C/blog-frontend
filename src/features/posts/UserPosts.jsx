@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useGetUserPostsQuery } from "../users/usersApiSlice";
 import PostDisplayLargeAbbr from "../../components/PostDisplayLargeAbbr";
@@ -12,6 +12,8 @@ const UserPosts = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+
+  const errRef = useRef();
 
   const {
     data: postData,
@@ -29,6 +31,10 @@ const UserPosts = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (isError) errRef?.current?.focus();
+  }, [isError]);
 
   let skeletonPosts = [];
   for (let i = 0; i < 10; i++) {
@@ -58,7 +64,7 @@ const UserPosts = () => {
   let errorContent;
   if (isError) {
     errorContent = (
-      <p className='margin-top-1'>
+      <p className='margin-top-1 .err-text' ref={errRef}>
         An error occurred. Please refresh the page.
       </p>
     );
@@ -66,10 +72,10 @@ const UserPosts = () => {
 
   return (
     <section className='flex-container flex-column flex-align-center'>
+      {errorContent}
       {isFetching && skeletonPosts}
       {postContent}
       {buttonContent}
-      {errorContent}
     </section>
   );
 };
