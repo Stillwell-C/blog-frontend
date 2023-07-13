@@ -16,6 +16,7 @@ import UserPosts from "./features/posts/UserPosts";
 import AdminDashboard from "./components/AdminDashboard";
 import EditUserInfo from "./features/users/EditUserInfo";
 import AdminSingleUser from "./features/users/AdminSingleUser";
+import RequireLogout from "./features/auth/RequireLogout";
 
 const roles = {
   User: "User",
@@ -30,8 +31,10 @@ function App() {
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
 
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
+        <Route element={<RequireLogout />}>
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+        </Route>
 
         <Route path='/posts'>
           <Route index element={<AllPosts />} />
