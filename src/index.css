@@ -140,6 +140,9 @@ button {
   margin-right: 2rem;
 }
 
+.err-text {
+  color: var(--error)
+}
 
 /* Page headers and footers */
 .page-header {
