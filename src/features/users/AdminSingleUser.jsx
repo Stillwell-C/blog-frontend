@@ -62,7 +62,7 @@ const AdminSingleUser = () => {
   );
 
   const updateButtonContent = !updateIsLoading ? (
-    "Edit User"
+    "Save changes"
   ) : (
     <BeatLoader color='#333' size={8} />
   );
@@ -156,6 +156,7 @@ const AdminSingleUser = () => {
             type='submit'
             className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
             disabled={deleteIsLoading || updateIsLoading ? true : false}
+            style={{ minWidth: "124px" }}
           >
             {updateButtonContent}
           </button>
