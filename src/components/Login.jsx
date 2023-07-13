@@ -63,9 +63,9 @@ const Login = () => {
   }, [isError, errorMsg]);
 
   return (
-    <section className='auth-page-container fill-screen'>
+    <main className='auth-page-container fill-screen'>
       <div className='auth-page-content-wrapper'>
-        <div className='auth-form-container'>
+        <section className='auth-form-container'>
           <h2>Log In</h2>
           <form onSubmit={handleLogin}>
             <div
@@ -111,21 +111,6 @@ const Login = () => {
                 required
               />
             </div>
-            {/* <div className='form-line'>
-              <label
-                htmlFor='persistLogin'
-                className='form-label checkbox-label'
-              >
-                <input
-                  type='checkbox'
-                  className='form-checkbox'
-                  id='persistLogin'
-                  onChange={() => setPersistLogin((prev) => !prev)}
-                  checked={persistLogin}
-                />
-                keep me logged in
-              </label>
-            </div> */}
             <div className='button-div'>
               <button
                 disabled={!username || !password}
@@ -140,10 +125,10 @@ const Login = () => {
               <Link to='/register'>Sign Up</Link>
             </div>
           </form>
-        </div>
+        </section>
         <img className='fade-in' src={birdImg} alt='' />
       </div>
-    </section>
+    </main>
   );
 };
 
