@@ -215,7 +215,7 @@ const Header = () => {
 
   return (
     <header className='page-header'>
-      <div className='header-top-content flex-container flex-align-center padding-1'>
+      <div className='header-top-content flex-container flex-align-center flex-justify-between padding-1'>
         <h1 className='header-title'>
           <Link to='/'>Wild Goose Chase </Link>
         </h1>
