@@ -652,12 +652,6 @@ button {
 
 /* New Post */
 
-.new-post-container {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-}
-
 .new-post-wrapper > h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
@@ -690,7 +684,6 @@ button {
 }
 
 .post-form-button-div {
-  display: flex;
   gap: 10px
 }
 

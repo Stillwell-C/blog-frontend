@@ -138,7 +138,7 @@ const NewPost = () => {
   );
 
   return (
-    <main className='fill-screen new-post-container flex-align-center'>
+    <main className='fill-screen new-post-container flex-align-center flex-container flex-column padding-2'>
       <div className='new-post-wrapper'>
         <h2>New Post</h2>
         <form onSubmit={handleSubmit}>
@@ -232,7 +232,7 @@ const NewPost = () => {
               required
             ></textarea>
           </div>
-          <div className='post-form-button-div'>
+          <div className='post-form-button-div flex-container'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button flex-container flex-align-center flex-justify-center'
