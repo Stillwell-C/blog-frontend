@@ -8,7 +8,7 @@ const ErrorPage = ({ message }) => {
     content = "Please try again";
   }
   return (
-    <section className='fill-screen error-page flex-container flex-column flex-align-center flex-justify-center'>
+    <section className='fill-screen error-page flex-container flex-column flex-align-center flex-justify-center padding-1'>
       <img src={errorRobot} alt='' />
       <h2>Error</h2>
       <p>Something went wrong</p>
