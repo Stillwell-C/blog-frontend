@@ -17,7 +17,7 @@ const HomeTopPosts = ({ topPosts, isLoading }) => {
   const content = isLoading ? loadingContent : topPostsRender;
 
   return (
-    <div className='top-posts-list flex-container flex-column flex-justify-between'>
+    <div className='top-posts-list flex-container flex-column flex-justify-between gap-10p'>
       {content}
     </div>
   );

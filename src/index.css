@@ -316,7 +316,6 @@ button {
 
 .top-posts-list {
   flex-grow: 1;
-  gap: 10px
 }
 
 @media screen and (min-width: 950px){
