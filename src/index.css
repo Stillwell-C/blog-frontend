@@ -106,6 +106,10 @@ button {
   gap: 10px
 }
 
+.gap-20p {
+  gap: 20px
+}
+
 .img-color-fix {
   filter: invert(0%) sepia(0%) saturate(3616%) hue-rotate(164deg) brightness(95%) contrast(60%);
 }
@@ -371,7 +375,6 @@ button {
   padding: 1rem 0;
   max-width: clamp(200px, 80vw, 1000px);
   flex-wrap: wrap;
-  gap: 20px
 }
 
 /* Post Preview component */

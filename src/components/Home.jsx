@@ -72,7 +72,7 @@ const Home = () => {
       </div>
       <section className='home-bottom-container flex-container flex-column flex-align-center'>
         <h3>Recent Posts</h3>
-        <div className='home-bottom-post-wrapper flex-container flex-justify-center'>
+        <div className='home-bottom-post-wrapper flex-container flex-justify-center gap-20p'>
           {<HomeRecentPosts posts={posts} isLoading={isLoading} />}
         </div>
         <button
