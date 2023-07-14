@@ -27,8 +27,13 @@ const AdminSingleUser = () => {
 
   const modalText = "delete this account";
 
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetUserQuery(userID);
+  const {
+    data: userData,
+    isLoading: dataIsLoading,
+    isSuccess: dataIsSuccess,
+    isError: dataIsError,
+    error: dataError,
+  } = useGetUserQuery(userID);
 
   const [
     updateUser,
@@ -51,14 +56,15 @@ const AdminSingleUser = () => {
   ] = useDeleteUserMutation();
 
   useEffect(() => {
-    if (data?.roles.some((role) => role.match(/user/i))) setUserCheckbox(true);
-    if (data?.roles.some((role) => role.match(/contributor/i)))
+    if (userData?.roles.some((role) => role.match(/user/i)))
+      setUserCheckbox(true);
+    if (userData?.roles.some((role) => role.match(/contributor/i)))
       setContributorCheckbox(true);
-    if (data?.roles.some((role) => role.match(/admin/i))) {
+    if (userData?.roles.some((role) => role.match(/admin/i))) {
       setAdminCheckbox(true);
       setAdminConfirm(true);
     }
-  }, [isSuccess]);
+  }, [dataIsSuccess]);
 
   const deleteButtonContent = !deleteIsLoading ? (
     "Delete"
@@ -73,12 +79,12 @@ const AdminSingleUser = () => {
   );
 
   const handleDelete = async () => {
-    await deleteUser({ id: data._id });
+    await deleteUser({ id: userData._id });
     navigate("/admindash");
   };
 
   const handleDeleteAdmin = async () => {
-    await deleteUser({ id: data._id, adminPassword });
+    await deleteUser({ id: userData._id, adminPassword });
     navigate("/admindash");
   };
 
@@ -103,78 +109,94 @@ const AdminSingleUser = () => {
     if (contributorCheckbox) roles.push("Contributor");
     if (adminCheckbox) roles.push("Admin");
 
-    await updateUser({ id: data._id, roles });
+    await updateUser({ id: userData._id, roles });
   };
 
   useEffect(() => {
-    if (errMsg.length || isError || deleteIsError || updateIsError)
+    if (errMsg.length || dataIsError || deleteIsError || updateIsError)
       errRef?.current?.focus();
-  }, [errMsg, isError, deleteIsError, updateIsError]);
+  }, [errMsg, dataIsError, deleteIsError, updateIsError]);
 
   let editPage = (
     <>
       <div
         ref={errRef}
         className={
-          errMsg.length || isError || deleteIsError || updateIsError
+          errMsg.length || dataIsError || deleteIsError || updateIsError
             ? "form-error-div margin-top-2"
             : "error-offscreen"
         }
         aria-live='assertive'
       >
         {errMsg}
-        {error?.data?.message}
-        {deleteError?.data?.message}
-        {updateError?.data?.message}
+        {dataError?.userData?.message}
+        {deleteError?.userData?.message}
+        {updateError?.userData?.message}
       </div>
-      <form onSubmit={handleUpdate}>
-        <h2 className='margin-top-2'>Edit User: {data?.username}</h2>
-        <p>User Roles:</p>
+      <form
+        onSubmit={handleUpdate}
+        className='admin-user-edit-form flex-container flex-column flex-align-center'
+      >
+        <h2 className='margin-top-2'>Edit User: {userData?.username}</h2>
         <div>
-          <label className='margin-r-1' htmlFor='user-checkbox'>
-            <input
-              type='checkbox'
-              id='user-checkbox'
-              name='user-checkbox'
-              disabled
-              checked={userCheckbox}
-              onChange={() => setUserCheckbox(!userCheckbox)}
-            />
-            User
-          </label>
-          <label className='margin-r-1' htmlFor='contributor-checkbox'>
-            <input
-              type='checkbox'
-              id='contributor-checkbox'
-              name='contributor-checkbox'
-              checked={contributorCheckbox}
-              onChange={() => setContributorCheckbox(!contributorCheckbox)}
-            />
-            Contributor
-          </label>
-          <label className='margin-r-1' htmlFor='admin-checkbox'>
-            <input
-              type='checkbox'
-              id='admin-checkbox'
-              name='admin-checkbox'
-              checked={adminCheckbox}
-              onChange={() => setAdminCheckbox(!adminCheckbox)}
-            />
-            Admin
-          </label>
+          <p className='margin-btm-5p'>User Roles:</p>
+          <div className='admin-user-edit-checkboxes flex-container'>
+            <label
+              htmlFor='user-checkbox'
+              className='admin-user-edit-checkbox flex-container flex-align-center'
+            >
+              <input
+                type='checkbox'
+                id='user-checkbox'
+                name='user-checkbox'
+                disabled
+                checked={userCheckbox}
+                onChange={() => setUserCheckbox(!userCheckbox)}
+              />
+              User
+            </label>
+            <label
+              htmlFor='contributor-checkbox'
+              className='admin-user-edit-checkbox flex-container flex-align-center'
+            >
+              <input
+                type='checkbox'
+                id='contributor-checkbox'
+                name='contributor-checkbox'
+                checked={contributorCheckbox}
+                onChange={() => setContributorCheckbox(!contributorCheckbox)}
+              />
+              Contributor
+            </label>
+            <label
+              htmlFor='admin-checkbox'
+              className='admin-user-edit-checkbox flex-container flex-align-center'
+            >
+              <input
+                type='checkbox'
+                id='admin-checkbox'
+                name='admin-checkbox'
+                checked={adminCheckbox}
+                onChange={() => setAdminCheckbox(!adminCheckbox)}
+              />
+              Admin
+            </label>
+          </div>
         </div>
-        <p>
-          {`Created at: ${new Date(data?.createdAt).toLocaleDateString(
-            "en-us",
-            dateOptions
-          )}`}
-        </p>
-        <p>
-          {`Updated at: ${new Date(data?.updatedAt).toLocaleDateString(
-            "en-us",
-            dateOptions
-          )}`}
-        </p>
+        <div>
+          <p>
+            {`Created at: ${new Date(userData?.createdAt).toLocaleDateString(
+              "en-us",
+              dateOptions
+            )}`}
+          </p>
+          <p>
+            {`Updated at: ${new Date(userData?.updatedAt).toLocaleDateString(
+              "en-us",
+              dateOptions
+            )}`}
+          </p>
+        </div>
         <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
           <button
             type='submit'
@@ -208,13 +230,13 @@ const AdminSingleUser = () => {
   );
 
   let content;
-  if (isLoading) {
+  if (dataIsLoading) {
     content = <LoadingPage />;
   }
-  if (isError) {
-    content = <ErrorPage message={error?.data?.message} />;
+  if (dataIsError) {
+    content = <ErrorPage message={dataError?.userData?.message} />;
   }
-  if (isSuccess) {
+  if (dataIsSuccess) {
     content = editPage;
   }
 

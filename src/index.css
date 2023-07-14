@@ -119,6 +119,10 @@ button {
   margin-bottom: 3rem;
 }
 
+.margin-btm-5p {
+  margin-bottom: 5px;
+}
+
 .margin-top-1 {
   margin-top: 1rem;
 }
@@ -814,6 +818,19 @@ button {
   color: var(--text-color);
   font-size: 1rem;
   border: none;
+}
+
+.admin-user-edit-form {
+  gap: 10px;
+  text-align: center;
+}
+
+.admin-user-edit-checkboxes {
+  gap: 10px;
+}
+
+.admin-user-edit-checkbox {
+  gap: 3px;
 }
 
 /* Not found page & Error Page */
