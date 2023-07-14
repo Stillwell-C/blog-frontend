@@ -250,23 +250,15 @@ button {
 /* Top */
 
 .home-top-container {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
   min-height: clamp(810px, 90vh, 1000px);
 }
 
 .home-top-center {
   flex-grow: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .home-top-center-content {
   max-width: 1000px;
-  display: flex;
-  flex-direction: column;
   text-align: center;
 }
 
@@ -288,9 +280,6 @@ button {
   margin-top: 2rem;
   min-height: 100%;
   border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .home-top-posts > h3 {
@@ -299,8 +288,6 @@ button {
 }
 
 .top-posts-list {
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
   gap: 10px
 }
@@ -332,21 +319,34 @@ button {
 
 
 .home-middle-container {
-  padding: 2rem;
   height: clamp(350px, 40vh, 600px);
 }
 
 .home-middle-wrapper {
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
 
 .home-middle-container  img {
   width: clamp(250px, 80vw, 350px);
+}
+
+/* Home bottom */
+
+.home-bottom-container {
+  padding: 2rem 0;
+}
+
+.home-bottom-container h3 {
+  font-size: 2rem;
+}
+
+.home-bottom-post-wrapper {
+  padding: 1rem 0;
+  max-width: clamp(200px, 80vw, 1000px);
+  flex-wrap: wrap;
+  gap: 20px
 }
 
 /* Post Preview component */
@@ -514,28 +514,6 @@ button {
   100% {
     opacity: 1;
   }
-}
-
-/* Home bottom */
-
-.home-bottom-container {
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.home-bottom-container h3 {
-  font-size: 2rem;
-}
-
-.home-bottom-post-wrapper {
-  padding: 1rem 0;
-  max-width: clamp(200px, 80vw, 1000px);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px
 }
 
 /* FORMS, LOGIN, & REGISTER PAGE */

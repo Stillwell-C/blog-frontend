@@ -25,8 +25,10 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setTopPosts(postData?.top);
-    setPosts(postData?.posts);
+    if (postData) {
+      setTopPosts(postData?.top);
+      setPosts(postData?.posts);
+    }
     console.log("post data: ", postData);
   }, [isLoading]);
 
@@ -45,22 +47,22 @@ const Home = () => {
   // }, [isLoading]);
 
   const content = (
-    <main className='home-container fill-screen'>
-      <section className='home-top-container'>
-        <div className='home-top-center'>
-          <div className='home-top-center-content'>
+    <main className='fill-screen'>
+      <section className='home-top-container padding-2 flex-container flex-column'>
+        <div className='home-top-center flex-container flex-align-center flex-justify-center'>
+          <div className='home-top-center-content flex-continer flex-column'>
             <h2>Waterfowl of Korea</h2>
             <p>Exploring the Avian Splendor of Korea&#39;s Wetlands</p>
             <img className='fade-in' src={gooseImg} alt='grayscale goose' />
           </div>
         </div>
-        <aside className='home-top-posts'>
+        <aside className='home-top-posts flex-container flex-column flex-align-center'>
           <h3>Top Posts</h3>
           {<HomeTopPosts topPosts={topPosts} isLoading={isLoading} />}
         </aside>
       </section>
-      <div className='home-middle-container'>
-        <div className='home-middle-wrapper'>
+      <div className='home-middle-container padding-2'>
+        <div className='home-middle-wrapper flex-container flex-align-center flex-justify-center'>
           <img
             className='fade-in'
             src={birdFlight}
@@ -68,9 +70,9 @@ const Home = () => {
           />
         </div>
       </div>
-      <section className='home-bottom-container'>
+      <section className='home-bottom-container flex-container flex-column flex-align-center'>
         <h3>Recent Posts</h3>
-        <div className='home-bottom-post-wrapper'>
+        <div className='home-bottom-post-wrapper flex-container flex-justify-center'>
           {<HomeRecentPosts posts={posts} isLoading={isLoading} />}
         </div>
         <button
