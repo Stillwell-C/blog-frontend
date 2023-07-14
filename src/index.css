@@ -689,12 +689,6 @@ button {
 
 /* Single Post */
 
-.single-post-container {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
-
 .single-post-content {
   max-width: clamp(300px, 60%, 600px);
   white-space: pre-wrap;
@@ -722,16 +716,12 @@ button {
 
 .post-like-btn-div {
   margin: 2rem 0;
-  display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  flex-direction: column;
   gap: 5px;
 }
 
 .post-like-btn {
-  display: flex;
-  align-items: center;
   gap: 5px;
   padding: 7px 10px;
 }

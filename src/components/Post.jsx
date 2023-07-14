@@ -128,10 +128,10 @@ const Post = () => {
             <p>{postContent?.text}</p>
           </div>
           <div className='edit-post-btn-div margin-top-2'>{editButtons}</div>
-          <div className='post-like-btn-div'>
+          <div className='post-like-btn-div flex-container flex-column'>
             <button
               type='button'
-              className='post-like-btn basic-button'
+              className='post-like-btn flex-container flex-align-center basic-button'
               aria-label={
                 userLike
                   ? `Unlike this post. Current number of likes: ${likeCount}`
@@ -168,7 +168,11 @@ const Post = () => {
     LoadedPage
   );
 
-  return <main className='fill-screen single-post-container'>{content}</main>;
+  return (
+    <main className='fill-screen flex-container flex-justify-center padding-2'>
+      {content}
+    </main>
+  );
 };
 
 export default Post;
