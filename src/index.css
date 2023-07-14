@@ -813,7 +813,7 @@ button {
 
 /* User & Admin Dashboard */
 .dashboard-content {
-  width: clamp(300px, 80vw, 800px);
+  width: clamp(300px, 80vw, 650px);
 }
 
 .dashboard-display-buttons {
