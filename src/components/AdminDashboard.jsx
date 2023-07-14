@@ -17,9 +17,9 @@ const AdminDashboard = () => {
 
   return (
     <main className='fill-screen flex-container flex-justify-center'>
-      <div className='dashboard-content margin-top-2'>
+      <div className='dashboard-content flex-container flex-column flex-align-center margin-top-2'>
         <h2>Admin Dashboard</h2>
-        <div className='dashboard-display-buttons margin-top-1'>
+        <div className='dashboard-display-buttons flex-container flex-justify-center margin-top-1'>
           <button
             type='button'
             aria-label='Display users'
