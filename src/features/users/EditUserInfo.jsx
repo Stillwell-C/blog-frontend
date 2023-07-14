@@ -22,8 +22,15 @@ const EditUserInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [updateUser, { isLoading, isSuccess, isError, error }] =
-    useUpdateUserMutation();
+  const [
+    updateUser,
+    {
+      isLoading: updateIsLoading,
+      isSuccess: updateIsSuccess,
+      isError: updateIsError,
+      error: updateError,
+    },
+  ] = useUpdateUserMutation();
 
   const [
     deleteUser,
@@ -64,7 +71,7 @@ const EditUserInfo = () => {
   const modalText = "delete this account";
 
   useEffect(() => {
-    if (isSuccess) return;
+    if (updateIsSuccess) return;
     usernameRef?.current.focus();
     setUsername(originalUsername);
   }, []);
@@ -84,8 +91,8 @@ const EditUserInfo = () => {
 
   useEffect(() => {
     if (!errorMsg.length) return;
-    if (isError || errorMsg.length) errRef.current.focus();
-  }, [isError, errorMsg]);
+    if (updateIsError || errorMsg.length) errRef.current.focus();
+  }, [updateIsError, errorMsg]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,7 +145,7 @@ const EditUserInfo = () => {
     }
   }, [deleteIsSuccess]);
 
-  const editButtonContent = !isLoading ? (
+  const editButtonContent = !updateIsLoading ? (
     "Edit"
   ) : (
     <BeatLoader color='#333' size={8} />
@@ -159,7 +166,7 @@ const EditUserInfo = () => {
           <div
             ref={errRef}
             className={
-              isError || errorMsg || deleteIsError || logoutIsError
+              updateIsError || errorMsg || deleteIsError || logoutIsError
                 ? "form-error-div"
                 : "error-offscreen"
             }
@@ -167,7 +174,7 @@ const EditUserInfo = () => {
           >
             {/* See if this is sufficient for message */}
             {errorMsg}
-            {error?.data?.message}
+            {updateError?.data?.message}
             {deleteError?.data?.message}
             {logoutError?.data?.message}
           </div>
