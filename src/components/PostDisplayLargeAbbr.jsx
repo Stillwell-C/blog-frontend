@@ -66,18 +66,18 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
         <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
           <button
             type='button'
-            className='basic-button delete-button flex-container flex-justify-center flex-align-center margin-r-2'
+            className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
+            onClick={() => navigate(`/posts/${post._id}/edit`)}
+          >
+            Edit Post
+          </button>
+          <button
+            type='button'
+            className='basic-button delete-button flex-container flex-justify-center flex-align-center'
             onClick={() => setModalOpen(true)}
             disabled={isLoading ? true : false}
           >
             {buttonContent}
-          </button>
-          <button
-            type='button'
-            className='basic-button flex-container flex-justify-center flex-align-center'
-            onClick={() => navigate(`/posts/${post._id}/edit`)}
-          >
-            Edit
           </button>
         </div>
         <div
