@@ -201,6 +201,9 @@ button {
 
 .header-dropdown-menu {
   display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
   background-color: var(--background-grey);
 }
 
