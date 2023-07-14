@@ -67,7 +67,7 @@ const AddComment = () => {
   }
   if (loggedIn) {
     content = (
-      <div className='add-user-comment'>
+      <div className='add-user-comment flex-container flex-column flex-align-center'>
         <div
           className={errorMsg || isError ? "form-error-div" : "error-offscreen"}
           ref={errRef}
@@ -76,7 +76,7 @@ const AddComment = () => {
           {error?.data?.message}
         </div>
         <div className='msg-div'></div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='flex-container flex-column'>
           <label htmlFor='userComment'>Add comment:</label>
           <textarea
             name='userComment'
@@ -88,7 +88,7 @@ const AddComment = () => {
             type='submit'
             disabled={isLoading ? true : false}
             aria-disabled={isLoading ? true : false}
-            className='basic-button'
+            className='basic-button flex-container flex-align-center flex-justify-center'
           >
             {buttonContent}
           </button>

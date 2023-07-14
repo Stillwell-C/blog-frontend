@@ -744,21 +744,12 @@ button {
   gap: 5px;
 }
 
-.add-user-comment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .add-user-comment > form {
-  display: flex;
-  flex-direction: column;
   gap: 5px;
 }
 
 .add-user-comment textarea {
   resize: vertical;
-  /* background-color: var(--background-grey); */
   border: 1.5px solid var(--border-color);
   border-radius: .25rem;
   font-size: 1rem;
@@ -772,9 +763,6 @@ button {
   margin-top: 10px;
   width: 80px;
   height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .add-user-comment-msg {
