@@ -197,10 +197,10 @@ const AdminSingleUser = () => {
             )}`}
           </p>
         </div>
-        <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
+        <div className='flex-container flex-align-center flex-justify-center margin-top-1 gap-2'>
           <button
             type='submit'
-            className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
+            className='basic-button flex-container flex-justify-center flex-align-center'
             disabled={deleteIsLoading || updateIsLoading ? true : false}
             style={{ minWidth: "124px" }}
           >
