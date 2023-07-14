@@ -60,10 +60,10 @@ const CommentDisplayAbbr = ({ comment }) => {
   }, [confirmDelete]);
 
   return (
-    <article className='comment-display' role='comment'>
+    <article className='comment-display padding-1' role='comment'>
       <p>{commentDisplay}</p>
       <p>{date}</p>
-      <div className='comment-button-div'>
+      <div className='comment-button-div flex-container'>
         <button
           className='basic-button'
           type='button'

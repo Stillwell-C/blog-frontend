@@ -414,7 +414,6 @@ button {
 
 /* Comment Display */
 .comment-display {
-  padding: 1rem;
   width: clamp(300px, 80vw, 500px);
   border-bottom: 1px solid var(--border-color);
 }
@@ -429,7 +428,6 @@ button {
 }
 
 .comment-button-div {
-  display: flex;
   justify-content: space-around;
 }
 
