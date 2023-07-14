@@ -82,7 +82,7 @@ const PostComments = () => {
   }
 
   return (
-    <div className='flex-container flex-column post-comments-container'>
+    <div className='flex-container flex-column post-comments-container gap-1'>
       {content}
     </div>
   );
