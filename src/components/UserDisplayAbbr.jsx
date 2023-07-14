@@ -57,7 +57,7 @@ const UserDisplayAbbr = ({ user }) => {
   }, [isError]);
 
   return (
-    <article className='post-display-wrapper post-display-abbr-wrapper'>
+    <article className='post-display-wrapper flex-container flex-column flex-justify-between post-display-abbr-wrapper padding-1'>
       <h3>Username: {user?.username}</h3>
       <p>Roles: {user?.roles?.join(", ")}</p>
       <p>

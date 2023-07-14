@@ -26,7 +26,7 @@ const PostDisplaySmall = ({ post }) => {
   }, []);
 
   return (
-    <article className='post-display-small-wrapper post-display-wrapper '>
+    <article className='post-display-small-wrapper post-display-wrapper flex-container flex-column flex-justify-between padding-1'>
       <div>
         <Link to={`/posts/${post._id}`}>
           <h4>{post.title}</h4>

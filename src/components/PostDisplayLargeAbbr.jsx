@@ -84,7 +84,7 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   }
 
   return (
-    <article className='post-display-wrapper post-display-abbr-wrapper'>
+    <article className='post-display-wrapper flex-container flex-column flex-justify-between post-display-abbr-wrapper padding-1'>
       <div>
         <Link to={`/posts/${post._id}`}>
           <h4>{post.title}</h4>

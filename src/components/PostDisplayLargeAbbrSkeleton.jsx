@@ -1,7 +1,7 @@
 const PostDisplayLargeAbbrSkeleton = () => {
   return (
-    <div className='post-display-wrapper post-display-abbr-wrapper post-display-wrapper-skeleton'>
-      <div className='post-display-wrapper-skeleton-title'>
+    <div className='post-display-wrapper flex-container flex-column flex-justify-between post-display-abbr-wrapper post-display-wrapper-skeleton padding-1'>
+      <div className='post-display-wrapper-skeleton-title flex-container flex-column flex-align-center'>
         <div className='skeleton skeleton-title-md skeleton-width-80'></div>
         <div className='skeleton skeleton-title-md skeleton-width-100'></div>
       </div>
