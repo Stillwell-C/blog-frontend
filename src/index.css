@@ -145,6 +145,14 @@ button {
   color: var(--error)
 }
 
+.padding-1 {
+  padding: 1rem;
+}
+
+.padding-2 {
+  padding: 2rem;
+}
+
 /* Page headers and footers */
 .page-header {
   position: sticky;
@@ -154,33 +162,9 @@ button {
 }
 
 .header-top-content {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--border-color);
   background-color: var(--background-grey);
-}
-
-.header-dropdown-menu {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--background-grey);
-}
-
-.header-dropdown-menu > a {
-  min-width: 100%;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.3rem;
-  text-decoration: none;
-  color: var(--text-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.header-dropdown-menu.active {
-  display: flex;
 }
 
 .header-title > a {
@@ -205,6 +189,26 @@ button {
 .header-dropdown-toggle-button > img {
   max-width: 2rem;
 }
+
+.header-dropdown-menu {
+  display: none;
+  background-color: var(--background-grey);
+}
+
+.header-dropdown-menu > a {
+  min-width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-dropdown-menu.active {
+  display: flex;
+}
+
 
 @media screen and (min-width: 850px){
   .header-buttons-container {
