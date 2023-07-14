@@ -151,7 +151,11 @@ const NewPost = () => {
             {errorMsg}
             {error?.data?.message}
           </div>
-          <div className={`form-line ${titleErr ? "error" : ""}`}>
+          <div
+            className={`form-line flex-container flex-column ${
+              titleErr ? "error" : ""
+            }`}
+          >
             <label htmlFor='title' className='form-label'>
               title:
             </label>
@@ -169,7 +173,11 @@ const NewPost = () => {
               maxLength='150'
             />
           </div>
-          <div className={`form-line ${epigraphErr ? "error" : ""}`}>
+          <div
+            className={`form-line flex-container flex-column ${
+              epigraphErr ? "error" : ""
+            }`}
+          >
             <label htmlFor='epigraph' className='form-label'>
               epigraph:
             </label>
@@ -185,7 +193,11 @@ const NewPost = () => {
               maxLength='850'
             ></textarea>
           </div>
-          <div className={`form-line ${epigraphAuthorErr ? "error" : ""}`}>
+          <div
+            className={`form-line flex-container flex-column ${
+              epigraphAuthorErr ? "error" : ""
+            }`}
+          >
             <label htmlFor='epigraphAuthor' className='form-label'>
               epigraph author:
             </label>
@@ -201,7 +213,11 @@ const NewPost = () => {
               maxLength='70'
             />
           </div>
-          <div className={`form-line ${textErr ? "error" : ""}`}>
+          <div
+            className={`form-line flex-container flex-column ${
+              textErr ? "error" : ""
+            }`}
+          >
             <label htmlFor='text' className='form-label'>
               text:
             </label>

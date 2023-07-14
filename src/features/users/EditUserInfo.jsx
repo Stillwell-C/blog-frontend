@@ -172,7 +172,9 @@ const EditUserInfo = () => {
             {logoutError?.data?.message}
           </div>
           <div
-            className={`form-line ${username && !validUsername ? "error" : ""}`}
+            className={`form-line flex-container flex-column ${
+              username && !validUsername ? "error" : ""
+            }`}
           >
             <label htmlFor='username' className='form-label'>
               username:
@@ -206,7 +208,9 @@ const EditUserInfo = () => {
             </p>
           </div>
           <div
-            className={`form-line ${password && !validPassword ? "error" : ""}`}
+            className={`form-line flex-container flex-column ${
+              password && !validPassword ? "error" : ""
+            }`}
           >
             <label htmlFor='password' className='form-label'>
               password:
@@ -236,7 +240,7 @@ const EditUserInfo = () => {
             </p>
           </div>
           <div
-            className={`form-line ${
+            className={`form-line flex-container flex-column ${
               confirmPassword && !confirmPasswordMatch ? "error" : ""
             }`}
           >

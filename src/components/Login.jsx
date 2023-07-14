@@ -87,7 +87,7 @@ const Login = () => {
               {errorMsg}
               {error?.data?.message}
             </div>
-            <div className='form-line'>
+            <div className='form-line flex-container flex-column'>
               <label htmlFor='username' className='form-label'>
                 username:
               </label>
@@ -104,7 +104,7 @@ const Login = () => {
                 ref={usernameRef}
               />
             </div>
-            <div className='form-line'>
+            <div className='form-line flex-container flex-column'>
               <label htmlFor='password' className='form-label'>
                 password:
               </label>
