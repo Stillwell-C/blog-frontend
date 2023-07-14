@@ -51,7 +51,7 @@ const PaginationButtons = ({ totalPages, currentPage, setCurrentPage }) => {
 
   return (
     <nav
-      className='post-pagination-nav margin-top-1 margin-btm-2'
+      className='post-pagination-nav flex-container margin-top-1 margin-btm-2'
       aria-label='All Posts Page Pagination Navigation'
     >
       <button

@@ -627,7 +627,6 @@ button {
 /* PAGEINATION BUTTONS */
 
 .post-pagination-nav {
-  display: flex;
   gap: 5px
 }
 
