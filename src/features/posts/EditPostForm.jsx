@@ -137,7 +137,7 @@ const EditPostForm = ({ post }) => {
   );
 
   return (
-    <section className='fill-screen flex-container flex-column flex-align-center edit-post-container'>
+    <section className='fill-screen flex-container flex-column flex-align-center edit-post-container padding-2'>
       <div className='new-post-wrapper'>
         <h2 className='margin-top-2'>Edit Post</h2>
         <form onSubmit={handleSubmit}>
@@ -232,7 +232,7 @@ const EditPostForm = ({ post }) => {
               required
             ></textarea>
           </div>
-          <div className='post-form-button-div flex-container margin-top-2 margin-btm-2'>
+          <div className='post-form-button-div flex-container margin-top-1 margin-btm-1'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button flex-container flex-align-center flex-justify-center'
