@@ -440,6 +440,7 @@ button {
 /* Comment Display */
 .comment-display {
   width: clamp(300px, 80vw, 500px);
+  padding: 1rem 2rem;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -447,20 +448,10 @@ button {
   margin-bottom: 5px;
 }
 
-.comment-display > p:last-of-type {
-  margin-bottom: 15px;
-  text-align: end;
-}
-
-.comment-button-div {
-  justify-content: space-around;
-}
-
 .comment-button-div > button {
   font-size: .8rem;
   width: 85px;
 }
-
 
 /* Skeleton classes */
 
@@ -827,7 +818,7 @@ button {
 
 .dashboard-display-buttons {
   gap: clamp(1rem, 15%, 3rem);
-  width: 80%;
+  width: 100%;
   border-bottom: 1px solid var(--border-color);
 }
 
