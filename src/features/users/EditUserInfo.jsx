@@ -277,10 +277,10 @@ const EditUserInfo = () => {
               Passwords must match.
             </p>
           </div>
-          <div className='button-div flex-container'>
+          <div className='button-div flex-container flex-justify-center gap-2 margin-top-1'>
             <button
               disabled={originalUsername === username && !password.length}
-              className='basic-button margin-r-2 flex-container flex-align-center flex-justify-center'
+              className='basic-button flex-container flex-align-center flex-justify-center'
               type='submit'
               style={{ minWidth: "65px" }}
             >
