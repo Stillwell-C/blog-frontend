@@ -50,7 +50,7 @@ const AllPosts = () => {
   }
 
   return (
-    <main className='all-posts-container fill-screen'>
+    <main className='all-posts-container fill-screen padding-2 flex-container flex-column flex-align-center'>
       <h2>All Posts</h2>
       {isFetching && skeletonPosts}
       {!isFetching &&
