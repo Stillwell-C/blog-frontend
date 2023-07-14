@@ -21,7 +21,6 @@ const Post = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // const [isLoading, setIsLoading] = useState(true);
   const [postContent, setPostContent] = useState({});
   const [parsedDate, setParsedDate] = useState("");
   const [likeCount, setLikeCount] = useState(0);
@@ -31,9 +30,9 @@ const Post = () => {
 
   const {
     data: postData,
-    isLoading,
-    isError,
-    error,
+    isLoading: postIsLoading,
+    isError: postIsError,
+    error: postError,
   } = useGetPostQuery({ postID, userID: id });
 
   const [
@@ -61,7 +60,7 @@ const Post = () => {
     setPostContent(postData);
     setLikeCount(postData?.likes);
     setUserLike(postData?.userLikesPost);
-  }, [isLoading]);
+  }, [postIsLoading]);
 
   let editButtons = null;
   if (id === postContent?.author?._id || isAdmin) {
@@ -160,9 +159,9 @@ const Post = () => {
     </>
   );
 
-  const content = isError ? (
-    <ErrorPage />
-  ) : isLoading ? (
+  const content = postIsError ? (
+    <ErrorPage message={postError?.data?.message} />
+  ) : postIsLoading ? (
     <PostSkeleton />
   ) : (
     LoadedPage
