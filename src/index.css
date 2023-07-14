@@ -65,7 +65,6 @@ button {
 
 .fill-screen {
   flex-grow: 1;
-  overflow-x: scroll;
 }
 
 .flex-container {
