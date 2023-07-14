@@ -115,7 +115,7 @@ button {
 }
 
 .main-img {
-  width: clamp(300px, 80vw, 500px);
+  width: clamp(250px, 80vw, 500px);
 }
 
 .fade-in {
@@ -303,7 +303,7 @@ button {
 
 .home-top-center-content > img {
   margin-top: 3rem;
-  width: clamp(300px, 80vw, 500px);
+  width: clamp(250px, 80vw, 500px);
 }
 
 .home-top-posts {
@@ -747,7 +747,7 @@ button {
   border-radius: .25rem;
   font-size: 1rem;
   padding: 5px 10px;
-  width: clamp(300px, 80vw, 500px);
+  width: clamp(250px, 80vw, 500px);
   min-height: 100px;
 }
 
