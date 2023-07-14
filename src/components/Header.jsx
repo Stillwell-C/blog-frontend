@@ -103,7 +103,7 @@ const Header = () => {
   }
 
   let buttonLoadingSkeleton = (
-    <div className='header-button-skeleton'>
+    <div className='header-button-skeleton flex-container flex-align-center flex-justify-center'>
       <div className='skeleton skeleton-title-sm skeleton-width-80'></div>
     </div>
   );

@@ -488,9 +488,6 @@ button {
 .header-button-skeleton {
   width: 70px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 1px solid var(--loading-grey);
   border-radius: .25rem;
   animation: content-loading 1s linear infinite alternate;
