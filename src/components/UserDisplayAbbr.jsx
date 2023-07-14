@@ -72,10 +72,10 @@ const UserDisplayAbbr = ({ user }) => {
           dateOptions
         )}`}
       </p>
-      <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
+      <div className='flex-container flex-align-center flex-justify-center margin-top-1 gap-2'>
         <button
           type='button'
-          className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
+          className='basic-button flex-container flex-justify-center flex-align-center'
           onClick={() => navigate(`/admindash/${user._id}`)}
         >
           Edit User
