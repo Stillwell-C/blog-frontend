@@ -60,7 +60,7 @@ const AdminPosts = () => {
   let errorContent;
   if (isError) {
     errorContent = (
-      <p className='margin-top-1 .err-text' ref={errRef}>
+      <p className='margin-top-1 err-text' ref={errRef}>
         An error occurred. Please refresh the page.
       </p>
     );
