@@ -220,7 +220,7 @@ const Header = () => {
           <Link to='/'>Wild Goose Chase </Link>
         </h1>
 
-        <nav className='header-buttons-container'>{displayButtons}</nav>
+        <nav className='header-buttons-container gap-10p'>{displayButtons}</nav>
         <button
           className='header-dropdown-toggle-button'
           aria-label={`${showDropdown ? "hide" : "display"} nagivation menu`}
