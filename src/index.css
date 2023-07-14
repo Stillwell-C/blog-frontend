@@ -90,6 +90,22 @@ button {
   flex-direction: column;
 }
 
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-5p {
+  gap: 5px;
+}
+
+.gap-10p {
+  gap: 10px
+}
+
 .img-color-fix {
   filter: invert(0%) sepia(0%) saturate(3616%) hue-rotate(164deg) brightness(95%) contrast(60%);
 }
