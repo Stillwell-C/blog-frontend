@@ -63,10 +63,10 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   if (adminDisplay) {
     adminButtons = (
       <div className='flex-continer flex-column flex-align-center'>
-        <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
+        <div className='flex-container flex-align-center flex-justify-center margin-top-1 gap-2'>
           <button
             type='button'
-            className='basic-button flex-container flex-justify-center flex-align-center margin-r-2'
+            className='basic-button flex-container flex-justify-center flex-align-center'
             onClick={() => navigate(`/posts/${post._id}/edit`)}
           >
             Edit Post
