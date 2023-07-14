@@ -25,8 +25,15 @@ const EditPostForm = ({ post }) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [updatePost, { isLoading, isSuccess, isError, error }] =
-    useUpdatePostMutation();
+  const [
+    updatePost,
+    {
+      isLoading: updateIsLoading,
+      isSuccess: updateIsSuccess,
+      isError: updateIsError,
+      error: updateError,
+    },
+  ] = useUpdatePostMutation();
 
   const [
     deletePost,
@@ -108,15 +115,16 @@ const EditPostForm = ({ post }) => {
   }, [confirmDelete]);
 
   useEffect(() => {
-    if (isSuccess || deleteIsSuccess) navigate("/");
-  }, [isSuccess, deleteIsSuccess]);
+    if (updateIsSuccess || deleteIsSuccess) navigate("/");
+  }, [updateIsSuccess, deleteIsSuccess]);
 
   useEffect(() => {
     if (!errorMsg.length) return;
-    if (isError || deleteIsError || errorMsg.length) errRef.current.focus();
-  }, [isError, deleteIsError, errorMsg]);
+    if (updateIsError || deleteIsError || errorMsg.length)
+      errRef.current.focus();
+  }, [updateIsError, deleteIsError, errorMsg]);
 
-  const submitButtonContent = !isLoading ? (
+  const submitButtonContent = !updateIsLoading ? (
     "Submit"
   ) : (
     <BeatLoader color='#333' size={8} />
@@ -129,18 +137,18 @@ const EditPostForm = ({ post }) => {
   );
 
   return (
-    <section className='fill-screen new-post-container flex-align-center edit-post-container'>
+    <section className='fill-screen flex-container flex-column flex-align-center edit-post-container'>
       <div className='new-post-wrapper'>
-        <h2>Edit Post</h2>
+        <h2 className='margin-top-2'>Edit Post</h2>
         <form onSubmit={handleSubmit}>
           <div
             className={
-              errorMsg || isError ? "form-error-div" : "error-offscreen"
+              errorMsg || updateIsError ? "form-error-div" : "error-offscreen"
             }
             ref={errRef}
           >
             {errorMsg}
-            {error?.data?.message}
+            {updateError?.data?.message}
             {deleteError?.data?.message}
           </div>
           <div
@@ -224,7 +232,7 @@ const EditPostForm = ({ post }) => {
               required
             ></textarea>
           </div>
-          <div className='post-form-button-div'>
+          <div className='post-form-button-div flex-container margin-top-2 margin-btm-2'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button flex-container flex-align-center flex-justify-center'
