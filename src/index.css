@@ -591,10 +591,6 @@ button {
   padding: 2rem 1rem;
 }
 
-.auth-page-content-wrapper {
-  gap: 20px;
-}
-
 .auth-page-container img {
   max-height: clamp(100px, 15vh, 150px);
 }
@@ -642,10 +638,6 @@ button {
 
 /* PAGEINATION BUTTONS */
 
-.post-pagination-nav {
-  gap: 5px
-}
-
 .posts-pagination-btn.highlighted-btn {
   background-color: var(--text-color);
   border: 1px solid var(--text-color);
@@ -658,7 +650,6 @@ button {
 
 .all-posts-container {
   justify-content: flex-start;
-  gap: 10px
 }
 
 .all-posts-container h2 {
@@ -699,10 +690,6 @@ button {
   }
 }
 
-.post-form-button-div {
-  gap: 10px
-}
-
 /* Single Post */
 
 .single-post-content {
@@ -734,11 +721,9 @@ button {
   margin: 2rem 0;
   justify-content: flex-end;
   align-items: flex-end;
-  gap: 5px;
 }
 
 .post-like-btn {
-  gap: 5px;
   padding: 7px 10px;
 }
 
@@ -754,14 +739,6 @@ button {
   margin: 2rem 0;
   text-align: center;
   font-size: 1.5rem;
-}
-
-.single-post-content-skeleton {
-  gap: 5px;
-}
-
-.add-user-comment > form {
-  gap: 5px;
 }
 
 .add-user-comment textarea {

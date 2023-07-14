@@ -232,7 +232,7 @@ const NewPost = () => {
               required
             ></textarea>
           </div>
-          <div className='post-form-button-div flex-container margin-top-1'>
+          <div className='post-form-button-div gap-10p flex-container margin-top-1'>
             <button
               disabled={!title || !text ? true : false}
               className='basic-button flex-container flex-align-center flex-justify-center'

@@ -76,7 +76,10 @@ const AddComment = () => {
           {error?.data?.message}
         </div>
         <div className='msg-div'></div>
-        <form onSubmit={handleSubmit} className='flex-container flex-column'>
+        <form
+          onSubmit={handleSubmit}
+          className='flex-container flex-column gap-5p'
+        >
           <label htmlFor='userComment'>Add comment:</label>
           <textarea
             name='userComment'

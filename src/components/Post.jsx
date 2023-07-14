@@ -127,10 +127,10 @@ const Post = () => {
             <p>{postContent?.text}</p>
           </div>
           <div className='edit-post-btn-div margin-top-2'>{editButtons}</div>
-          <div className='post-like-btn-div flex-container flex-column'>
+          <div className='post-like-btn-div gap-5p flex-container flex-column'>
             <button
               type='button'
-              className='post-like-btn flex-container flex-align-center basic-button'
+              className='post-like-btn gap-5p flex-container flex-align-center basic-button'
               aria-label={
                 userLike
                   ? `Unlike this post. Current number of likes: ${likeCount}`
