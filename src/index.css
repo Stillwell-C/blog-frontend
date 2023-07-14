@@ -741,8 +741,6 @@ button {
 }
 
 .single-post-content-skeleton {
-  display: flex;
-  flex-direction: column;
   gap: 5px;
 }
 
