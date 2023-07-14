@@ -41,7 +41,9 @@ button {
   padding: 7px 10px;
   border-radius: .25rem;
   min-height: 34px;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-button {
