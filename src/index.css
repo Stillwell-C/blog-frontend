@@ -571,30 +571,21 @@ button {
 /* Login & register pages*/
 
 .auth-page-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100%;
   padding: 2rem 1rem;
 }
 
 .auth-page-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 20px;
 }
 
 .auth-page-container img {
-  max-height: 125px;
-  height: auto;
+  max-height: clamp(100px, 30vh, 150px);
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 390px) {
   .auth-page-container img {
-    max-height: 250px;
-    height: auto;
+    max-height: clamp(150px, 40vh, 250px);
   }
 }
 
@@ -612,8 +603,6 @@ button {
 
 .auth-form-container {
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-end;
 }
 

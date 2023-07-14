@@ -70,9 +70,9 @@ const Login = () => {
   );
 
   return (
-    <main className='auth-page-container fill-screen'>
-      <div className='auth-page-content-wrapper'>
-        <section className='auth-form-container'>
+    <main className='auth-page-container fill-screen flex-container flex-align-center flex-justify-center'>
+      <div className='auth-page-content-wrapper flex-container flex-align-center flex-justify-center flex-column'>
+        <section className='auth-form-container flex-container flex-column'>
           <h2>Log In</h2>
           <form onSubmit={handleLogin}>
             <div
