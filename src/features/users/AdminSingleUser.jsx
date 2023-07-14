@@ -135,12 +135,12 @@ const AdminSingleUser = () => {
       </div>
       <form
         onSubmit={handleUpdate}
-        className='admin-user-edit-form flex-container flex-column flex-align-center'
+        className='admin-user-edit-form gap-10p flex-container flex-column flex-align-center'
       >
         <h2 className='margin-top-2'>Edit User: {userData?.username}</h2>
         <div>
           <p className='margin-btm-5p'>User Roles:</p>
-          <div className='admin-user-edit-checkboxes flex-container'>
+          <div className='admin-user-edit-checkboxes gap-10p flex-container'>
             <label
               htmlFor='user-checkbox'
               className='admin-user-edit-checkbox flex-container flex-align-center'

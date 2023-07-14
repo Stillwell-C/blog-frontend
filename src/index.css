@@ -807,12 +807,7 @@ button {
 }
 
 .admin-user-edit-form {
-  gap: 10px;
   text-align: center;
-}
-
-.admin-user-edit-checkboxes {
-  gap: 10px;
 }
 
 .admin-user-edit-checkbox {
