@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dateOptions from "../utils/DateOptions";
 import { BeatLoader } from "react-spinners";
 import { useDeletePostMutation } from "../features/posts/postsApiSlice";
@@ -9,6 +9,7 @@ import ConfirmModal from "./ConfirmModal";
 const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   const [date, setDate] = useState("");
   const errRef = useRef();
+  const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -61,15 +62,22 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   let adminButtons = null;
   if (adminDisplay) {
     adminButtons = (
-      <>
+      <div className='flex-continer flex-column flex-align-center'>
         <div className='flex-container flex-align-center flex-justify-center margin-top-1'>
           <button
             type='button'
-            className='basic-button delete-button flex-container flex-justify-center flex-align-center'
+            className='basic-button delete-button flex-container flex-justify-center flex-align-center margin-r-2'
             onClick={() => setModalOpen(true)}
             disabled={isLoading ? true : false}
           >
             {buttonContent}
+          </button>
+          <button
+            type='button'
+            className='basic-button flex-container flex-justify-center flex-align-center'
+            onClick={() => navigate(`/posts/${post._id}/edit`)}
+          >
+            Edit
           </button>
         </div>
         <div
@@ -77,9 +85,9 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
           ref={errRef}
           aria-live='assertive'
         >
-          {error}
+          {error?.data?.message}
         </div>
-      </>
+      </div>
     );
   }
 
