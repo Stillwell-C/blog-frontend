@@ -65,7 +65,7 @@ const ConfirmModal = ({
               &#10005;
             </button>
           </header>
-          <section className='modal-body fill-screen flex-container flex-column flex-align-center flex-justify-center'>
+          <section className='padding-1 fill-screen flex-container flex-column flex-align-center flex-justify-center'>
             <p className='margin-btm-2'>Are you sure you want to {text}?</p>
             {adminConfirm && (
               <div className='admin-confirm-container margin-btm-1'>

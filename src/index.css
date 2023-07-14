@@ -874,9 +874,6 @@ button {
   font-size: 1.5rem;
 }
 
-.modal-body {
-  padding: 1rem;
-}
 
 .modal-overlay {
   position: fixed;
