@@ -84,10 +84,10 @@ const ConfirmModal = ({
                 </div>
               </div>
             )}
-            <div className='modal-buttons flex-container flex-align-center flex-justify-center'>
+            <div className='modal-buttons flex-container flex-align-center flex-justify-center gap-1'>
               <button
                 type='button'
-                className='basic-button delete-button margin-r-1'
+                className='basic-button delete-button'
                 onClick={() => setModalOpen(false)}
                 id='modal-close'
               >
