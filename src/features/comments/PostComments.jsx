@@ -32,17 +32,6 @@ const PostComments = () => {
     return () => (runEffect.current = true);
   }, [data]);
 
-  useEffect(() => console.log(commentData), [commentData]);
-
-  useEffect(() => {
-    console.log(error);
-  }, [isError]);
-
-  // const renderedComments = commentData.map((comment) => (
-  //   <PostComment comment={comment} key={comment._id} />
-  // ));
-  // const loadingMsg = <p>Comments loading...</p>;
-
   let buttonContent = isFetching ? (
     <BeatLoader color='#333' size={8} />
   ) : (
