@@ -2,8 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { useSelector } from "react-redux";
-import { selectCredentialsLoading } from "../features/auth/authSlice";
 import menuImg from "../assets/menu-svgrepo-com.svg";
 
 const Header = () => {
@@ -13,8 +11,6 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { loggedIn, isAdmin, isContributor } = useAuth();
-
-  const authLoading = useSelector(selectCredentialsLoading);
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
@@ -96,19 +92,6 @@ const Header = () => {
     );
   }
 
-  let buttonLoadingSkeleton = (
-    <div className='header-button-skeleton flex-container flex-align-center flex-justify-center'>
-      <div className='skeleton skeleton-title-sm skeleton-width-80'></div>
-    </div>
-  );
-
-  const skeletonButtons = (
-    <>
-      {buttonLoadingSkeleton}
-      {buttonLoadingSkeleton}
-    </>
-  );
-
   const headerButtons = !loggedIn ? (
     <>
       {loginButton}
@@ -122,8 +105,6 @@ const Header = () => {
       {logoutButton}
     </>
   );
-
-  const displayButtons = authLoading ? skeletonButtons : headerButtons;
 
   const handleLogoutLink = () => {
     setShowDropdown(false);
@@ -210,7 +191,7 @@ const Header = () => {
           <Link to='/'>Wild Goose Chase </Link>
         </h1>
 
-        <nav className='header-buttons-container gap-10p'>{displayButtons}</nav>
+        <nav className='header-buttons-container gap-10p'>{headerButtons}</nav>
         <button
           className='header-dropdown-toggle-button'
           aria-label={`${showDropdown ? "hide" : "display"} nagivation menu`}
