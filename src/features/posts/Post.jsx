@@ -86,21 +86,13 @@ const Post = () => {
       return;
     }
     if (!userLike) {
-      try {
-        await updatePostLike({ postID, userID: id, increment: 1 });
-        setUserLike(true);
-        setLikeCount((prev) => prev + 1);
-      } catch (err) {
-        console.log(err);
-      }
+      updatePostLike({ postID, userID: id, increment: 1 });
+      setUserLike(true);
+      setLikeCount((prev) => prev + 1);
     } else {
-      try {
-        await updatePostLike({ postID, userID: id, increment: -1 });
-        setUserLike(false);
-        setLikeCount((prev) => prev - 1);
-      } catch (err) {
-        console.log(err);
-      }
+      updatePostLike({ postID, userID: id, increment: -1 });
+      setUserLike(false);
+      setLikeCount((prev) => prev - 1);
     }
   };
 
