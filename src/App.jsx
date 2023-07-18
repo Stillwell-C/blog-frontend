@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import NewPost from "./components/NewPost";
 import Post from "./components/Post";
-import AllPosts from "./components/AllPosts";
+import AllPosts from "./features/posts/AllPosts";
 import EditPost from "./features/posts/EditPost";
 import PersistentLogin from "./features/auth/PersistentLogin";
 import UserDashboard from "./components/UserDashboard";

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import PostDisplayLarge from "./PostDisplayLarge";
-import PostDisplayLargeSkeleton from "./PostDisplayLargeSkeleton";
-import PaginationButtons from "./PaginationButtons";
-import { useGetMultiplePostsQuery } from "../features/posts/postsApiSlice";
-import ErrorPage from "./ErrorPage";
+import PostDisplayLarge from "../../components/PostDisplayLarge";
+import PostDisplayLargeSkeleton from "../../components/PostDisplayLargeSkeleton";
+import PaginationButtons from "../../components/PaginationButtons";
+import { useGetMultiplePostsQuery } from "./postsApiSlice";
+import ErrorPage from "../../components/ErrorPage";
 
 const AllPosts = () => {
   // const [isLoading, setIsLoading] = useState(true);
