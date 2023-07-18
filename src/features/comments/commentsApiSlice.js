@@ -1,22 +1,22 @@
-import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
-
-const commentsAdapter = createEntityAdapter({});
-
-const initialState = commentsAdapter.getInitialState();
 
 export const commentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getComment: builder.query({
       query: (commentId) => `/comments/${commentId}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
       providesTags: (result, error, arg) => {
-        //Not sure if this is preferable to just returning "Comment"
         if (result) return [{ type: "Comment", id: result._id }];
         else return ["Comment"];
       },
     }),
     getComments: builder.query({
       query: ({ page, limit }) => `/comments?page=${page}&limit=${limit}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
       providesTags: (result, error, arg) => {
         if (result?.comments?.length) {
           return [
@@ -36,6 +36,9 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
           ...commentData,
         },
       }),
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
       invalidatesTags: (result, error, arg) => [
         { type: "Comment", id: arg._id },
       ],
@@ -48,6 +51,9 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
           ...commentData,
         },
       }),
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
       invalidatesTags: (result, error, arg) => [
         { type: "Comment", id: arg._id },
       ],
@@ -60,6 +66,9 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
           id,
         },
       }),
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
       invalidatesTags: (result, error, arg) => [
         { type: "Comment", id: arg._id },
       ],
