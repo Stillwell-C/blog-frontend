@@ -30,15 +30,11 @@ const AddComment = () => {
       return;
     }
     const trimmedCommentBody = commentBody.trim();
-    try {
-      addNewComment({
-        author: id,
-        parentPostId: postID,
-        commentBody: trimmedCommentBody,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    addNewComment({
+      author: id,
+      parentPostId: postID,
+      commentBody: trimmedCommentBody,
+    });
   };
 
   useEffect(() => {
