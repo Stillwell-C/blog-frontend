@@ -66,7 +66,6 @@ const PostComments = () => {
       <ScaleLoader className='post-comments-loader' color='#333' height={45} />
     );
   } else if (isError) {
-    console.log(error);
     content = <p>An error has occurred. Refresh page to see comments.</p>;
   }
 
