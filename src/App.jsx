@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import Login from "./features/auth/Login";
 import NotFound from "./components/NotFound";
 import NewPost from "./features/posts/NewPost";
-import Post from "./components/Post";
+import Post from "./features/posts/Post";
 import AllPosts from "./features/posts/AllPosts";
 import EditPost from "./features/posts/EditPost";
 import PersistentLogin from "./features/auth/PersistentLogin";

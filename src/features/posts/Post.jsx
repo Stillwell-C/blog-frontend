@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import PostSkeleton from "./PostSkeleton";
-import dateOptions from "../utils/DateOptions";
-import outlinedHeart from "../assets/heart-outline.svg";
-import filledHeart from "../assets/heart-filled.svg";
-import {
-  useGetPostQuery,
-  useUpdatePostLikeMutation,
-} from "../features/posts/postsApiSlice";
-import ErrorPage from "./ErrorPage";
-import useAuth from "../hooks/useAuth";
-import AddComment from "../features/comments/AddComment";
-import PostComments from "../features/comments/PostComments";
+import PostSkeleton from "../../components/PostSkeleton";
+import dateOptions from "../../utils/DateOptions";
+import outlinedHeart from "../../assets/heart-outline.svg";
+import filledHeart from "../../assets/heart-filled.svg";
+import { useGetPostQuery, useUpdatePostLikeMutation } from "./postsApiSlice";
+import ErrorPage from "../../components/ErrorPage";
+import useAuth from "../../hooks/useAuth";
+import AddComment from "../comments/AddComment";
+import PostComments from "../comments/PostComments";
 
 const Post = () => {
   const { postID } = useParams();
