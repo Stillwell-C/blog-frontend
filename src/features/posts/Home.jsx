@@ -23,7 +23,6 @@ const Home = () => {
     top: true,
   });
 
-  // const [isLoading, setIsLoading] = useState(true);
   const [topPosts, setTopPosts] = useState([]);
   const [posts, setPosts] = useState([]);
 
@@ -32,22 +31,7 @@ const Home = () => {
       setTopPosts(postData?.top);
       setPosts(postData?.posts);
     }
-    console.log("post data: ", postData);
   }, [isLoading]);
-
-  // useEffect(() => {
-  //   setTopPosts(
-  //     postData?.ids
-  //       ?.filter((id) => postData.entities[id].top === true)
-  //       .map((id) => postData.entities[id])
-  //   );
-  //   setPosts(
-  //     postData?.ids
-  //       ?.filter((id) => postData.entities[id].top !== true)
-  //       .map((id) => postData.entities[id])
-  //   );
-  //   console.log("post data: ", postData);
-  // }, [isLoading]);
 
   const content = (
     <main className='fill-screen'>
