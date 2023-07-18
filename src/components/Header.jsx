@@ -114,7 +114,7 @@ const Header = () => {
   let homeLink = null;
   if (!pathname.match(/^\/$/i)) {
     homeLink = (
-      <Link onClick={() => showDropdown(false)} to='/'>
+      <Link onClick={() => setShowDropdown(false)} to='/'>
         Home
       </Link>
     );
@@ -123,19 +123,19 @@ const Header = () => {
   let allPostsLink = null;
   if (!pathname.match(/^\/posts$/i)) {
     allPostsLink = (
-      <Link onClick={() => showDropdown(false)} to='/posts'>
+      <Link onClick={() => setShowDropdown(false)} to='/posts'>
         All Posts
       </Link>
     );
   }
 
   const loginLink = (
-    <Link onClick={() => showDropdown(false)} to='/login'>
+    <Link onClick={() => setShowDropdown(false)} to='/login'>
       Log in
     </Link>
   );
   const newUserLink = (
-    <Link onClick={() => showDropdown(false)} to='/register'>
+    <Link onClick={() => setShowDropdown(false)} to='/register'>
       Sign up
     </Link>
   );
@@ -145,14 +145,14 @@ const Header = () => {
     </Link>
   );
   const myPageLink = (
-    <Link onClick={() => showDropdown(false)} to='mypage'>
+    <Link onClick={() => setShowDropdown(false)} to='mypage'>
       My page
     </Link>
   );
   let adminDashLink = null;
   if (isAdmin) {
     adminDashLink = (
-      <Link onClick={() => showDropdown(false)} to='/admindash'>
+      <Link onClick={() => setShowDropdown(false)} to='/admindash'>
         Admin dashboard
       </Link>
     );
@@ -160,7 +160,7 @@ const Header = () => {
   let newPostLink = null;
   if (isContributor) {
     newPostLink = (
-      <Link onClick={() => showDropdown(false)} to='posts/new'>
+      <Link onClick={() => setShowDropdown(false)} to='posts/new'>
         New post
       </Link>
     );
