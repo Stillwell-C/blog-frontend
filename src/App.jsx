@@ -48,8 +48,6 @@ function App() {
           </Route>
         </Route>
 
-        <Route path='/users'></Route>
-
         <Route element={<RequireLogin />}>
           <Route path='/mypage'>
             <Route index element={<UserDashboard />} />
