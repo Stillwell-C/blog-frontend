@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
-import usePersistLogin from "../../hooks/usePersistLogin";
 import { BeatLoader } from "react-spinners";
 
 const Login = () => {
@@ -18,7 +17,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  // const [persistLogin, setPersistLogin] = usePersistLogin();
 
   const [login, { isLoading, error, isSuccess, isError }] = useLoginMutation();
 
@@ -32,20 +30,6 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // setPersistLogin(true);
-    // try {
-    //   const { accessToken } = await login({ username, password }).unwrap;
-    //   dispatch(setCredentials({ accessToken }));
-    //   setUsername("");
-    //   setPassword("");
-    //   navigate("/");
-    // } catch (err) {
-    //   if (!err.status) {
-    //     setErrorMsg("No Server Response");
-    //   } else {
-    //     setErrorMsg(err?.data?.message);
-    //   }
-    // }
     const response = await login({ username, password });
     dispatch(setCredentials({ accessToken: response.data.accessToken }));
   };
