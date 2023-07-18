@@ -87,39 +87,6 @@ const NewPost = () => {
       text: trimmedText,
       author: id,
     });
-
-    // try {
-    //   const response = await axios.post(
-    //     ADD_POST_URL,
-    //     JSON.stringify({
-    //       title: trimmedTitle,
-    //       epigraph: trimmedEpigraph,
-    //       epigraphAuthor: trimmedEpigraphAuthor,
-    //       text: trimmedText,
-    //       author,
-    //     }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   //Potentially remove once author is automatically input
-    //   if (!response.data.isError) {
-    //     navigate("/");
-    //   } else {
-    //     setErrorMsg(response.data.message);
-    //   }
-    // } catch (err) {
-    //   console.log(err.response.status);
-    //   if (!err.response) {
-    //     setErrorMsg("No server reponse");
-    //   } else if (err.response.status === 400) {
-    //     setErrorMsg(err.response.message);
-    //   } else {
-    //     setErrorMsg("Add post failed");
-    //   }
-    //   errRef.current.focus();
-    // }
   };
 
   useEffect(() => {
