@@ -12,20 +12,14 @@ const Header = () => {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // const [authLoading, setAuthLoading] = useState(true);
   const { loggedIn, isAdmin, isContributor } = useAuth();
 
   const authLoading = useSelector(selectCredentialsLoading);
-
-  // useEffect(() => {
-  //   setAuthLoading(false);
-  // }, [loggedIn]);
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
 
   useEffect(() => {
-    //Not sure if this will help or hurt
     if (isSuccess) window.location.reload();
   }, [isSuccess]);
 
@@ -208,10 +202,6 @@ const Header = () => {
       {logoutLink}
     </>
   );
-
-  useEffect(() => {
-    console.log("show drop: ", showDropdown);
-  }, [showDropdown]);
 
   return (
     <header className='page-header'>
