@@ -5,7 +5,6 @@ const usePersistLogin = () => {
     JSON.parse(localStorage.getItem("persistLogin")) || false
   );
   useEffect(() => {
-    console.log("persist called", persistLogin);
     localStorage.setItem("persistLogin", JSON.stringify(persistLogin));
   }, [persistLogin]);
   return [persistLogin, setPersistLogin];
