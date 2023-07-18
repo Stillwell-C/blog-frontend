@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import PaginationButtons from "../../components/PaginationButtons";
 import { useGetMultiplePostsQuery } from "./postsApiSlice";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
-import PostDisplayLargeAbbr from "../../components/PostDisplayLargeAbbr";
+import PostDisplayLargeAbbr from "./PostDisplayLargeAbbr";
 
 const AdminPosts = () => {
   const [posts, setPosts] = useState([]);

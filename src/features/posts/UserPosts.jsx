@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useGetUserPostsQuery } from "../users/usersApiSlice";
-import PostDisplayLargeAbbr from "../../components/PostDisplayLargeAbbr";
+import PostDisplayLargeAbbr from "./PostDisplayLargeAbbr";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 import PaginationButtons from "../../components/PaginationButtons";
 import ErrorPage from "../../components/ErrorPage";

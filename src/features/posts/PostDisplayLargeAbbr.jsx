@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import dateOptions from "../utils/DateOptions";
+import dateOptions from "../../utils/DateOptions";
 import { BeatLoader } from "react-spinners";
-import { useDeletePostMutation } from "../features/posts/postsApiSlice";
-import useAuth from "../hooks/useAuth";
-import ConfirmModal from "./ConfirmModal";
+import { useDeletePostMutation } from "./postsApiSlice";
+import useAuth from "../../hooks/useAuth";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
   const [date, setDate] = useState("");
