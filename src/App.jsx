@@ -12,7 +12,6 @@ import PersistentLogin from "./features/auth/PersistentLogin";
 import UserDashboard from "./components/UserDashboard";
 import RequireLogin from "./features/auth/RequireLogin";
 import RequireRole from "./features/auth/RequireRole";
-import UserPosts from "./features/posts/UserPosts";
 import AdminDashboard from "./components/AdminDashboard";
 import EditUserInfo from "./features/users/EditUserInfo";
 import AdminSingleUser from "./features/users/AdminSingleUser";
