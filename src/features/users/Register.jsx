@@ -66,28 +66,6 @@ const Register = () => {
       return;
     }
     await addNewUser({ username, password });
-
-    // try {
-    //   const response = await axios.post(
-    //     REGISTER_URL,
-    //     JSON.stringify({ username, password }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (err) {
-    //   console.log(err.response.status);
-    //   if (!err.response) {
-    //     setErrorMsg("No server reponse");
-    //   } else if (err.response.status === 409) {
-    //     setErrorMsg("Username taken");
-    //   } else {
-    //     setErrorMsg("Registration failed");
-    //   }
-    //   errRef.current.focus();
-    // }
   };
 
   useEffect(() => {
@@ -134,7 +112,6 @@ const Register = () => {
             }
             aria-live='assertive'
           >
-            {/* See if this is sufficient for message */}
             {errorMsg}
             {error?.data?.message}
           </div>
