@@ -2,9 +2,12 @@ import { useState } from "react";
 import AdminPosts from "../features/posts/AdminPosts";
 import AdminComments from "../features/comments/AdminComments";
 import AdminUsers from "../features/users/AdminUsers";
+import usePageTitle from "../hooks/usePageTitle";
 
 const AdminDashboard = () => {
   const [displayContent, setDisplayContent] = useState("users");
+
+  usePageTitle("Admin Dashboard");
 
   let content;
   if (displayContent === "users") {
