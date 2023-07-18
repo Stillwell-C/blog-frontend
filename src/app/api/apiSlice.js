@@ -26,8 +26,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   //JWT middleware has detected expired token
   //Additional error codes can also be handled potentially
   if (result?.error?.status === 403) {
-    console.log("sending refresh token");
-
     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
 
     if (refreshResult?.data) {
