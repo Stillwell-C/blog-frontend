@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./features/posts/Home";
 import Register from "./features/users/Register";
@@ -62,7 +62,8 @@ function App() {
             </Route>
           </Route>
 
-          <Route path='*' element={<NotFound />} />
+          <Route path='/404' element={<NotFound />} />
+          <Route path='*' element={<Navigate to='/404' />} />
         </Route>
       </Route>
     </Routes>
