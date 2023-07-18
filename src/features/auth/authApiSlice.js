@@ -17,7 +17,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
       //Optimistic update
-      //Only logout if query to server is fulfilled
+      //Will take effect before server success response
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
