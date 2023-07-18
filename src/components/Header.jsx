@@ -20,7 +20,7 @@ const Header = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isError) console.log("logout error: ", error?.data?.message);
+    if (isError) window.location.reload();
   }, [isError]);
 
   let loginButton = (
