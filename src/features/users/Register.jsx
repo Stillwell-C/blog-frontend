@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import spoonbill from "../assets/spoonbill.svg";
+import spoonbill from "../../assets/spoonbill.svg";
 import { Link } from "react-router-dom";
-import { useAddNewUserMutation } from "../features/users/usersApiSlice";
+import { useAddNewUserMutation } from "./usersApiSlice";
 import { BeatLoader } from "react-spinners";
 
 //Begin with upper/lower case letter and contain 3-23 more characters

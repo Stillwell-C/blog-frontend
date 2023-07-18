@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./features/posts/Home";
-import Register from "./components/Register";
+import Register from "./features/users/Register";
 import Login from "./features/auth/Login";
 import NotFound from "./components/NotFound";
 import NewPost from "./features/posts/NewPost";
