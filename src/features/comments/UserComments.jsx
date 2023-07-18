@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useGetUserCommentsQuery } from "../users/usersApiSlice";
-import CommentDisplayAbbr from "../../components/CommentDisplayAbbr";
+import CommentDisplayAbbr from "./CommentDisplayAbbr";
 import PaginationButtons from "../../components/PaginationButtons";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import CommentDisplayAbbr from "../../components/CommentDisplayAbbr";
+import CommentDisplayAbbr from "./CommentDisplayAbbr";
 import PaginationButtons from "../../components/PaginationButtons";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 import { useGetCommentsQuery } from "./commentsApiSlice";

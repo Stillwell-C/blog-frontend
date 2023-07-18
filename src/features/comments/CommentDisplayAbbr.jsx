@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import dateOptions from "../utils/DateOptions";
+import dateOptions from "../../utils/DateOptions";
 import { useNavigate } from "react-router-dom";
-import { useDeleteCommentMutation } from "../features/comments/commentsApiSlice";
+import { useDeleteCommentMutation } from "./commentsApiSlice";
 import { BeatLoader } from "react-spinners";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const CommentDisplayAbbr = ({ comment }) => {
   const navigate = useNavigate();
