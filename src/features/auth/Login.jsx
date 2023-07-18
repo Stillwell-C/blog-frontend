@@ -6,9 +6,11 @@ import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 import { BeatLoader } from "react-spinners";
 import usePageTitle from "../../hooks/usePageTitle";
+import usePersistLogin from "../../hooks/usePersistLogin";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [persistLogin, setPersistLogin] = usePersistLogin();
 
   usePageTitle("Login");
 
@@ -33,6 +35,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setPersistLogin(true);
     const response = await login({ username, password });
     dispatch(setCredentials({ accessToken: response.data.accessToken }));
   };
