@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import useAuth from "../hooks/useAuth";
-import { useDeleteUserMutation } from "../features/users/usersApiSlice";
-import dateOptions from "../utils/DateOptions";
+import useAuth from "../../hooks/useAuth";
+import { useDeleteUserMutation } from "./usersApiSlice";
+import dateOptions from "../../utils/DateOptions";
 import { useNavigate } from "react-router-dom";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const UserDisplayAbbr = ({ user }) => {
   const errRef = useRef();

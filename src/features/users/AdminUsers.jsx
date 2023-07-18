@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import PaginationButtons from "../../components/PaginationButtons";
 import PostDisplayLargeAbbrSkeleton from "../../components/PostDisplayLargeAbbrSkeleton";
 import { useGetAllUsersQuery } from "./usersApiSlice";
-import UserDisplayAbbr from "../../components/UserDisplayAbbr";
+import UserDisplayAbbr from "./UserDisplayAbbr";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
