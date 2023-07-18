@@ -34,9 +34,9 @@ const CommentDisplayAbbr = ({ comment }) => {
     parseDate(comment.createdAt, comment.updatedAt);
   }, []);
 
-  useEffect(() => {
-    if (isError) console.log(error);
-  }, [isError]);
+  // useEffect(() => {
+  //   if (isError) console.log(error);
+  // }, [isError]);
 
   const commentDisplay =
     comment.commentBody.length > 200
