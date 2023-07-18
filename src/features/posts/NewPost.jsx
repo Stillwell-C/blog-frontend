@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddNewPostMutation } from "../features/posts/postsApiSlice";
-import useAuth from "../hooks/useAuth";
+import { useAddNewPostMutation } from "./postsApiSlice";
+import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 
 const NewPost = () => {

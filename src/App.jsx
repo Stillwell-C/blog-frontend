@@ -4,7 +4,7 @@ import Home from "./features/posts/Home";
 import Register from "./components/Register";
 import Login from "./features/auth/Login";
 import NotFound from "./components/NotFound";
-import NewPost from "./components/NewPost";
+import NewPost from "./features/posts/NewPost";
 import Post from "./components/Post";
 import AllPosts from "./features/posts/AllPosts";
 import EditPost from "./features/posts/EditPost";
