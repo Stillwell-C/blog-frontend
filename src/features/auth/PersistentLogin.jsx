@@ -20,12 +20,10 @@ const PersistentLogin = () => {
     useRefreshMutation();
 
   useEffect(() => {
-    console.log(isUninitialized);
     //To handle things being run twice in strict mode
     if (runEffect.current === true || process.env.NODE_ENV !== "development") {
       //get new access token with valid refresh token
       const verifyRefreshToken = async () => {
-        console.log("verifying refresh token");
         try {
           dispatch(setCredentialsLoading(true));
           await refresh();
@@ -33,7 +31,6 @@ const PersistentLogin = () => {
           setLoginSuccess(true);
           dispatch(setCredentialsLoading(false));
         } catch (err) {
-          console.log(err);
           dispatch(setCredentialsLoading(false));
         }
       };
