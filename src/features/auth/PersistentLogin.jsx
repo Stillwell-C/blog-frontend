@@ -5,9 +5,10 @@ import usePersistLogin from "../../hooks/usePersistLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentToken, setCredentialsLoading } from "./authSlice";
 import ErrorPage from "../../components/ErrorPage";
+import LoadingFullPage from "../../components/LoadingFullPage";
 
 const PersistentLogin = () => {
-  // const [persist, setPersist] = usePersistLogin();
+  const [persistLogin, setPersistLogin] = usePersistLogin();
   const token = useSelector(selectCurrentToken);
   const runEffect = useRef(false);
 
@@ -19,6 +20,7 @@ const PersistentLogin = () => {
     useRefreshMutation();
 
   useEffect(() => {
+    console.log(isUninitialized);
     //To handle things being run twice in strict mode
     if (runEffect.current === true || process.env.NODE_ENV !== "development") {
       //get new access token with valid refresh token
@@ -36,33 +38,27 @@ const PersistentLogin = () => {
         }
       };
 
-      if (!token && persist) verifyRefreshToken();
+      if (!token && persistLogin) verifyRefreshToken();
     }
 
     //Ref will hold value after unmount & remount
     return () => (runEffect.current = true);
   }, []);
 
-  //Save login: true to local
-  //If error -> set this to false ?
-
   let content;
-  if (
-    !persist ||
+  if (persistLogin && isLoading) {
+    //Displaying outlet will kick out of protected routes
+    //So loading pages is displayed.
+    content = <LoadingFullPage />;
+  } else if (
+    !persistLogin ||
     (isSuccess && loginSuccess) ||
-    (token && isUninitialized) ||
-    isLoading
+    (token && isUninitialized)
   ) {
     content = <Outlet />;
-  }
-  // else if (isLoading) {
-  //   //persist: yes, token: no
-  //   console.log("loading");
-  //   content = <Outlet />;
-  // }
-  else if (isError) {
-    //persist: yes, token: no
-    setPersist(false);
+  } else if (isError) {
+    //persist login, but token not found
+    setPersistLogin(false);
     content = (
       <ErrorPage message={<Link to='/login'>Please login again</Link>} />
     );
