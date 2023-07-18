@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import birdImg from "../assets/stork.svg";
+import birdImg from "../../assets/stork.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../features/auth/authSlice";
-import { useLoginMutation } from "../features/auth/authApiSlice";
-import usePersistLogin from "../hooks/usePersistLogin";
+import { setCredentials } from "./authSlice";
+import { useLoginMutation } from "./authApiSlice";
+import usePersistLogin from "../../hooks/usePersistLogin";
 import { BeatLoader } from "react-spinners";
 
 const Login = () => {

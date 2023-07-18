@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./features/posts/Home";
 import Register from "./components/Register";
-import Login from "./components/Login";
+import Login from "./features/auth/Login";
 import NotFound from "./components/NotFound";
 import NewPost from "./components/NewPost";
 import Post from "./components/Post";
