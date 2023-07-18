@@ -5,9 +5,12 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 import { BeatLoader } from "react-spinners";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  usePageTitle("Login");
 
   const usernameRef = useRef();
   const errRef = useRef();

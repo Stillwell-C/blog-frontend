@@ -4,8 +4,11 @@ import PostDisplayLargeSkeleton from "../../components/PostDisplayLargeSkeleton"
 import PaginationButtons from "../../components/PaginationButtons";
 import { useGetMultiplePostsQuery } from "./postsApiSlice";
 import ErrorPage from "../../components/ErrorPage";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const AllPosts = () => {
+  usePageTitle("All Posts");
+
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();

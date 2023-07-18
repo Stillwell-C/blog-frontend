@@ -9,6 +9,7 @@ import ErrorPage from "../../components/ErrorPage";
 import useAuth from "../../hooks/useAuth";
 import AddComment from "../comments/AddComment";
 import PostComments from "../comments/PostComments";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const Post = () => {
   const { postID } = useParams();
@@ -22,6 +23,9 @@ const Post = () => {
   const [parsedDate, setParsedDate] = useState("");
   const [likeCount, setLikeCount] = useState(0);
   const [userLike, setUserLike] = useState(false);
+  const [postTitle, setPostTitle] = useState();
+
+  usePageTitle(postTitle || "Wild Goose Chase");
 
   const { id, isAdmin, loggedIn } = useAuth();
 
@@ -57,6 +61,7 @@ const Post = () => {
     setPostContent(postData);
     setLikeCount(postData?.likes);
     setUserLike(postData?.userLikesPost);
+    setPostTitle(postData?.title);
   }, [postIsLoading]);
 
   let editButtons = null;

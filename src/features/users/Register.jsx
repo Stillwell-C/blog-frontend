@@ -3,6 +3,7 @@ import spoonbill from "../../assets/spoonbill.svg";
 import { Link } from "react-router-dom";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { BeatLoader } from "react-spinners";
+import usePageTitle from "../../hooks/usePageTitle";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -12,6 +13,8 @@ const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/;
 const Register = () => {
   const usernameRef = useRef();
   const errRef = useRef();
+
+  usePageTitle("Sign Up");
 
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
     useAddNewUserMutation();

@@ -3,9 +3,12 @@ import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import UserComments from "../features/comments/UserComments";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../hooks/usePageTitle";
 
 const UserDashboard = () => {
   const { username, roles } = useAuth();
+
+  usePageTitle("My Page");
 
   const navigate = useNavigate();
 

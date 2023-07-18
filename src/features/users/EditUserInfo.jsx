@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSendLogoutMutation } from "../auth/authApiSlice";
 import { BeatLoader } from "react-spinners";
 import ConfirmModal from "../../components/ConfirmModal";
+import usePageTitle from "../../hooks/usePageTitle";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -16,6 +17,8 @@ const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/;
 const EditUserInfo = () => {
   const usernameRef = useRef();
   const errRef = useRef();
+
+  usePageTitle("Edit My Account");
 
   const { username: originalUsername, id } = useAuth();
 

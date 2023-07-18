@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useAddNewPostMutation } from "./postsApiSlice";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const NewPost = () => {
   const { id } = useAuth();
 
   const navigate = useNavigate();
+
+  usePageTitle("New Post");
 
   const titleRef = useRef();
   const errRef = useRef();

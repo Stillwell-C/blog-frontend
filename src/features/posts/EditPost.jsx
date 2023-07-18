@@ -4,9 +4,12 @@ import EditPostForm from "./EditPostForm";
 import { useGetPostQuery } from "./postsApiSlice";
 import { Navigate, useParams } from "react-router-dom";
 import LoadingPage from "../../components/LoadingPage";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const EditPost = () => {
   const { postID } = useParams();
+
+  usePageTitle("Edit Post");
 
   const { data: postData, isLoading, isError } = useGetPostQuery({ postID });
 

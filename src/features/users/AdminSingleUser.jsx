@@ -10,11 +10,14 @@ import dateOptions from "../../utils/DateOptions";
 import { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import ConfirmModal from "../../components/ConfirmModal";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const AdminSingleUser = () => {
   const { userID } = useParams();
   const errRef = useRef();
   const navigate = useNavigate();
+
+  usePageTitle("Edit User Account");
 
   const [userCheckbox, setUserCheckbox] = useState(false);
   const [contributorCheckbox, setContributorCheckbox] = useState(false);
