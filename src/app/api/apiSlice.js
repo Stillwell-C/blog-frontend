@@ -19,7 +19,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   //Args - should give request url including any queries
   //Api - api methods such as dispatch, getState etc
-  //extra - any custom options
+  //extra - any custom options 1
 
   let result = await baseQuery(args, api, extraOptions);
 
