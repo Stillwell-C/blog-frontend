@@ -17,6 +17,7 @@ const Home = () => {
     data: postData,
     isLoading,
     isError,
+    error,
   } = useGetMultiplePostsQuery({
     page: 1,
     limit: 12,
@@ -73,7 +74,7 @@ const Home = () => {
     </main>
   );
 
-  return isError ? <ErrorPage /> : content;
+  return isError ? <ErrorPage message={error?.data?.message} /> : content;
 };
 
 export default Home;

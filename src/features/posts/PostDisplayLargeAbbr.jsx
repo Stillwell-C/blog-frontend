@@ -18,8 +18,7 @@ const PostDisplayLargeAbbr = ({ post, adminDisplay = false }) => {
 
   const { isAdmin } = useAuth();
 
-  const [deletePost, { isLoading, isSuccess, isError, error }] =
-    useDeletePostMutation();
+  const [deletePost, { isLoading, isError, error }] = useDeletePostMutation();
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {

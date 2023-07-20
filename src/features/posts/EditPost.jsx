@@ -5,13 +5,19 @@ import { useGetPostQuery } from "./postsApiSlice";
 import { Navigate, useParams } from "react-router-dom";
 import LoadingPage from "../../components/LoadingPage";
 import usePageTitle from "../../hooks/usePageTitle";
+import ErrorPage from "../../components/ErrorPage";
 
 const EditPost = () => {
   const { postID } = useParams();
 
   usePageTitle("Edit Post");
 
-  const { data: postData, isLoading, isError } = useGetPostQuery({ postID });
+  const {
+    data: postData,
+    isLoading,
+    isError,
+    error,
+  } = useGetPostQuery({ postID });
 
   const { id, isAdmin } = useAuth();
 
@@ -25,6 +31,8 @@ const EditPost = () => {
 
   const content = isLoading ? (
     <LoadingPage />
+  ) : isError ? (
+    <ErrorPage message={error?.data?.message} />
   ) : (
     <EditPostForm post={postData} />
   );

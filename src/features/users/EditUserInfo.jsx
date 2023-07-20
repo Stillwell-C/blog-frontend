@@ -45,15 +45,8 @@ const EditUserInfo = () => {
     },
   ] = useDeleteUserMutation();
 
-  const [
-    sendLogout,
-    {
-      isLoading: logoutIsLoading,
-      isSuccess: logoutIsSuccess,
-      isError: logoutIsError,
-      error: logoutError,
-    },
-  ] = useSendLogoutMutation();
+  const [sendLogout, { isError: logoutIsError, error: logoutError }] =
+    useSendLogoutMutation();
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);

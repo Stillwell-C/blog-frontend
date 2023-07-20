@@ -19,7 +19,6 @@ const AdminPosts = () => {
   } = useGetMultiplePostsQuery({ page: currentPage, limit: 10, top: false });
 
   useEffect(() => {
-    // setTotalPosts(postData?.totalPosts);
     setTotalPages(Math.ceil(postData?.totalPosts / 10) || 1);
     setPosts(postData?.posts);
   }, [postData]);

@@ -13,12 +13,11 @@ const PostComments = () => {
 
   const runEffect = useRef(false);
 
-  const { data, isFetching, isSuccess, isError, error } =
-    useGetPostCommentsQuery({
-      postId: postID,
-      limit: 10,
-      page: currentPage,
-    });
+  const { data, isFetching, isSuccess, isError } = useGetPostCommentsQuery({
+    postId: postID,
+    limit: 10,
+    page: currentPage,
+  });
 
   useEffect(() => {
     if (
@@ -66,7 +65,11 @@ const PostComments = () => {
       <ScaleLoader className='post-comments-loader' color='#333' height={45} />
     );
   } else if (isError) {
-    content = <p>An error has occurred. Refresh page to see comments.</p>;
+    content = (
+      <p className='.err-text'>
+        An error has occurred. Refresh page to see comments.
+      </p>
+    );
   }
 
   return (

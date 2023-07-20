@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dateOptions from "../../utils/DateOptions";
 import { useNavigate } from "react-router-dom";
 import { useDeleteCommentMutation } from "./commentsApiSlice";
@@ -7,8 +7,10 @@ import ConfirmModal from "../../components/ConfirmModal";
 
 const CommentDisplayAbbr = ({ comment }) => {
   const navigate = useNavigate();
-  const [date, setDate] = useState("");
 
+  const errRef = useRef();
+
+  const [date, setDate] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -34,9 +36,9 @@ const CommentDisplayAbbr = ({ comment }) => {
     parseDate(comment.createdAt, comment.updatedAt);
   }, []);
 
-  // useEffect(() => {
-  //   if (isError) console.log(error);
-  // }, [isError]);
+  useEffect(() => {
+    if (isError) errRef.current.focus();
+  }, [isError]);
 
   const commentDisplay =
     comment.commentBody.length > 200
@@ -79,6 +81,13 @@ const CommentDisplayAbbr = ({ comment }) => {
         >
           {buttonContent}
         </button>
+      </div>
+      <div
+        className={isError ? "form-error-div" : "error-offscreen"}
+        ref={errRef}
+        aria-live='assertive'
+      >
+        {error?.data?.message}
       </div>
       {modalOpen && (
         <ConfirmModal

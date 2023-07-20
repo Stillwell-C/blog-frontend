@@ -16,7 +16,7 @@ const PersistentLogin = () => {
 
   const [loginSuccess, setLoginSuccess] = useState(false);
 
-  const [refresh, { isUninitialized, isLoading, isSuccess, isError, error }] =
+  const [refresh, { isUninitialized, isLoading, isSuccess, isError }] =
     useRefreshMutation();
 
   useEffect(() => {

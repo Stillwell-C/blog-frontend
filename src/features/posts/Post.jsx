@@ -10,6 +10,7 @@ import useAuth from "../../hooks/useAuth";
 import AddComment from "../comments/AddComment";
 import PostComments from "../comments/PostComments";
 import usePageTitle from "../../hooks/usePageTitle";
+import { BeatLoader } from "react-spinners";
 
 const Post = () => {
   const { postID } = useParams();
@@ -36,10 +37,8 @@ const Post = () => {
     error: postError,
   } = useGetPostQuery({ postID, userID: id });
 
-  const [
-    updatePostLike,
-    { isLoading: likeIsLoading, isError: likeIsError, error: likeError },
-  ] = useUpdatePostLikeMutation();
+  const [updatePostLike, { isLoading: likeIsLoading, isError: likeIsError }] =
+    useUpdatePostLikeMutation();
 
   const parseDate = (createdDate, updatedDate) => {
     if (createdDate === updatedDate) {
@@ -77,7 +76,17 @@ const Post = () => {
     );
   }
 
-  let buttonHeart = userLike ? filledHeart : outlinedHeart;
+  const buttonHeart = userLike ? filledHeart : outlinedHeart;
+  let buttonContent;
+  if (likeIsLoading) {
+    buttonContent = <BeatLoader color='#333' size={8} />;
+  } else {
+    buttonContent = (
+      <>
+        <img src={buttonHeart} alt='' /> <span>{likeCount}</span>
+      </>
+    );
+  }
 
   //Maybe move to own component
   const handleLike = async () => {
@@ -131,8 +140,10 @@ const Post = () => {
                   : `Like this post. Current number of likes: ${likeCount}`
               }
               onClick={handleLike}
+              disabled={likeIsLoading}
+              style={{ minWidth: "60px" }}
             >
-              <img src={buttonHeart} alt='' /> {likeCount}
+              {buttonContent}
             </button>
             <div
               className={likeIsError ? "form-error-div" : "error-offscreen"}
