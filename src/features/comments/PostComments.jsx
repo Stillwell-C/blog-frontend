@@ -24,7 +24,16 @@ const PostComments = () => {
       (runEffect.current === true || process.env.NODE_ENV !== "development") &&
       data?.comments
     ) {
-      setCommentData((prev) => [...prev, ...data.comments]);
+      if (
+        commentData?.length > 0 &&
+        data?.comments?.length &&
+        commentData.filter(({ _id }) => _id === data?.comments[0]?._id).length >
+          0
+      ) {
+        setCommentData((prev) => [...new Set([...prev, ...data.comments])]);
+      } else {
+        setCommentData((prev) => [...prev, ...data.comments]);
+      }
       setTotalPages(Math.ceil(data?.totalComments / 10) || 1);
     }
 
