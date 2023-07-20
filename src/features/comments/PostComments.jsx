@@ -13,12 +13,11 @@ const PostComments = () => {
 
   const runEffect = useRef(false);
 
-  const { data, isFetching, isSuccess, isError, error } =
-    useGetPostCommentsQuery({
-      postId: postID,
-      limit: 10,
-      page: currentPage,
-    });
+  const { data, isFetching, isSuccess, isError } = useGetPostCommentsQuery({
+    postId: postID,
+    limit: 10,
+    page: currentPage,
+  });
 
   useEffect(() => {
     if (
