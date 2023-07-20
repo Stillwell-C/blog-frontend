@@ -3,7 +3,6 @@ import { setCredentials } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://wild-goose-chase-api-production.up.railway.app/",
-  // baseUrl: "http://localhost:3500",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     //If need to send any other info, maybe using this technique
