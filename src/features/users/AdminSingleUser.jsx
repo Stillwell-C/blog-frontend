@@ -40,22 +40,12 @@ const AdminSingleUser = () => {
 
   const [
     updateUser,
-    {
-      isLoading: updateIsLoading,
-      isSuccess: updateIsSuccess,
-      isError: updateIsError,
-      error: updateError,
-    },
+    { isLoading: updateIsLoading, isError: updateIsError, error: updateError },
   ] = useUpdateUserMutation();
 
   const [
     deleteUser,
-    {
-      isLoading: deleteIsLoading,
-      isSuccess: deleteIsSuccess,
-      isError: deleteIsError,
-      error: deleteError,
-    },
+    { isLoading: deleteIsLoading, isError: deleteIsError, error: deleteError },
   ] = useDeleteUserMutation();
 
   useEffect(() => {
