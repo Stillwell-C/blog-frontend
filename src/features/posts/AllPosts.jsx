@@ -18,6 +18,7 @@ const AllPosts = () => {
     isFetching,
     isError,
     isLoading,
+    error,
   } = useGetMultiplePostsQuery({
     page: currentPage,
     limit: 10,
@@ -52,7 +53,7 @@ const AllPosts = () => {
           setCurrentPage={setCurrentPage}
         />
       )}
-      {isError && <ErrorPage />}
+      {isError && <ErrorPage message={error?.data?.message} />}
     </main>
   );
 };
