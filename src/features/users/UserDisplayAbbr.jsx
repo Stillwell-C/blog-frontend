@@ -12,8 +12,7 @@ const UserDisplayAbbr = ({ user }) => {
 
   const navigate = useNavigate();
 
-  const [deleteUser, { isLoading, isSuccess, isError, error }] =
-    useDeleteUserMutation();
+  const [deleteUser, { isLoading, isError, error }] = useDeleteUserMutation();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
