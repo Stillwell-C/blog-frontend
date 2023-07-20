@@ -65,7 +65,11 @@ const PostComments = () => {
       <ScaleLoader className='post-comments-loader' color='#333' height={45} />
     );
   } else if (isError) {
-    content = <p>An error has occurred. Refresh page to see comments.</p>;
+    content = (
+      <p className='.err-text'>
+        An error has occurred. Refresh page to see comments.
+      </p>
+    );
   }
 
   return (
