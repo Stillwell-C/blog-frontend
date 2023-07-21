@@ -30,10 +30,8 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
 
-          <Route element={<RequireLogout />}>
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
-          </Route>
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
 
           <Route path='/posts'>
             <Route index element={<AllPosts />} />
