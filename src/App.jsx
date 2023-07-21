@@ -15,7 +15,6 @@ import RequireRole from "./features/auth/RequireRole";
 import AdminDashboard from "./components/AdminDashboard";
 import EditUserInfo from "./features/users/EditUserInfo";
 import AdminSingleUser from "./features/users/AdminSingleUser";
-import RequireLogout from "./features/auth/RequireLogout";
 
 const roles = {
   User: "User",
@@ -30,10 +29,8 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
 
-          <Route element={<RequireLogout />}>
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
-          </Route>
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
 
           <Route path='/posts'>
             <Route index element={<AllPosts />} />

@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import spoonbill from "../../assets/spoonbill.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { BeatLoader } from "react-spinners";
 import usePageTitle from "../../hooks/usePageTitle";
+import useAuth from "../../hooks/useAuth";
 
 //Begin with upper/lower case letter and contain 3-23 more characters
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -13,6 +14,10 @@ const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/;
 const Register = () => {
   const usernameRef = useRef();
   const errRef = useRef();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { loggedIn } = useAuth();
 
   usePageTitle("Sign Up");
 
@@ -34,6 +39,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
+    if (loggedIn) navigate("/");
     if (isSuccess) return;
     usernameRef?.current.focus();
   }, []);
@@ -90,14 +96,20 @@ const Register = () => {
     <BeatLoader color='#333' size={8} />
   );
 
+  const loginLink = location?.state?.redirectPath ? (
+    <Link to='/login' state={{ redirectPath: location.state.redirectPath }}>
+      log in
+    </Link>
+  ) : (
+    <Link to='/login'>log in</Link>
+  );
+
   const successPage = (
     <>
       <img className='img-color-fix' src={spoonbill} alt='' />
       <div className='auth-form-container success'>
         <h2>Success</h2>
-        <p className='auth-success-link'>
-          Please <Link to='/login'>log in</Link>
-        </p>
+        <p className='auth-success-link'>Please {loginLink}</p>
       </div>
     </>
   );
@@ -236,7 +248,7 @@ const Register = () => {
           </div>
           <div className='auth-form-link-div'>
             <p>Have an account?</p>
-            <Link to='/login'>Log in</Link>
+            {loginLink}
           </div>
         </form>
       </section>

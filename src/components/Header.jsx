@@ -23,11 +23,18 @@ const Header = () => {
     if (isError) window.location.reload();
   }, [isError]);
 
+  let redirectPath;
+  if (pathname.match(/\/login/i) || pathname.match(/\/register/i)) {
+    redirectPath = "/";
+  } else {
+    redirectPath = pathname;
+  }
+
   let loginButton = (
     <button
       className='basic-button'
       style={{ minWidth: "95px" }}
-      onClick={() => navigate("/login")}
+      onClick={() => navigate("/login", { state: { redirectPath } })}
     >
       Log in
     </button>
@@ -37,7 +44,7 @@ const Header = () => {
     <button
       className='basic-button'
       style={{ minWidth: "95px" }}
-      onClick={() => navigate("/register")}
+      onClick={() => navigate("/register", { state: { redirectPath } })}
     >
       Sign up
     </button>
@@ -130,22 +137,26 @@ const Header = () => {
   }
 
   const loginLink = (
-    <Link onClick={() => setShowDropdown(false)} to='/login'>
+    <Link
+      onClick={() => setShowDropdown(false)}
+      to='/login'
+      state={{ redirectPath }}
+    >
       Log in
     </Link>
   );
   const newUserLink = (
-    <Link onClick={() => setShowDropdown(false)} to='/register'>
+    <Link
+      onClick={() => setShowDropdown(false)}
+      to='/register'
+      state={{ redirectPath }}
+    >
       Sign up
     </Link>
   );
-  const logoutLink = (
-    <Link onClick={handleLogoutLink} to='/'>
-      Log out
-    </Link>
-  );
+  const logoutLink = <Link onClick={handleLogoutLink}>Log out</Link>;
   const myPageLink = (
-    <Link onClick={() => setShowDropdown(false)} to='mypage'>
+    <Link onClick={() => setShowDropdown(false)} to='/mypage'>
       My page
     </Link>
   );

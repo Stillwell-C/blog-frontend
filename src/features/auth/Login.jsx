@@ -1,15 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import birdImg from "../../assets/stork.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 import { BeatLoader } from "react-spinners";
 import usePageTitle from "../../hooks/usePageTitle";
 import usePersistLogin from "../../hooks/usePersistLogin";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { loggedIn } = useAuth();
+
   const [persistLogin, setPersistLogin] = usePersistLogin();
 
   usePageTitle("Login");
@@ -26,6 +30,7 @@ const Login = () => {
   const [login, { isLoading, error, isSuccess, isError }] = useLoginMutation();
 
   useEffect(() => {
+    if (loggedIn) navigate("/");
     usernameRef.current.focus();
   }, []);
 
@@ -44,7 +49,11 @@ const Login = () => {
     if (isSuccess) {
       setUsername("");
       setPassword("");
-      navigate("/");
+      if (location?.state?.redirectPath) {
+        navigate(location?.state?.redirectPath);
+      } else {
+        navigate("/");
+      }
     }
   }, [isSuccess]);
 
@@ -57,6 +66,14 @@ const Login = () => {
     "Log In"
   ) : (
     <BeatLoader color='#333' size={8} />
+  );
+
+  const registerLink = location?.state?.redirectPath ? (
+    <Link to='/register' state={{ redirectPath: location.state.redirectPath }}>
+      Sign Up
+    </Link>
+  ) : (
+    <Link to='/register'>Sign Up</Link>
   );
 
   return (
@@ -120,7 +137,7 @@ const Login = () => {
             </div>
             <div className='auth-form-link-div'>
               <p>Need an account?</p>
-              <Link to='/register'>Sign Up</Link>
+              {registerLink}
             </div>
           </form>
         </section>

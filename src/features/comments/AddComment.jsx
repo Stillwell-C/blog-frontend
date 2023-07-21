@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useAddNewCommentMutation } from "./commentsApiSlice";
 import { useEffect, useRef, useState } from "react";
@@ -7,6 +7,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 const AddComment = () => {
   const { id, loggedIn } = useAuth();
   const { postID } = useParams();
+  const { pathname } = useLocation();
 
   const errRef = useRef();
 
@@ -56,8 +57,15 @@ const AddComment = () => {
   if (!loggedIn) {
     content = (
       <div className='add-user-comment-msg'>
-        To submit a comment please <Link to='/login'>log in</Link> or{" "}
-        <Link to='/register'>sign up</Link>.
+        To submit a comment please{" "}
+        <Link to='/login' state={{ redirectPath: pathname }}>
+          log in
+        </Link>{" "}
+        or{" "}
+        <Link to='/register' state={{ redirectPath: pathname }}>
+          sign up
+        </Link>
+        .
       </div>
     );
   }
