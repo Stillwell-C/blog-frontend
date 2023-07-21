@@ -248,7 +248,7 @@ const Register = () => {
           </div>
           <div className='auth-form-link-div'>
             <p>Have an account?</p>
-            <Link to='/login'>Log in</Link>
+            {loginLink}
           </div>
         </form>
       </section>
