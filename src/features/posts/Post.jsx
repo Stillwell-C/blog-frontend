@@ -91,7 +91,7 @@ const Post = () => {
   //Maybe move to own component
   const handleLike = async () => {
     if (!loggedIn) {
-      navigate("/login");
+      navigate("/login", { state: { redirectPath: pathname } });
       return;
     }
     if (!userLike) {
