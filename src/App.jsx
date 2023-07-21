@@ -15,7 +15,6 @@ import RequireRole from "./features/auth/RequireRole";
 import AdminDashboard from "./components/AdminDashboard";
 import EditUserInfo from "./features/users/EditUserInfo";
 import AdminSingleUser from "./features/users/AdminSingleUser";
-import RequireLogout from "./features/auth/RequireLogout";
 
 const roles = {
   User: "User",
