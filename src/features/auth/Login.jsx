@@ -68,6 +68,14 @@ const Login = () => {
     <BeatLoader color='#333' size={8} />
   );
 
+  const registerLink = location?.state?.redirectPath ? (
+    <Link to='/register' state={{ redirectPath: location.state.redirectPath }}>
+      Sign Up
+    </Link>
+  ) : (
+    <Link to='/register'>Sign Up</Link>
+  );
+
   return (
     <main className='auth-page-container fill-screen flex-container flex-align-center flex-justify-center'>
       <div className='auth-page-content-wrapper gap-20p flex-container flex-align-center flex-justify-center flex-column'>
@@ -129,7 +137,7 @@ const Login = () => {
             </div>
             <div className='auth-form-link-div'>
               <p>Need an account?</p>
-              <Link to='/register'>Sign Up</Link>
+              {registerLink}
             </div>
           </form>
         </section>
