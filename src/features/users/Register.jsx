@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import spoonbill from "../../assets/spoonbill.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { BeatLoader } from "react-spinners";
 import usePageTitle from "../../hooks/usePageTitle";
@@ -14,6 +14,7 @@ const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/;
 const Register = () => {
   const usernameRef = useRef();
   const errRef = useRef();
+  const location = useLocation();
 
   const { loggedIn } = useAuth();
 
@@ -94,14 +95,20 @@ const Register = () => {
     <BeatLoader color='#333' size={8} />
   );
 
+  const loginLink = location?.state?.redirectPath ? (
+    <Link to='/login' state={{ redirectPath: location.state.redirectPath }}>
+      log in
+    </Link>
+  ) : (
+    <Link to='/login'>log in</Link>
+  );
+
   const successPage = (
     <>
       <img className='img-color-fix' src={spoonbill} alt='' />
       <div className='auth-form-container success'>
         <h2>Success</h2>
-        <p className='auth-success-link'>
-          Please <Link to='/login'>log in</Link>
-        </p>
+        <p className='auth-success-link'>Please {loginLink}</p>
       </div>
     </>
   );
