@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import spoonbill from "../../assets/spoonbill.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { BeatLoader } from "react-spinners";
 import usePageTitle from "../../hooks/usePageTitle";
@@ -15,6 +15,7 @@ const Register = () => {
   const usernameRef = useRef();
   const errRef = useRef();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { loggedIn } = useAuth();
 
