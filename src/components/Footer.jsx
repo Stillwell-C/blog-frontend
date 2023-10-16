@@ -2,7 +2,7 @@ import githubLogo from "../assets/github.svg";
 
 const Footer = () => {
   return (
-    <footer className='page-footer flex-container flex-justify-center'>
+    <footer className='page-footer flex-container flex-justify-center gap-1'>
       <a
         className='footer-link flex-container flex-align-center'
         href='https://github.com/Stillwell-C'
