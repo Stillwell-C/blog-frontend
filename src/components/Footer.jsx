@@ -15,6 +15,12 @@ const Footer = () => {
       >
         <img src={githubLogo} alt='' />
       </a>
+      <a
+        className='footer-link flex-container flex-align-center'
+        href='https://github.com/Stillwell-C/blog-frontend'
+      >
+        About
+      </a>
     </footer>
   );
 };
