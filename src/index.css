@@ -300,9 +300,13 @@ button {
   font-size: 1rem;
 }
 
-.home-top-center-content > img {
+.home-top-center-content img {
   margin-top: 3rem;
   width: clamp(250px, 80vw, 500px);
+}
+
+.home-top-center-content .home-top-center-img-div {
+  min-height: clamp(250px, 65vh, 500px);
 }
 
 .home-top-posts {
@@ -594,9 +598,17 @@ button {
   max-height: clamp(100px, 15vh, 150px);
 }
 
+.auth-page-img-div {
+  min-height: clamp(100px, 15vh, 150px);
+}
+
 @media screen and (min-width: 390px) {
   .auth-page-container img {
     max-height: clamp(150px, 40vh, 250px);
+  }
+
+  .auth-page-img-div {
+    min-height: clamp(150px, 40vh, 250px);
   }
 }
 
@@ -609,6 +621,10 @@ button {
   .auth-page-container img {
     max-height: 350px;
     height: auto;
+  }
+
+  .auth-page-img-div {
+    min-width: 260px;
   }
 }
 
