@@ -41,7 +41,9 @@ const Home = () => {
           <div className='home-top-center-content flex-continer flex-column'>
             <h2>Waterfowl of Korea</h2>
             <p>Exploring the Avian Splendor of Korea&#39;s Wetlands</p>
-            <img className='fade-in' src={gooseImg} alt='grayscale goose' />
+            <div className='home-top-center-img-div'>
+              <img className='fade-in' src={gooseImg} alt='grayscale goose' />
+            </div>
           </div>
         </div>
         <aside className='home-top-posts flex-container flex-column flex-align-center'>
