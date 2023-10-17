@@ -116,7 +116,9 @@ const Register = () => {
 
   const registrationPage = (
     <>
-      <img className='img-color-fix fade-in' src={spoonbill} alt='' />
+      <div className='auth-page-img-div'>
+        <img className='img-color-fix fade-in' src={spoonbill} alt='' />
+      </div>
       <section className='auth-form-container flex-container flex-column'>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
