@@ -101,3 +101,41 @@ Almost all text content was generated using ChatGPT.
 - MongoDB/Mongoose
 - Bcrypt
 - Express Validator
+
+## Screenshots
+
+### Desktop
+
+#### Homepage
+
+<img  src="./ProjectImages/Homepage.png" alt="desktop homepage" >
+
+#### User Page
+
+<img  src="./ProjectImages/UserPage.png" alt="desktop user page" >
+
+#### Admin Dashboard
+
+<img  src="./ProjectImages/AdminDash.png" alt="desktop admin dashboard" >
+
+#### Paginated Posts
+
+<img  src="./ProjectImages/PaginatedPosts.png" alt="desktop paginated posts" >
+
+#### Like & Comment on Posts
+
+<img  src="./ProjectImages/LikeAndComment.png" alt="desktop like and comment on posts" >
+
+### Mobile
+
+#### Homepage
+
+<img  src="./ProjectImages/MobileHome.PNG" alt="mobile homepage" height="500" >
+
+#### Mobile Dropdown Menu
+
+<img  src="./ProjectImages/MobileMenu.PNG" alt="mobile dropdown menu" height="500" >
+
+#### Mobile Posts
+
+<img  src="./ProjectImages/MobilePosts.PNG" alt="mobile posts" height="500" >
