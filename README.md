@@ -53,7 +53,7 @@ If a user is logged in and does not have a JWT access token (e.g. the user has r
 
 Specific routes such as the "My Page" dashboard require a valid JWT access token to access. JWT verification is done using the [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) package. Routes requiring JWT are protected on the front end to ensure that a user is logged in or has the necessary roles to view a page (e.g. a logged in account with the role user will not be able to visit the admin dashboard by using the admin dashboard URL).
 
-[RTK Query](https://redux-toolkit.js.org/rtk-query/overview) is used to make server requests and cache/invalidate data.
+[RTK Query](https://redux-toolkit.js.org/rtk-query/overview) and Redux Toolkit are used to make server requests and cache/invalidate data on the front end.
 
 The [cors](https://www.npmjs.com/package/cors) package is used to only allow requests from specific origins. In this case, I am only allowing requests originating from the frontend.
 
@@ -69,7 +69,7 @@ Admins have access to all pages that users can access as well as the Admin Dashb
 
 #### Accessibility
 
-Throughout this project, I have tried to make this website accessible to screen readers, especially with respect to forms, navigation menus & pagination buttons, error messages, and modals. However, any input on how to improve on this is greatly appreciated. I am sure there are instances where I have misused or neglected to properly implement ARIA.
+Throughout this project, I have tried to make this website accessible to screen readers, especially with respect to forms, navigation menus & pagination buttons, error messages, and modals. However, any input on how to improve on this is greatly appreciated. I am sure there are instances where I have misused or neglected to properly implement ARIA or other accessibility best practices.
 
 The [focus-trap-react](https://www.npmjs.com/package/focus-trap-react) package is used to trap focus when a modal is present on the screen. All modals can be exited using the escape key.
 
