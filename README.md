@@ -14,6 +14,23 @@ View the backend code [here](https://github.com/Stillwell-C/blog-api)
 
 Or the API's landing page [here](https://wild-goose-chase-api-production.up.railway.app)
 
+## Contents
+
+- [Description](#description)
+  - [Overview](#overview)
+  - [Detailed Description](#detailed-description)
+    - [UI](#ui)
+    - [API & Authentication](#api--authentication)
+    - [Users, Contributors, and Admins](#users-contributors-and-admins)
+    - [Accessibility](#accessibility)
+    - [Additional Info](#additional-info)
+  - [Known Issues](#known-issues)
+    - [Authentication & Persisted Log In On Certain Browsers](#authentication--persisted-log-in-on-certain-browsers)
+- [Built With](#built-with)
+- [Screenshots](#screenshots)
+  - [Desktop](#desktop)
+  - [Mobile](#mobile)
+
 ## Description
 
 ### Overview
@@ -83,7 +100,7 @@ Almost all text content was generated using ChatGPT.
 
 ### Authentication
 
-- The frontend is hosted on [Vercel](https://vercel.com/) and the backend is hosted on [Railway](https://railway.app/). Resultingly, the refresh token stored in an HTTP only secure cookie is a cross-site cookie and does not function properly on some browsers, particularly some incognito or private browser windows such as Chrome and Opera. Refreshing the page will log you out on these browsers when using an incognito window.
+- The frontend is hosted on [Vercel](https://vercel.com/) and the backend is hosted on [Railway](https://railway.app/). Resultingly, the refresh token stored in an HTTP only secure cookie is a cross-site cookie and does not function properly on some browsers, including Safari and incognito or private browser modes of browsers such as Chrome and Opera. Due to how these browsers treat the cross-site cookie, log cannot be persisted and refreshing the page will log you out.
 
 ## Built with
 
