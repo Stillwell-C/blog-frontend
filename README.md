@@ -1,3 +1,5 @@
+[![kr](https://img.shields.io/badge/언어-한국어-red.svg)](https://github.com/Stillwell-C/blog-frontend/blob/main/README-kr.md)
+
 # Wild Goose Chase Blog
 
 This repository is the frontend for Wild Goose Chase, a MERN stack blog application.
